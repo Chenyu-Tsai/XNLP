@@ -2402,10 +2402,10 @@
 	<pair id="301" entailment="ENTAILMENT" task="IE">
 		<t>The two primes were announced by GIMPS on September 16. Before these two discoveries the two previously largest known prime numbers were discovered by UCMO professors Curtis Cooper and Steven Boone in Missouri United States and their record lasted almost three years. Historically prime numbers discovered by GIMPS are larger than the one previously found. The only other exception was when the 29th Mersenne prime was discovered after the 30th and 31st were found. Founded by M.I.T. graduate George Woltman in 1996 GIMPS has found 12 Mersenne primes or about one per year on average. Volunteers who wish to help find primes can download a program called Prime95 which runs in the background. Smaller prime numbers such as those with a few hundred digits are often used in cryptography.</t>
 		<h>GIMPS was founded by George Woltman.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Founded by M.I.T. graduate George Woltman in 1996 GIMPS</a>
+		<t3>Founded Woltman GIMPS</t3>
+		<t5>Founded graduate George Woltman GIMPS</t5>
+		<t7>Founded graduate George Woltman in 1996 GIMPS</t7>
 	</pair>
 	<pair id="302" entailment="CONTRADICTION" task="IE">
 		<t>Barack Obama is due to end his first overseas trip as US President today. Mr Obama has attended a series of engagements in Europe over the past week including the G20 summit in London a NATO meeting in Strasbourg and a conference of EU leaders in Prague. He is currently in Turkey where he has been seeking to reach out a hand to the Islamic world. Mr Obama is due to head back to the US this afternoon after visiting two of Istanbul's most historic buildings the Blue Mosque and the Hagia Sophia Church.</t>
@@ -2676,7 +2676,7 @@
 		<h>Greenpeace headquarters are located in Chesapeake Bay.</h>
 		<a>Greenpeace activists scattered schools of menhaden bait fish in the Chesapeake Bay</a>
 		<t3>Greenpeace Chesapeake Bay</t3>
-		<t5>Greenpeace scattered in Chesapeake Bay<</t5>
+		<t5>Greenpeace scattered in Chesapeake Bay</t5>
 		<t7>Greenpeace scattered schools in the Chesapeake Bay</t7>
 	</pair>
 	<pair id="336" entailment="CONTRADICTION" task="IE">
@@ -3394,7 +3394,7 @@
 	<pair id="425" entailment="ENTAILMENT" task="IR">
 		<t>British writer Edward Upward has died at the age of 105. Upward died on Friday February 13 in Pontefract England. He was believed to be the UK's oldest living author. Upward was born Edward Falaise Upward on September 9 1903 in Romford England. He attended Corpus Christi College in Cambridge where in 1924 he was awarded the Chancellor's Medal for English Verse. He was attending the college on a history scholarship he received in 1922.</t>
 		<h>Edward Upward was a British writer.</h>
-		<a></a>
+		<a>British writer Edward Upward</a>
 		<t3>British writer Upward</t3>
 		<t5>British writer Edward Upward</t5>
 		<t7>British writer Edward Upward</t7>
@@ -4050,522 +4050,522 @@
 	<pair id="507" entailment="UNKNOWN" task="IR">
 		<t>Firefighters have confirmed that the large James Bond sound stage at Pinewood Studios has been destroyed by fire. It is thought eight fire engines were called to the scene near Iver Heath in Buckinghamshire on Sunday morning where filming for Casino Royale the latest Bond movie has been completed. Jen McVean witnessed the event and she said the stage was "completely on fire". The set had been transformed into a replica of the Italian city of Venice but Mrs McVean who owns a firm at the studios said: "Nothing is salvageable and there are many many fire engines there." One spokesman said around 40 to 50 firefighters were at the scene.</t>
 		<h>James Bond was created by Ian Fleming.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>James Bond sound stage at Pinewood Studios</a>
+		<t3>James Bond Pinewood</t3>
+		<t5>James Bond Pinewood Studios</t5>
+		<t7>James Bond sound stage Pinewood Studios</t7>
 	</pair>
 	<pair id="508" entailment="UNKNOWN" task="IR">
 		<t>Constable Erwood will return to his job on Monday but has been given the job in North Taranaki as rural liaison officer. He will start on February 5. Mr Lammas said: Rural police officers in small and somewhat isolated communities in particular have a fine and sometimes difficult balance to achieve in being active members of their community but also being seen to be impartial in the discharge of their duties as a police officer.</t>
 		<h>Mr. Erwood drives when he's sober.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Erwood will return to his job on Monday</a>
+		<t3>Erwood return job</t3>
+		<t5>Erwood will return job</t5>
+		<t7>Erwood will return to his job</t7>
 	</pair>
 	<pair id="509" entailment="ENTAILMENT" task="IR">
 		<t>Rosa Parks the African American woman who served as a catalyst to the American Civil Rights Movement died of natural causes on Monday night at her home in Detroit Michigan. She was 92. Parks was best known for her refusal to yield her seat to a white man who demanded it on a city bus. Her defiance led to the Montgomery Bus Boycott in Alabama in 1955.</t>
 		<h>Rosa Parks died on Monday.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>died of natural causes on Monday night at her home</a>
+		<t3>Parks died Monday</t3>
+		<t5>Rosa Parks died on Monday</t5>
+		<t7>Rosa Parks died natural causes on Monday</t7>
 	</pair>
 	<pair id="510" entailment="ENTAILMENT" task="IR">
 		<t>Fans of the American hard rock band Aerosmith have launched legal action against the band in response to a late cancellation of a scheduled concert on the Hawaiian Island of Maui. Attorney Brandee Faria filed a class action suit in Hawaii Circuit Court on October 19. The suit alleges that the band's cancellation cost fans between US$500000 (€349944) and $3 million (€2.1 million) in travel and accommodation costs as well as other related expenses.</t>
 		<h>Aerosmith have cancelled a concert in Maui.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Aerosmith have launched legal action against the band in response to a late cancellation</a>
+		<t3>Aerosmith cancellation Maui</t3>
+		<t5>Aerosmith against late cancellation Maui</t5>
+		<t7>Aerosmith against the band late cancellation Maui</t7>
 	</pair>
 	<pair id="511" entailment="ENTAILMENT" task="IR">
 		<t>Australian senator Barnaby Joyce (Nationals Queensland) has moved to oppose the government's planned changes to the country's petrol retail industry. The National Party of which Senator Joyce is a member governs Australia in coalition with the Liberal Party. The government plans to amend regulations governing the petrol industry to allow oil companies to own more than five percent of petrol stations. Senator Joyce has given notice to disallow regulations that would force the government to debate them in the House of Representatives and the Senate.</t>
 		<h>Mr. Joyce is an Australian Senator.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Australian senator Barnaby Joyce</a>
+		<t3>Australian senator Joyce</t3>
+		<t5>Australian senator Barnaby Joyce</t5>
+		<t7>Australian senator Barnaby Joyce</t7>
 	</pair>
 	<pair id="512" entailment="ENTAILMENT" task="IR">
 		<t>The Bolivian President Evo Morales 49 has claimed victory after voters ratified a new leftist constitution granting more power to the country's indigenous majority. "The indigenous farmers the most marginalized sector throughout the history of the republic are now recognized as people with the same rights as any citizen. Here begins the new Bolivia. Here we begin to reach true equality" Morales told a crowd in front of the flag-draped balcony of Palacio Quemado in La Paz the administrative capital of Bolivia.</t>
 		<h>Morales is the President of Bolivia.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Bolivian President Evo Morales</a>
+		<t3>Bolivian President Morales</t3>
+		<t5>Bolivian President Evo Morales</t5>
+		<t7>Bolivian President Evo Morales</t7>
 	</pair>
 	<pair id="513" entailment="UNKNOWN" task="IR">
 		<t>U.S. Senator Sam Brownback formerly the chairman of the Senate Foreign Relations subcommittee with responsibility for Southeast Asia commented: I offer my deepest condolences for the loss of Benazir Bhutto and to the families of those killed today. This is a terrible loss to her supporters the people of Pakistan and for democracy. I hope and pray that that the people of Pakistan and President Musharraf can avoid further bloodshed and continue down the road to democracy. Pakistan has been a good friend to the United States in fighting fundamentalist terrorism and I sincerely hope we can continue to work together. Pakistan needs to continue to work toward a peaceful stable and democratic nation if they hope to maintain our strong friendship.</t>
 		<h>Sam Brownback is not a Republican.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>U.S. Senator Sam Brownback formerly the chairman of the Senate Foreign Relations</a>
+		<t3>Brownback formerly chairman</t3>
+		<t5>Sam Brownback formerly chairman</t5>
+		<t7>Senator Sam Brownback formerly the chairman</t7>
 	</pair>
 	<pair id="514" entailment="CONTRADICTION" task="IR">
 		<t>An appeals court in Eastern France has confirmed the Swedish car manufacturer Volvo is guilty over the deaths of two schoolchildren aged nine and ten and the serious injury of a third after a brakes failure caused an accident in 1999. The Volvo 850 TDI was being driven by a local teacher when it struck the children who had been on their way to school. Driver Catherine Kohtz later asserted that the brake pedal had become stiff and the brakes themselves unresponsive as she traveled along the steep road.</t>
 		<h>Volvo is a car manufacturer from Finland.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Swedish car manufacturer Volvo</a>
+		<t3>Swedish manufacturer Volvo</t3>
+		<t5>Swedish car manufacturer Volvo</t5>
+		<t7>Swedish car manufacturer Volvo</t7>
 	</pair>
 	<pair id="515" entailment="ENTAILMENT" task="IR">
 		<t>BELFAST UNITED KINGDOM Thieves have gotten away with money believed to be in excess of £20m ($39m) from the headquarters of Northern Bank a subsidiary of National Australia Bank in Northern Ireland. Other sources have stimated the total to be as much as $58m. In what appears to be a meticulously planned operation the families of two executives were held hostage on Sunday night by armed gunmen. The two executives were made to go to work yesterday as if everything was normal after closing the bank they opened the vault for a number of robbers who then proceeded to empty the contents into a waiting truck over a two hour period.</t>
 		<h>Belfast is in the UK.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>BELFAST UNITED KINGDOM</a>
+		<t3>BELFAST UNITED KINGDOM</t3>
+		<t5>BELFAST UNITED KINGDOM</t5>
+		<t7>BELFAST UNITED KINGDOM</t7>
 	</pair>
 	<pair id="516" entailment="UNKNOWN" task="IR">
 		<t>It is the first time in the history of the Volvo Adventure Award that a Kenyan project has been selected as an international finalist. Emwatsi Primary School is a member of the Lake Victoria Schools Agroforestry  Environmental Education Network which is facilitated by the World Agroforestry Centre (ICRAF) and the Kenya Forestry Research Institute (KEFRI) within the framework of the 'Farmers of the Future' initiative.</t>
 		<h>Volvo is a car manufacturer from Finland.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Volvo Adventure Award that a Kenyan project has been selected</a>
+		<t3>Volvo Adventure Award</t3>
+		<t5>Volvo Adventure Award Kenyan project</t5>
+		<t7>Volvo Adventure Award that a Kenyan project</t7>
 	</pair>
 	<pair id="517" entailment="UNKNOWN" task="IR">
 		<t>Chinese Foreign Ministry spokesman Qin Gang told reporters that China is protesting Japan's plan to allow drilling for gas and oil in disputed waters in the East China Sea characterizing the move as "a serious provocation". On Wednesday Japan announced that they would begin processing applications to allow oil and gas drilling firms to explore in the disputed area east of the "demarcation line" which has held up applications to drill in the area for decades.</t>
 		<h>China won't receive money from Japan.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>China is protesting Japan's plan to allow drilling for gas</a>
+		<t3>China protesting Japan's</t3>
+		<t5>China is protesting Japan's drilling</t5>
+		<t7>China is protesting Japan's allow drilling</t7>
 	</pair>
 	<pair id="518" entailment="UNKNOWN" task="IR">
 		<t>With online gaming in persistent worlds becoming more prevalent a US congressional committee has begun to look into the tax implications of these booming online economies. Games such as World of Warcraft and Second Life have large player driven economic systems in which either following the rules or against them real world currencies are exchanged for in-game currencies. With the GDP of some of these economies rivaling that of some small countries the US government is wondering if it is missing out on a potential source of tax revenue: or as some gamers might put it the IRS is asking "You buy gold?"</t>
 		<h>The US Congress may re-establish luxury taxes.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>US government is wondering if it is missing out a potential source</a>
+		<t3>US government missing</t3>
+		<t5>US government missing potential source</t5>
+		<t7>US government is wondering missing potential source</t7>
 	</pair>
 	<pair id="519" entailment="ENTAILMENT" task="IR">
 		<t>The Kelham Island Tavern in Sheffield's Kelham Island Quarter was in a "semi derelict" state when it was purchased in 2001. After it was re-opened in 2002 by licensee Trevor Wraith and manager Lewis Gonda business quickly picked up and the pub has been awarded Sheffield CAMRA's local Pub of the Year award for the past four years. The pub won the award despite six weeks of closure a year and a half ago when the pub's cellar and floor were affected by the flooding of the River Don and the nearby Kelham goit. The pub also received Yorkshire CAMRA's Pub of the Year award in 2004 and 2007.</t>
 		<h>Mr. Gonda is the manager of The Kelham Island Tavern.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>manager Lewis Gonda business quickly picked up</a>
+		<t3>Tavern manager Gonda</t3>
+		<t5>Island Tavern manager Lewis Gonda</t5>
+		<t7>Kelham Island Tavern manager Lewis Gonda</t7>
 	</pair>
 	<pair id="520" entailment="ENTAILMENT" task="IR">
 		<t>The police have cordoned off roads around Upper Woburn Place following a massive explosion on a bus in the vicinity. Traffic is at a standstill in many places in the capital. Defra's security branch are reporting that police are advising everyone in London not to use any public transport and the Cabinet Office are advising staff to remain in offices until further notice. A further email sent to all staff by Defra's permanent secretary indicates that Charing Cross and Waterloo mainline railway stations have been closed down for police searches and that other stations could close for similar reasons later today.</t>
 		<h>Charing Cross is in London.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Charing Cross and Waterloo mainline railway stations have been closed</a>
+		<t3>London Charing Cross</t3>
+		<t5>London Charing Cross mainline railway</t5>
+		<t7>London Charing Cross and Waterloo mainline railway</t7>
 	</pair>
 	<pair id="521" entailment="UNKNOWN" task="IR">
 		<t>James Horwitz Chairman of the UTA Department of Physics was contacted by the Dallas Mavericks owner Mark Cuban to study the new ball. Horwitz asked UTA physics professor Kaushik De to lead the project. De's team found that the new balls are tackier when dry but become much more slippery than leather balls when they get damp. Traditional leather basketballs provide more grip when they are slightly wet.</t>
 		<h>Mark Cuban is a billionaire.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Dallas Mavericks owner Mark Cuban</a>
+		<t3>Mavericks owner Cuban</t3>
+		<t5>Dallas Mavericks owner Mark Cuban</t5>
+		<t7>Dallas Mavericks owner Mark Cuban</t7>
 	</pair>
 	<pair id="522" entailment="CONTRADICTION" task="IR">
 		<t>Movie studio company New Line Cinema has announced that movie director Peter Jackson will never be allowed to work on another New Line film. This announcement will also mean that Mr Jackson will not be allowed to film the prequel titled The Hobbit to The Lord of the Rings films he directed. The announcement was made mainly because New Zealander Mr Jackson and his partner Fran Walsh filed a law suit against New Line in 2005 as they believed New Line owed them much more money than they received for The Lord of the Rings trilogy as shown to them by a partial audit of The Fellowship of the Ring. Mr Jackson described it as "financial anomalies" which New Line refused to account for. "Fundamentally our legal action is about holding New Line to its contractual obligations and promises." The film trilogies have so far managed to earn US$3 billion in ticket sales since 2001.</t>
 		<h>New Line wants to work with Peter Jackson.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>movie director Peter Jackson will never be allowed to work on another New Line film</a>
+		<t3>Jackson never Line</t3>
+		<t5>Jackson never allowed New Line</t5>
+		<t7>Peter Jackson will never allowed New Line</t7>
 	</pair>
 	<pair id="523" entailment="ENTAILMENT" task="IR">
-		<t>One of the most visible Satanic organizations-though one that was never a suspect or charged in any of the Satanic Panic cases-is the Church of Satan founded by Anton LaVey. Members of the Church such as Peter H. Gilmore Peggy Nadramia Boyd Rice Adam Parfrey Diabolos Rex and musician King Diamond were active in media appearances to refute allegations of criminal activity and the FBI would later issue an official report debunking the criminal conspiracy theories of this time.</t>
+		<t>One of the most visible Satanic organizations though one that was never a suspect or charged in any of the Satanic Panic cases-is the Church of Satan founded by Anton LaVey. Members of the Church such as Peter H. Gilmore Peggy Nadramia Boyd Rice Adam Parfrey Diabolos Rex and musician King Diamond were active in media appearances to refute allegations of criminal activity and the FBI would later issue an official report debunking the criminal conspiracy theories of this time.</t>
 		<h>Peter Gilmore is a member of a satanic organization.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>One of the most visible Satanic organizations</a>
+		<t3>Satanic member Gilmore</t3>
+		<t5>Satanic organizations Peter Gilmore</t5>
+		<t7>most visible Satanic organizations Peter Gilmore</t7>
 	</pair>
 	<pair id="524" entailment="ENTAILMENT" task="IR">
 		<t>CNET editor former Fresh Gear contributor and Lab analyst James Kim has been missing since Saturday. Police have opened a missing person investigations and called on those especially from the Oregon area having any information on the whereabouts of the missing family to contact them. The information below is from the official investigation by the San Francisco Police Department (SFPD) missing family members include: James Kati Penelope (age 4.5) and Sabine (6 months).</t>
 		<h>James Kim worked for CNET.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>CNET editor former Fresh Gear contributor and Lab analyst James Kim</a>
+		<t3>CNET editor Kim</t3>
+		<t5>CNET editor James Kim</t5>
+		<t7>CNET editor former Lab analyst James Kim</t7>
 	</pair>
 	<pair id="525" entailment="UNKNOWN" task="IR">
 		<t>John Yelenic was found dead in his home on April 13 2006 one day before he was planning on signing his divorce papers. Prosecutors said Foley killed Yelenic after going to the dentist's house to confront him over the terms of the divorce. Prosecutors claim Foley slashed Yelenic several times with a knife and pushed his head through a small window causing a further gash on his neck. Yelenic bled to death.</t>
 		<h>Yelenic molested his adopted son.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Yelenic was found dead in his home</a>
+		<t3>Yelenic found dead</t3>
+		<t5>Yelenic was found dead </t5>
+		<t7>Yelenic was found dead in his home</t7>
 	</pair>
 	<pair id="526" entailment="UNKNOWN" task="IR">
 		<t>Frank was a Jewish girl who was hiding from the German occupation of the Netherlands during World War II and often referred to the tree as being "comforting" as she looked out the hidden apartment skylight. Officials for the city of Amsterdam and the Anne Frank Museum state that the tree is infected with a fungus and poses a public health hazard as they argue that it was in imminent danger of falling over. It had been scheduled to be cut down on Tuesday but was saved after an emergency court ruling.</t>
 		<h>America won World War II.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>German occupation of the Netherlands during World War II</a>
+		<t3>Netherlands War II</t3>
+		<t5>occupation Netherlands World War II</t5>
+		<t7>German occupation Netherlands during World War II</t7>
 	</pair>
 	<pair id="527" entailment="CONTRADICTION" task="IR">
 		<t>At least 28 people drowned and were confirmed dead 46 were rescued while 34 others remain missing on Sunday after an overcrowded passenger motorboat capsized off waters in Ballesteros a town of 17000 people the Cagayan police reported. 'M/B Mae Jan' a wooden-hulled ferry was carrying 102 passengers after an eight-hour voyage from Calayan Island in the Luzon Strait for Appari when it capsized less than 300 meters (984 feet) from its destination at 8:30 p.m. Its bamboo outrigger broke due to strong waves as it reached the mouth of the Cagayan River ('Bannag' Rio Grande de Cagayan 'Ilog ng Kagayan') along Barangay Linao about 50 meters from the shoreline of Pallog village.</t>
 		<h>More than 800 people died in a ferryboat accident in the Philippines.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>At least 28 people drowned and were confirmed dead</a>
+		<t3>28 confirmed dead</t3>
+		<t5>28 people drowned confirmed dead</t5>
+		<t7>28 people drowned were confirmed dead</t7>
 	</pair>
 	<pair id="528" entailment="UNKNOWN" task="IR">
 		<t>After the aeroplane pulled up abruptly it then pitched down at an angle of 31 degrees rolling left and right partially upside-down. This sort of stall is known as an aggravated stall and it can be very difficult to return the aeroplane to normal flight from one. In this case the pilot had less than two thousand feet to do so before the aircraft crashed into the ground. The pilot's training has now been put into question and it was discovered that the captain Marvin Renslow aged 47 had logged only 110 hours in this particular aircraft though he had thousands of hours in similar aircraft. Experts say his experience should have adequately prepared him.</t>
 		<h>A daily commuter flight crashed in Buffalo.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>two thousand feet to do so before the aircraft crashed into the ground</a>
+		<t3>aircraft crashed ground</t3>
+		<t5>aircraft crashed into the ground</t5>
+		<t7>before the aircraft crashed into the ground</t7>
 	</pair>
 	<pair id="529" entailment="UNKNOWN" task="IR">
 		<t>The movie is offered under a Creative Commons Attribution-Noncommercial-ShareAlike 2.5 license; this allows people to use edit or share the movie in any way (except commercially) as long as they credit the creators. All of the raw unedited footage including audio files is offered under a Creative Commons Attribution 2.5 license; as long as the creators are credited users can do whatever they want with the files privately or commercially.</t>
 		<h>"Boy Who Never Slept" is the title of an open source movie.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>this allows people to use edit or share the movie in any way</a>
+		<t3>allows edit movie</t3>
+		<t5>allows edit movie any way</t5>
+		<t7>allows people edit movie in any way</t7>
 	</pair>
 	<pair id="530" entailment="UNKNOWN" task="IR">
 		<t>The first major hurdle is Turkish recognition of Cyprus. EU leaders including European Commission President José Manuel Barroso have made recognising the island member-state a key pre-requisite for talks however Turkish Prime Minister Recep Tayyip Erdogan has previously said that he would not bow to demands to recognise the nation citing this as one of four red lines he will not cross. Erdogan has said that recognition is entirely dempendent upon the Greek-Cypriots accepting a United Nations peace plan to re-unify the island which previously they rejected.</t>
 		<h>During the EU summit there will be talks with Turkey.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>EU leaders including European Commission President José Manuel</a>
+		<t3>EU leaders Commission</t3>
+		<t5>EU leaders including European Commission</t5>
+		<t7>EU leaders including European Commission President</t7>
 	</pair>
 	<pair id="531" entailment="UNKNOWN" task="IR">
 		<t>"You cannot dial 911 because you are unhappy with your burger ok. I know you don't seriously think that the police need to make Burger King give you food faster" says the operator as Fortune continued to complain. "If it takes 15 minutes to cook it takes 15 minutes to cook ok. You don't need to call 911." It turns out after nearly three minutes of arguing with the operator Fortune never even placed an order. "Have you given them any money?" asks the operator. Fortune replies "no." The operator then asks Fortune "have they given you any food?" Again Fortune replies "no." The operator then tells Fortune that he is able to "just drive away" from the situation but he disagrees and tells her he will "just move [his] car". The operator warns Fortune that the police are on their way and then tells him to not block the drive-thru.</t>
 		<h>Eating in fast food restaurants is not healthy.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>make Burger King give you food faster</a>
+		<t3>Burger King faster</t3>
+		<t5>Burger King give food faster</t5>
+		<t7>make Burger King give you food faster</t7>
 	</pair>
 	<pair id="532" entailment="ENTAILMENT" task="IR">
 		<t>Sheikh Hasina (Shekh Hasina Oajed) was the Prime Minister of Bangladesh from 1996 to 2001. She has been the President of the Awami League a major political party in Bangladesh since 1981. She was the second female prime minister of Bangladesh. Bangladesh officially the People's Republic of Bangladesh ( Gônoprojatontri Bangladesh) is a country in South Asia. It is bordered by India on all sides except for a small border with Burma (Myanmar) to the far southeast and by the Bay of Bengal to the south. Together with the Indian state of West Bengal it makes up the ethno-linguistic region of Bengal.</t>
 		<h>Sheikh Hasina was Bangladesh's Prime Minister.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Sheikh Hasina (Shekh Hasina Oajed) was the Prime Minister of Bangladesh</a>
+		<t3>Hasina Minister Bangladesh</t3>
+		<t5>Sheikh Hasina Prime Minister of Bangladesh</t5>
+		<t7>Sheikh Hasina was the Prime Minister of Bangladesh</t7>
 	</pair>
 	<pair id="533" entailment="UNKNOWN" task="IR">
 		<t>Two British Army soldiers have been killed in a gun attack outside an army base in County Antrim Northern IrelandThe attack occurred at 21:40 GMT outside the Massereene army base home to 38 Engineering Regiment 16 miles north west of Belfast. According to the police four others two other soldiers and two civilians have been hurt one critically.</t>
 		<h>Real IRA is not responsible for gun attacks.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Two British Army soldiers have been killed in a gun attack</a>
+		<t3>British soldiers killed</t3>
+		<t5>British Army soldiers been killed</t5>
+		<t7>Two British Army soldiers have been killed</t7>
 	</pair>
 	<pair id="534" entailment="ENTAILMENT" task="IR">
 		<t>On Sunday Memoirs: 1939-1993 a memoir written by former Prime Minister of Canada Brian Mulroney will be released. The 1152 page tome outlines Mulroney's version of events during his time as prime minister. CTV will broadcast a documentary on Brian Mulroney on the eve of his book launch. In addition the network plans to air Triumph  Treachery: The Brian Mulroney Story on Sunday CTV says the 90-minute special will be the most complete interview the former prime minister has ever given and his first comprehensive interview since leaving office in 1993.The Quebec French language TVA network will air a similar documentary exclusively in French later that night.</t>
 		<h>Brian Mulroney was Prime Minister of Canada.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Prime Minister of Canada Brian Mulroney</a>
+		<t3>Prime Minister Mulroney</t3>
+		<t5>Prime Minister Canada Brian Mulroney</t5>
+		<t7>Prime Minister of Canada Brian Mulroney</t7>
 	</pair>
 	<pair id="535" entailment="ENTAILMENT" task="IR">
 		<t>Reggie Bibbs is a 43-year-old-man living in Houston Texas. Mr Bibbs was born with a genetic disease called neurofibromatosis (NF) which causes him to develop tumors on his body (see infobox on the right). NF can be a subtle disease but in Bibbs' case it has left him with a disfigured face and deformed leg. But he is happy with the way he looks and doesn't want to change his appearance to please other people. He has launched a successful campaign entitled "Just Ask" and that's just what Wikinews did in a video-interview.</t>
 		<h>Neurofibromatosis is a genetic disease.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>genetic disease called neurofibromatosis</a>
+		<t3>genetic disease neurofibromatosis</t3>
+		<t5>genetic disease called neurofibromatosis</t5>
+		<t7>genetic disease called neurofibromatosis</t7>
 	</pair>
 	<pair id="536" entailment="UNKNOWN" task="IR">
 		<t>President Barack Obama of the United States had his first full interview since his inauguration on Al Arabiya television. The Dubai television network in the United Arab Emirates had exclusive access to the President. Barack Obama in his historic interview on Al Arabia. During the interview Obama repeated a campaign promise to deliver a speech in a Muslim capital and urged that the peace process between Israel and Palestine resume. "We cannot tell either the Israelis or the Palestinians what's best for them. They're going to have to make some decisions. But I do believe that the moment is ripe for both sides to realize that the path that they are on is one that is not going to result in prosperity and security for their people" Obama said.</t>
 		<h>Barak Obama is the 44th President of the United States.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>President Barack Obama of the United States had his first full interview</a>
+		<t3>President Barack Obama</t3>
+		<t5>President Barack Obama United States</t5>
+		<t7>President Barack Obama of the United States</t7>
 	</pair>
 	<pair id="537" entailment="ENTAILMENT" task="IR">
 		<t>Five policemen and two bystanders were killed and seven members of the Sri Lankan cricket team have been injured in a coordinated gun and rocket attack by 12 to 14 gunmen in Lahore Pakistan at about 8.00 a.m local time. The Sri Lankan players were ambushed en route to the Gaddafi stadium to play the third day of the second test near the liberty round about. According to eye witnesses the team convoy was stopped by two vehicles blocking their path.</t>
 		<h>Seven members of the Sri Lankan Cricket team have been injured in Lahore.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>seven members of the Sri Lankan cricket team have been injured</a>
+		<t3>Lankan cricket injured</t3>
+		<t5>seven Lankan cricket injured Lahore</t5>
+		<t7>seven Sri Lankan cricket team injured Lahore</t7>
 	</pair>
 	<pair id="538" entailment="UNKNOWN" task="IR">
 		<t>Long John Baldry English-born blues legend passed away at the Vancouver General Hospital Vancouver British Columbia Thursday evening after fighting a severe chest infection for the past four months. Baldry was considered an innovator and inspiration in blues music in the 1950s and 60s and is credited with inspiring other music legends such as Elton John Rod Stewart Eric Clapton and The Rolling Stones.</t>
 		<h>A musician has died at the age of 60.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Long John Baldry English-born blues legend passed away</a>
+		<t3>Baldry blues legend</t3>
+		<t5>John Baldry blues legend passed</t5>
+		<t7>Long John Baldry blues legend passed away</t7>
 	</pair>
 	<pair id="539" entailment="CONTRADICTION" task="IR">
 		<t>The Canadian Conservative Party plans to reject the federal budget. A recently amended provision allowing the government to control greenhouse gas emissions is "completely unacceptable" says its leader Stephen Harper. Harper said Thursday his party plans to vote against the omnibus budget bill if it includes the amendment to the Canadian Environmental Protection Act. It would add greenhouse gas emissions to the list of controlled substances allowing the Canadian government to regulate those emissions he contends. "This is an attempt by the government to get unlimited power to impose multimillion-dollar fines on any basis without any parliamentary approval or discussion whatsoever." Harper said.</t>
 		<h>In Canada Mr. Harper and his party will support the budget bill.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Harper said Thursday his party plans to vote against the omnibus budget bill</a>
+		<t3>Harper party against</t3>
+		<t5>Harper party vote against bill</t5>
+		<t7>Harper his party vote against budget bill</t7>
 	</pair>
 	<pair id="540" entailment="ENTAILMENT" task="IR">
 		<t>It can be difficult to be John Reed. Christopher Hitchens called him a "Bin Ladenist" and Cathy Young editorialized in The Boston Globe that he "blames the victims of terrorism" when he puts out a novel like Snowball's Chance a biting send-up of George Orwell's Animal Farm which he was inspired to write after the terrorist attacks on September 11. "The clear references to 9/11 in the apocalyptic ending can only bring Orwell's name into disrepute in the U.S." wrote William Hamilton the British literary executor of the Orwell estate. That process had already begun: it was revealed Orwell gave the British Foreign Office a list of people he suspected of being "crypto-Communists and fellow travelers" labeling some of them as Jews and homosexuals. "I really wanted to explode that book" Reed told The New York Times. "I wanted to completely undermine it."</t>
 		<h>Christopher Hitchens described John Reed as a "Bin Ladenist".</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>John Reed. Christopher Hitchens called him a "Bin Ladenist"</a>
+		<t3>Reed Hitchens Ladenist</t3>
+		<t5>Reed Hitchens called Bin Ladenist</t5>
+		<t7>John Reed Christopher Hitchens called Bin Ladenist</t7>
 	</pair>
 	<pair id="541" entailment="UNKNOWN" task="IR">
 		<t>"This tells us we've got water ice within reach of the arm which means we can continue this investigation with the tools we brought with us" said  primary investigator for Phoenix's stereo imager Mark Lemmon. Scientists are planning to examine the substance and the soil surrounding it more closely. They plan to test it for signs of organic material and  minerals and hope to find out if the ice was ever a liquid which could have supported microbial life.</t>
 		<h>A robotic arm has been used for scientific discoveries.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Scientists are planning to examine the substance and the soil surrounding it</a>
+		<t3>Scientists examine substance</t3>
+		<t5>Scientists examine substance soil surrounding</t5>
+		<t7>Scientists planning examine substance soil surrounding it</t7>
 	</pair>
 	<pair id="542" entailment="CONTRADICTION" task="IR">
 		<t>Cardinal Murphy-O'Connor said "I am very glad to welcome Tony Blair into the Catholic Church ... For a long time he has been a regular worshipper at Mass with his family and in recent months he has been following a programme of formation to prepare for his reception into full communion ... My prayers are with him his wife and family at this joyful moment in their journey of faith together."</t>
 		<h>Blair belongs to the Church of England.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>welcome Tony Blair into the Catholic Church</a>
+		<t3>Blair Catholic Church</t3>
+		<t5>Tony Blair into Catholic Church</t5>
+		<t7>welcome Tony Blair into the Catholic Church</t7>
 	</pair>
 	<pair id="543" entailment="UNKNOWN" task="IR">
 		<t>The available information about the phosphorous cloud following the railway accident in the Ukraine last Monday is becoming more and more cryptic. The political involvement of most media and other factors are causing contradictions among official sources that are making press work extremely hard. Moreover no one is permitted to enter the accident location. The site of the accident was closed to visitors following the injury of three TV journalists who got too close.</t>
 		<h>A railway disaster caused a fire.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>railway accident in the Ukraine last Monday is becoming more and more cryptic</a>
+		<t3>railway accident cryptic</t3>
+		<t5>railway accident becoming more cryptic</t5>
+		<t7>railway accident becoming more and more cryptic</t7>
 	</pair>
 	<pair id="544" entailment="ENTAILMENT" task="IR">
 		<t>The Saint Paul Winter Carnival in Saint Paul Minnesota suffered a brief thaw on Monday with Monday's 41°F afternoon temperature plummeting below zero twenty four hours later. On Sunday judging of both ice and snow sculptures had taken place. By Monday afternoon temperatures above freezing had greatly damaged the outdoor sculptures. In Rice Park fallen ice from sculptures mixed with chunks left from the previous day's carving. Snow sculptures at the State Fairgrounds were also significantly damaged.</t>
 		<h>The Winter Carnival in Minnesota suffered from a temporary thaw.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Saint Paul Winter Carnival in Saint Paul Minnesota suffered a brief thaw</a>
+		<t3>Carnival Minnesota thaw</t3>
+		<t5>Winter Carnival Minnesota brief thaw</t5>
+		<t7>Saint Paul Winter Carnival Minnesota brief thaw</t7>
 	</pair>
 	<pair id="545" entailment="ENTAILMENT" task="IR">
 		<t>On Tuesday February 24 Hilda Solis was sworn in as the new United States Secretary of Labor. Solis reported for her first day as the new Secretary after having been confirmed by the Senate by a vote of 80-17 on February 24. Wikinews was there for her first appearance as Secretary on Wednesday. After being confirmed she resigned from her position as a House Representative for California and was sworn into her new position that same evening.</t>
 		<h>The United States Secretary of Labor is Hilda Solis.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Hilda Solis was sworn in as the new United States Secretary of Labor</a>
+		<t3>Solis Secretary Labor</t3>
+		<t5>Hilda Solis Secretary of Labor</t5>
+		<t7>Hilda Solis United States Secretary of Labor</t7>
 	</pair>
 	<pair id="546" entailment="ENTAILMENT" task="IR">
 		<t>Former Chilean President Augusto Pinochet 91 has suffered a heart attack early this morning. His son Marco Antonio declared that his father had received his last rites from a Catholic priest and that "he is in the hands of God and the doctors". Pinochet underwent a bypass surgery in the Hospital Militar in Santiago and his condition is reported to be critical but stable. Doctors have reported he is also suffering from pulmonary edema.</t>
 		<h>Augusto Pinochet was a former Chilean President.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Former Chilean President Augusto Pinochet</a>
+		<t3>Chilean President Pinochet</t3>
+		<t5>Former Chilean President Augusto Pinochet</t5>
+		<t7>Former Chilean President Augusto Pinochet</t7>
 	</pair>
 	<pair id="547" entailment="UNKNOWN" task="IR">
 		<t>22-year-old Sierra is a resident of Tampa and reached the final of the show's fourth season in 2005. The film she stars in will be released as a full-length DVD entitled Jessica Sierra Hardcore. The tape shows her having sex with a man thought to be Sierra's boyfriend. Steven Hirsch co-chairman of Vivid who are also responsible for a recent release featuring Kim Kardashian said in a statement "This title contains the most explicit sex we've ever seen in a celebrity video. Jessica clearly has more talent than just singing."</t>
 		<h>Jessica Sierra once reached the finals of "American Idol".</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Sierra is a resident of Tampa and reached the final of the show</a>
+		<t3>Sierra reached final</t3>
+		<t5>Sierra reached final of show</t5>
+		<t7>Sierra reached the final of the show</t7>
 	</pair>
 	<pair id="548" entailment="ENTAILMENT" task="IR">
 		<t>Rother points out that Social Security benefits which currently equal 42 percent of the earnings of an average worker retiring at age 65 would be reduced to 20% of pre-retirement earnings for future retirees thus potentially freezing retirees into today's standard of living. However Rother says that price indexing has to be linked to Bush's private investment accounts as income from the accounts give retirees the chance to make up the shortfalls.</t>
 		<h>Social Security benefits might be reduced.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Social Security benefits which currently equal 42 percent of the earnings of an average worker retiring at age 65 would be reduced</a>
+		<t3>benefits would reduced</t3>
+		<t5>Social Security benefits reduced</t5>
+		<t7>Social Security benefits would be reduced</t7>
 	</pair>
 	<pair id="549" entailment="ENTAILMENT" task="IR">
 		<t>"Three detainees in Villawood remain on voluntary starvation" an immigration department spokesman said. "Two Villawood detainees have agreed to stop their hunger strike. Australian refugee advocates say they are concerned about the welfare of the Chinese men who have been on a hunger strike since October 20 at Sydney's Villawood Immigration Detention Centre. Three of the six men from mainland China are continuing to refuse food at the centre.</t>
 		<h>Detainees in Australia are refusing food.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Three detainees in Villawood remain on voluntary starvation</a>
+		<t3>detainees emain starvation </t3>
+		<t5>detainees remain voluntary starvation Australian</t5>
+		<t7>detainees Villawood remain on voluntary starvation Australian</t7>
 	</pair>
 	<pair id="550" entailment="ENTAILMENT" task="IR">
 		<t>The bodies of five women within the United Kingdom have been found in or around the county of Suffolk in the east of England. The latest victims were found on 12 December 2006 in a rural area a few hundred meters apart and one body discovered within 40 minutes of the other. Detectives investigating the murders have confirmed that the last body discovered was that of 29 year old Annette Nicholls. Five women have been found dead within 10 days and authorities face an "unprecedented" murder investigation.</t>
 		<h>Five women have been found dead in England.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>bodies of five women within the United Kingdom have been found</a>
+		<t3>bodies five Kingdom</t3>
+		<t5>bodies five United Kingdom found</t5>
+		<t7>bodies five women within United Kingdom found</t7>
 	</pair>
 	<pair id="551" entailment="UNKNOWN" task="IR">
 		<t>Mr Lu was later found to have survived but suffered serious injuries. Mr Lu has told the Guardian that he was battered unconscious and later driven hundreds of miles to his home town where he is now recuperating. Civil rights lawyers said they were considering a legal case against his attackers thought to be a group of thugs hired by the local authorities to put down an anti-corruption campaign against the chief of Taishi village.</t>
 		<h>Mr. Lu suffers from the H5N1 virus.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Lu was later found to have survived but suffered serious injuries</a>
+		<t3>Lu suffered injuries</t3>
+		<t5>Lu found suffered injuries</t5>
+		<t7>Lu was found suffered serious injuries</t7>
 	</pair>
 	<pair id="552" entailment="ENTAILMENT" task="IR">
 		<t>An unnamed 27-year-old man has been arrested and charged with "public order offenses" after he threw a shoe at the Chinese prime minister Wen Jiabao while he was giving a speech at Cambridge University in the United Kingdom on Monday February 2. The speech was related to China's and the world economy titled See China in the Light of Her Development. Wen was on a seven day tour of Europe his final stop being the University.</t>
 		<h>A man threw a shoe at the Prime Minister.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>he threw a shoe at the Chinese prime minister Wen Jiabao</a>
+		<t3>threw shoe minister</t3>
+		<t5>he threw shoe prime minister</t5>
+		<t7>he threw a shoe at prime minister</t7>
 	</pair>
 	<pair id="553" entailment="UNKNOWN" task="IR">
 		<t>In 2004 the same Cleveland Clinic became the first institution to approve this surgery and test it on cadavers. In October 2006 surgeon Peter Butler at London's Royal Free Hospital in the UK was given permission by the NHS ethics board to carry out a full face transplant. His team will select four adult patients (children cannot be selected due to concerns over consent) with operations being carried out at six month intervals. In March 2008 the treatment of 30-year-old neurofibromatosis victim Pascal Coler of France ended after having received what his doctors call the worlds first successful full face transplant.</t>
 		<h>Neurofibromatosis is a genetic disease.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>neurofibromatosis victim Pascal Coler of France ended after having received</a>
+		<t3>neurofibromatosis victim Coler</t3>
+		<t5>neurofibromatosis victim Pascal Coler</t5>
+		<t7>neurofibromatosis victim Pascal Coler of France</t7>
 	</pair>
 	<pair id="554" entailment="UNKNOWN" task="IR">
 		<t>According to Bogota's newspaper El Tiempo Uribe asked for Castro's help on January 21. Castro responded with surprising speed and effectiveness. On January 21 Castro sent the chancellor Felipe Perez Roque to Caracas where he met with Chávez and then returned to Havana informing Castro on the results of the encounter. After midnight Castro communicated by telephone with Uribe for two hours. They decided that Castro would send his Vice-chancellor with a letter detailing what they had talked about to Chávez.</t>
 		<h>Alvaro Uribe is the current President of Colombia.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Uribe asked for Castro's help on January 21</a>
+		<t3>Uribe asked Castro</t3>
+		<t5>Uribe asked for Castro's help</t5>
+		<t7>Uribe asked for Castro's help on January</t7>
 	</pair>
 	<pair id="555" entailment="CONTRADICTION" task="IR">
 		<t>Former United States football player O.J. Simpson was sentenced to prison for 15 years yesterday morning on charges of kidnapping and armed robbery of two sports memorabilia dealers at a hotel in Las Vegas Nevada. Simpson's accomplice in the crime one Clarence Stewart was also given a thirty-three year sentence. Both will be eligible for parole in five years. Simpson aged 61 was arrested on twelve charges of kidnapping and armed robbery in which he and his accomplices used firearms to force two sports memorabilia dealers to give him several items that Simpson felt had been stolen from him.</t>
 		<h>O.J. Simpson was released in Las Vegas.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Simpson was sentenced to prison for 15 years</a>
+		<t3>Simpson sentenced prision</t3>
+		<t5>Simpson sentenced to prison 15</t5>
+		<t7>Simpson sentenced to prison for 15 years</t7>
 	</pair>
 	<pair id="556" entailment="ENTAILMENT" task="IR">
 		<t>Djibouti and Eritrea have spoken to the United Nations security council on Thursday to discuss a border dispute. Djibouti has said that unless the UN intervenes there will be war. The dispute dates back to June when violence erupted between the nations in the border region of Doumeira. The resulting clashes killed an estimated 35 people. The unmarked border remains disputed and the nations have built up troops on each side of the border keeping the situation tense.</t>
 		<h>There may be a war between Djibouti and Eritrea.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Djibouti has said that unless the UN intervenes there will be war</a>
+		<t3>Djibouti war Eritrea</t3>
+		<t5>Djibouti unless intervenes war Eritrea</t5>
+		<t7>Djibouti unless intervenes will be war Eritrea</t7>
 	</pair>
 	<pair id="557" entailment="ENTAILMENT" task="IR">
 		<t>A Japanese whaling ship the Keiko Maru will be docking in Hobart on December 24 to transfer a sick crew member to hospital. The crew member is suffering from appendicitis. Greenpeace has called on the Australian government to prevent the ship from refuelling. The government stated it is opposed to commercial whaling but that taking such action would be "counter-productive". Greenpeace CEO Steve Shallhorn said that it is an opportunity for Australia to demonstrate its opposition. "The Australian Government does have control over port authorities and we believe it does have the possibility to refuse to allow the ship to be refuelled" he said.</t>
 		<h>Greenpeace wants to protect whales.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Greenpeace has called on the Australian government to prevent the ship from refuelling. The government stated it is opposed to commercial whaling</a>
+		<t3>Greenpeace Australian whaling</t3>
+		<t5>Greenpeace called Australian opposed whaling</t5>
+		<t7>Greenpeace called Australian government opposed whaling</t7>
 	</pair>
 	<pair id="558" entailment="CONTRADICTION" task="IR">
 		<t>After discovery by a blogger Microsoft has announced that on their next operating system Windows 7 users will have the ability to remove Internet Explorer and other select Microsoft programs. Microsoft has been accused of forcing users to run their own software while competitor products get pushed out of the market because of this.</t>
 		<h>Users of Windows 7 will not be able to remove Internet Explorer.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Windows 7 users will have the ability to remove Internet Explorer</a>
+		<t3>users remove Explorer</t3>
+		<t5>Windows users remove Internet Explorer</t5>
+		<t7>Windows users have ability remove Internet Explorer</t7>
 	</pair>
 	<pair id="559" entailment="UNKNOWN" task="IR">
 		<t>Michele Yelenic is expected to testify that Foley was home with her when the alleged murder occurred. Krastek told the jury DNA under Yelenic's fingerprints will ultimately link him to the murder as will bloody shoe prints found at the crime scehe that match athletic shoes Foley is known to wear. Monzo also said authorities have failed to investigate several other suspects including Yelenic's neighbor. Monzo said Yelenic was on very friendly terms with the neighbor's wife which could have given him a motive to commit the murder.</t>
 		<h>Yelenic molested his adopted son.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Yelenic was on very friendly terms with the neighbor</a>
+		<t3>Yelenic friendly neighbor</t3>
+		<t5>Yelenic friendly terms with neighbor</t5>
+		<t7>Yelenic very friendly terms with the neighbor</t7>
 	</pair>
 	<pair id="560" entailment="CONTRADICTION" task="IR">
 		<t>Protests have continued after Manchester United defeated Lille in the Champions League round of 16. A free kick by Ryan Giggs in the second half of the game caused great controversy as Lille was setting up their wall as the ball went into the back of the net. Lille players nearly walked off the pitch at the time but they were goaded back onto the field and the game ended 1 0 for Manchester United.</t>
 		<h>Lille has defeated Manchester United.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>after Manchester United defeated Lille</a>
+		<t3>Manchester defeated Lille</t3>
+		<t5>Manchester United defeated Lille</t5>
+		<t7>after Manchester United defeated Lille</t7>
 	</pair>
 	<pair id="561" entailment="ENTAILMENT" task="IR">
 		<t>Italy and Inter Milan defender Marco Materazzi revealed the slur he said to Zinedine Zidane at last year's FIFA World Cup in Germany which led to Zidane's headbutting of Materazzi and subsequent red card for Zidane. Materazzi said in an interview with the TV Sorrisi e Canzoni magazine that the insult was: "I prefer the whore that is your sister." The Interview is set to be released on Monday.</t>
 		<h>Materazzi insulted Zidane.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Zidane's headbutting of Materazzi and subsequent red card</a>
+		<t3>Zidane headbutting Materazzi</t3>
+		<t5>Zidane's headbutting of Materazzi</t5>
+		<t7>Zidane's headbutting of Materazzi red card</t7>
 	</pair>
 	<pair id="562" entailment="UNKNOWN" task="IR">
 		<t>Kansas senator Sam Brownback said "It's stunning to me that we would outsource the production of these airplanes to Europe instead of building them in America. I'll be calling upon the Secretary of Defense for a full debriefing and expect there will be a protest of the award by Boeing." Todd Tiahrt a Kansas representative said "We should have an American tanker built by an American company with American workers. I cannot believe we would create French jobs in place of Kansas jobs."</t>
 		<h>Sam Brownback is not a Republican.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Sam Brownback said "It's stunning to me that we would outsource</a>
+		<t3>Sam Brownback stunning</t3>
+		<t5>Sam Brownback said "It's stunning to me</t5>
+		<t7>Sam Brownback said "It's stunning to me that we would outsource</t7>
 	</pair>
 	<pair id="563" entailment="ENTAILMENT" task="IR">
 		<t>The actress was crowned winner of Celebrity Big Brother following confrontations with fellow housemates Jade Goody Jo O'Meara and Danielle Lloyd who were accused of bullying and racism. Despite denying the claims all three lost most of their major endorsements and Jade and Danielle's partners are said to have left them. Politicians became embroiled in the proceedings when media regulator Ofcom received more than 40000 complaints from viewers. This resulted in the row reached both the House of Commons and India where chancellor Gordon Brown's bridge-building visit was overshadowed by controversy caused by the programme.</t>
 		<h>Jade Goody is a contestant in Celebrity Big Brother.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Celebrity Big Brother following confrontations with fellow housemates Jade Goody</a>
+		<t3>Celebrity Brother Goody</t3>
+		<t5>Celebrity Big Brother Jade Goody</t5>
+		<t7>Celebrity Big Brother fellow housemates Jade Goody</t7>
 	</pair>
 	<pair id="564" entailment="UNKNOWN" task="IR">
 		<t>"The CBBA is calling on the Federal Government to commit $14 million in new funding for content production infrastructure training and sector co-ordination and planning" Ms Walch says. "With $10.4 billion being spent on 'strengthening the economy' this is highly targeted $14 million will assist in skills development and employment pathways for many volunteers involved in local stations as well as strengthening local communities ability to sustain themselves in tough times."</t>
 		<h>CBAA stands for Community Broadcasting Association of Animals.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>CBBA is calling on the Federal Government to commit $14 million</a>
+		<t3>CBBA Federal commit</t3>
+		<t5>CBBA calling Federal Government commit</t5>
+		<t7>CBBA is calling on Federal Government commit</t7>
 	</pair>
 	<pair id="565" entailment="UNKNOWN" task="IR">
 		<t>Robinho is considered one of the best Brazilian forward players at the present time and he is an important player for Santos. The authorities are cautious to release any information concerning the case as this could jeopardize both the investigations and Ms. Souza's life.</t>
 		<h>Ms. Souza is Robinho's sister.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Robinho is considered one of the best Brazilian forward players</a>
+		<t3>Robinho the best</t3>
+		<t5>Robinho is considered the best</t5>
+		<t7>Robinho is considered one of the best</t7>
 	</pair>
 	<pair id="566" entailment="CONTRADICTION" task="IR">
 		<t>Mr. P V Narasimha Rao former prime minister of India passed away this morning after suffering cardiac arrest in a private hospital in New Delhi. He had been in critical condition for the past few days. He was admitted to the All India Institute of Medical Sciences (AIIMS) on December 9 after he complained of breathlessnes.</t>
 		<h>Mr. Rao had cancer.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Rao former prime minister of India passed away this morning after suffering cardiac</a>
+		<t3>Rao passed cardiac</t3>
+		<t5>Rao passed suffering cardiac</t5>
+		<t7>Rao passed away after suffering cardiac</t7>
 	</pair>
 	<pair id="567" entailment="CONTRADICTION" task="IR">
 		<t>A statement given by Dr. Lee Schwamm and Dr. Larry Ronan of Massachusetts General Hospital stated "Over the course of the last several days we've done a series of tests on Senator Kennedy to determine the cause of his seizure. He has had no further seizures remains in good overall condition and is up and walking around the hospital."</t>
 		<h>Ted Kennedy is dead.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>remains in good overall condition and is up and walking around</a>
+		<t3>Kennedy good condition</t3>
+		<t5>Kennedy good condition walking</t5>
+		<t7>Kennedy remains good condition walking around</t7>
 	</pair>
 	<pair id="568" entailment="ENTAILMENT" task="IR">
 		<t>Two fossilized trees with their roots trunks and heads still attached and are said to be over 380 million years old have been found in the state of New York inside a rock quarry near Gilboa New York in the USA. Researchers call the extinct tree a Wattieza and this particular tree stood over 30 feet tall and used spores to reproduce rather than seeds. It may have even looked like many palms trees that exist today but did not have any leaves. Instead they had fronds much like a fern.</t>
 		<h>Fossilized trees have been found in the USA.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Two fossilized trees with their roots trunks and heads still attached and are said to be over 380 million years old have been found in the state of New York</a>
+		<t3>trees found York</t3>
+		<t5>fossilized trees found New York</t5>
+		<t7>fossilized trees have been found New York</t7>
 	</pair>
 	<pair id="569" entailment="UNKNOWN" task="IR">
 		<t>A private security guard attached to Brad Pitt and Angelina Jolie pulled out his revolver to threaten a lensman in Pune India. The Associated Press photographer was also roughed up by the guard Sunil Singh who works for Tops Securities. Defamer.com a tabloid in Los Angeles however says that two guards were involved in the attack. The incident occurred at the Sindh Society area in the suburb of Aundh.</t>
 		<h>Brad Pitt and Angelina Jolie have a daughter.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Brad Pitt and Angelina Jolie pulled out his revolver to threaten</a>
+		<t3>Pitt and Jolie</t3>
+		<t5>Pitt and Jolie pulled out</t5>
+		<t7>Brad Pitt and Angelina Jolie pulled out</t7>
 	</pair>
 	<pair id="570" entailment="ENTAILMENT" task="IR">
 		<t>Two court filings in response to a lawsuit brought by Nebraska State Senator Ernie Chambers were filed on behalf of God according to John Friend clerk of the Douglas County District Court in Omaha Nebraska. "This one miraculously appeared on the counter. It just all of a sudden was here — poof!" said Mr. Friend. In one filing St. Michael the Archangel is listed as a witness.</t>
 		<h>Senator Ernie Chambers has sued God.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>lawsuit brought by Nebraska State Senator Ernie Chambers were filed on behalf of God</a>
+		<t3>lawsuit Chambers God</t3>
+		<t5>lawsuit Senator Chambers filed God</t5>
+		<t7>lawsuit Senator Ernie Chambers filed of God</t7>
 	</pair>
 	<pair id="571" entailment="ENTAILMENT" task="IR">
 		<t>Russia has made delivery of its first shipment of nuclear fuel to Iran's Bushehr facility which is also being built by Russia. Both the Kremlin and the White House say that this should allow Iran to shut down its controversial uranium enrichment program. The Russian company Atomstroiexport said that the shipments began on Sunday. It was also confirmed by Gholam Reza Aghazadeh the head of the Atomic Energy Organization of Iran.</t>
 		<h>Iran received nuclear fuel from Russia.</h>
-		<a></a>
-		<t3></t3>
-		<t5></t5>
-		<t7></t7>
+		<a>Russia has made delivery of its first shipment of nuclear fuel to Iran</a>
+		<t3>Russia nuclear Iran</t3>
+		<t5>Russia delivery nuclear fuel Iran</t5>
+		<t7>Russia made delivery nuclear fuel to Iran</t7>
 	</pair>
 	<pair id="572" entailment="ENTAILMENT" task="IR">
 		<t>U.S. Secretary of State Condoleezza Rice and Foreign Affairs Minister Peter MacKay made a visit to MacKay's Nova Scotia riding Pictou Nova Scotia yesterday. Rice spent 23 hours in Canada. She thanked people in Atlantic Canada who helped thousands of Americans stranded when their planes were forced to land in the region. Rice and MacKay travelled together to and from the riding. It was a a 90-minute drive each way from Halifax.</t>
