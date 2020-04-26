@@ -7,7 +7,6 @@ import random
 import numpy as np
 import torch
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset
-from torch.utils.data.distributed import DistributedSampler
 from tensorboardX import SummaryWriter
 from tqdm import tqdm, trange
 
@@ -16,18 +15,16 @@ from transformers import (
     AdamW,
     XLNetTokenizer,
     XLNetForSequenceClassification,
-    XLNetConfig
+    XLNetConfig,
+    get_linear_schedule_with_warmup
 )
 
 logger = logging.getLogger(__name__)
 
-ALL_MODELS = sum((tuple(conf.pretrained_config_archive_map.keys()) for conf in (BertConfig, XLNetConfig, XLMConfig, RobertaConfig)), ())
+ALL_MODELS = sum((tuple(conf.pretrained_config_archive_map.keys()) for conf in XLNetConfig), ())
 
 MODEL_CLASSES = {
-    'bert': (BertConfig, BertForSequenceClassification, BertTokenizer),
     'xlnet': (XLNetConfig, XLNetForSequenceClassification, XLNetTokenizer),
-    'xlm': (XLMConfig, XLMForSequenceClassification, XLMTokenizer),
-    'roberta': (RobertaConfig, RobertaForSequenceClassification, RobertaTokenizer),
 }
 
 def set_seed(args):
@@ -41,7 +38,6 @@ def train(args, train_dataset, model, tokenizer):
     """ Train the model """
     tb_writer = SummaryWriter()
 
-    args.train_batch_size = args.per_gpu_train_batch_size * 1
     train_sampler = RandomSampler(train_dataset)
     train_dataloader = DataLoader(train_dataset, sampler=train_sampler, batch_size=args.train_batch_size)
 
@@ -52,13 +48,13 @@ def train(args, train_dataset, model, tokenizer):
         t_total = len(train_dataloader) // args.gradient_accumulation_steps * args.num_train_epochs
 
     # Prepare optimizer and schedule (linear warmup and decay)
-    no_decays = ['bias', 'LayerNorm.weight']
+    no_decay = ['bias', 'LayerNorm.weight']
     optimizer_grouped_parameters = [
-        {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decays)], 'weight_decay': args.weight_decay},
-        {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decays)], 'weight_decay': 0.0}
+        {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)], 'weight_decay': args.weight_decay},
+        {'params': [p for n, p in model.named_parameters() if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
         ]
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
-    scheduler = WarmupLinearSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=t_total)
+    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=args.warmup_steps, num_training_steps=t_total)
 
     # Train!
     logger.info("***** Running training *****")
@@ -69,9 +65,11 @@ def train(args, train_dataset, model, tokenizer):
     logger.info("  Total optimization steps = %d", t_total)
 
     global_step = 0
+    epochs_trained = 0
+    #steps_trained_in_current_epoch = 0
     tr_loss, logging_loss = 0.0, 0.0
     model.zero_grad()
-    train_iterator = trange(int(args.num_train_epochs), desc="Epoch")
+    train_iterator = trange(epochs_trained, int(args.num_train_epochs), desc="Epoch")
     set_seed(args)
 
     for _ in train_iterator:
@@ -90,12 +88,12 @@ def train(args, train_dataset, model, tokenizer):
                 loss = loss/args.gradient_accumulation_steps
             
             loss.backward()
-            torch.nn.utils.clip_grad_norm(model.parameters(), args.max_grad_norm)
-
             tr_loss += loss.item()
+
             if (step + 1) % args.gradient_accumulation_steps == 0:
-                scheduler.step()
+                torch.nn.utils.clip_grad_norm(model.parameters(), args.max_grad_norm)
                 optimizer.step()
+                scheduler.step()
                 model.zero_grad()
                 global_step += 1
 
@@ -105,7 +103,7 @@ def train(args, train_dataset, model, tokenizer):
                         results = evalute(args, model, tokenizer)
                         for key, value in results.items():
                             tb_writer.add_scalar('eval_{}'.format(key), value, global_step)
-                    tb_writer.add_scalar('lr', scheduler.get_lr([0], global_step))
+                    tb_writer.add_scalar('lr', scheduler.get_lr()[0], global_step)
                     tb_writer.add_scalar('loss', (tr_loss - logging_loss)/args.logging_steps, global_step)
                     logging_loss = tr_loss
                 
@@ -142,7 +140,7 @@ def evalute(args, model, tokenizer, prefix=""):
         if not os.path.exists(eval_output_dir):
             os.makedirs(eval_output_dir)
 
-        args.eval_batch_size = args.per_gpu_train_batch_size
+        args.eval_batch_size = args.train_batch_size
         eval_sampler = SequentialSampler(eval_dataset)
         eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=args.eval_batch_size)
 
@@ -302,7 +300,7 @@ def main():
     parser.add_argument("--do_eval", action="store_true", help="Whether to run eval on the dev set.")
     parser.add_argument("--evaluate_during_training", action="store_true", help="Run evaluation during training at each logging step.")
     parser.add_argument("--do_lower_case", action="store_true", help="Set this flag if you are using an uncased model.")
-    parser.add_argument("--per_gpu_train_batch_size", default=8, type=int, help="Batch size per GPU/CPU for training.")
+    parser.add_argument("--train_batch_size", default=8, type=int, help="Batch size for training.")
     parser.add_argument("--per_gpu_eval_batch_size", default=8, type=int, help="Batch size per GPU/CPU for evaluation.")
     parser.add_argument(
         "--gradient_accumulation_steps",

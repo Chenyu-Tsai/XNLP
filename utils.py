@@ -55,9 +55,10 @@ def pair_without_score(pair):
     """ Return pairs without score """
     pairs = []
     for token_a, token_b, score in pair:
-        pair = (token_a, token_b)
-        pairs.append(pair)
-    return pair
+        if token_a != '' and token_b != '':
+            pair = (token_a, token_b)
+            pairs.append(pair)
+    return pairs
 
 def MRR_calculate(pair_truth, pair_all):
     final_score = 0.
@@ -81,11 +82,12 @@ def MRR_mean(pair_truth, pair_all, top_k, times):
 
 def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_sentence_a):
     """ Evaluating MRR between model and attention span"""
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     inputs = tokenizer.encode_plus(sentence_a, sentence_b, return_tensors='pt', add_special_tokens=True)
-    input_ids = inputs['input_ids'].cuda()
+    input_ids = inputs['input_ids'].to(device)
     input_ids.squeeze()
     tokens = tokenizer.convert_ids_to_tokens(input_ids.squeeze().tolist())
-    token_type_ids = inputs['token_type_ids'].cuda()
+    token_type_ids = inputs['token_type_ids'].to(device)
     
     model.eval()
     with torch.no_grad():
@@ -116,7 +118,7 @@ def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_senten
     test_sentence_b_tokens = test_tokens[test_slice_b]
     test_pair = pair_match(test_sentence_a_tokens, test_sentence_b_tokens, attn_data=None)
 
-    return MRR_calculate(test_pair, pair)
+    return MRR_calculate(test_pair, pair), len(test_pair)
 
 """ Preprocessing Functions """
 
