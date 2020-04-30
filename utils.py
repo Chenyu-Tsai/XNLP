@@ -5,8 +5,12 @@ from torch.utils.data.dataset import ConcatDataset
 from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
 
+import pandas as pd
+
+device = torch.device("cpu")
+
 def format_special_chars(tokens):
-    return [t.replace('Ġ', ' ').replace('▁', ' ').replace('</w>', '') for t in tokens]
+    return [t.replace('Ġ', '').replace('▁', '').replace('</w>', '') for t in tokens]
 
 def format_attention(attention, tokens):
     """ Set special token <sep>, <cls> attention to zero and format the attention """
@@ -60,6 +64,18 @@ def pair_without_score(pair):
             pairs.append(pair)
     return pairs
 
+def unique_pair_without_score(pair):
+    pairs = []
+    if len(pair[0]) == 3:
+        for token_a, token_b, score in pair:
+            if token_a != '' and token_b != '' and token_a not in pairs:
+                pairs.append(token_a)
+    else:
+        for token_a, token_b in pair:
+            if token_a != '' and token_b != '' and token_a not in pairs:
+                pairs.append(token_a)
+    return pairs
+
 def MRR_calculate(pair_truth, pair_all):
     final_score = 0.
     for query in pair_truth:
@@ -80,9 +96,8 @@ def MRR_mean(pair_truth, pair_all, top_k, times):
     final = final/times
     return final
 
-def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_sentence_a):
+def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_sentence_a, unique=False):
     """ Evaluating MRR between model and attention span"""
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     inputs = tokenizer.encode_plus(sentence_a, sentence_b, return_tensors='pt', add_special_tokens=True)
     input_ids = inputs['input_ids'].to(device)
     input_ids.squeeze()
@@ -103,7 +118,10 @@ def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_senten
     sentence_b_tokens = tokens[slice_b]
     pair = pair_match(sentence_a_tokens, sentence_b_tokens, attn_data=attn_data)
     pair = sorted(pair, key=lambda pair: pair[2], reverse=True)
-    pair = pair_without_score(pair)
+    if not unique:
+        pair = pair_without_score(pair)
+    else:
+        pair = unique_pair_without_score(pair)
     
     test_inputs = tokenizer.encode_plus(test_sentence_a, sentence_b, return_tensors='pt', add_special_tokens=False)
     test_input_ids = test_inputs['input_ids']
@@ -117,12 +135,10 @@ def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_senten
     test_sentence_a_tokens = test_tokens[test_slice_a]
     test_sentence_b_tokens = test_tokens[test_slice_b]
     test_pair = pair_match(test_sentence_a_tokens, test_sentence_b_tokens, attn_data=None)
+    if unique:
+        test_pair = unique_pair_without_score(test_pair)
 
     return MRR_calculate(test_pair, pair), len(test_pair)
-
-""" Preprocessing Functions """
-
-
 
 """ Data Related Functions """
 
