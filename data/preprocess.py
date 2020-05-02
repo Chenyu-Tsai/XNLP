@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import pandas as pd
 import argparse
+import re
 
 # replace the word in raw RTE dataset
 replacement = {"hasn't": 'has not', 
@@ -149,13 +150,49 @@ def extract_semantic_phenomenons(df_sp, df_train):
 
     return df
 def preprocess_text(inputs, remove_space=True):
-  if remove_space:
-    outputs = ' '.join(inputs.strip().split())
-  else:
-    outputs = inputs
-  outputs = outputs.replace("``", '"').replace("''", '"')
+    if remove_space:
+        outputs = ' '.join(inputs.strip().split())
+    else:
+        outputs = inputs
+    outputs = outputs.replace("``", '"').replace("''", '"').replace("(","").replace(")","").replace("$","")
 
-  return outputs
+    return outputs
+
+def train_to_span_detection(file):
+    """ extract the raw RTE training dataset to TSV file """
+    root = ET.parse(file).getroot()
+    premise = []
+    hypothesis = []
+    span = []
+    start_position = []
+    
+
+    for type_tag in root.findall('pair'):
+    
+        e = type_tag.get('entailment')
+    
+        t = type_tag.find('t').text
+        for word, rep in replacement.items():
+            t = t.replace(word.lower(), rep)
+        t = preprocess_text(t, remove_space=True)
+
+        h = type_tag.find('h').text
+        for word, rep in replacement.items():
+            h = h.replace(word.lower(), rep)
+        h = preprocess_text(h, remove_space=True)
+
+        a = type_tag.find('a').text
+        for word, rep in replacement.items():
+            a = a.replace(word.lower(), rep)
+        a = preprocess_text(a, remove_space=True)
+        print(a, t)
+        a_pos = re.search(a, t)
+        premise.append(t)
+        hypothesis.append(h)
+        span.append(a)
+        start_position.append(a_pos.start())
+
+    return premise, hypothesis, span, start_position
 
 def main():
 
@@ -172,6 +209,10 @@ def main():
     df_sp = SP_union('raw/RTE5_SP1.csv', 'raw/RTE5_SP2.csv')
     df_multi_label = extract_semantic_phenomenons(df_sp, df_train)
     df_multi_label.to_csv("train_multi_label.tsv", sep='\t', index=False, encoding="utf_8_sig")
+
+    premise, hypothesis, span, start_position = train_to_span_detection('raw/RTE5_train.xml')
+    df_span_detection = pd.DataFrame((zip(premise, hypothesis, span, start_position)), columns=['premise', 'hyp', 'span','start_pos'])
+    df_span_detection.to_csv("train_span_detection.tsv", sep='\t', index=False, encoding="utf_8_sig")
 
 if __name__ == "__main__":
     main()

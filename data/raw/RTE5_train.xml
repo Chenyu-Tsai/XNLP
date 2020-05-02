@@ -85,7 +85,7 @@
 		<a>Egyptian Foreign Ministry spokesman Hossam Zaki</a>
 	</pair>
 	<pair id="18" entailment="ENTAILMENT" task="QA">
-		<t>Seoul City said Monday a 690-meter-tall, 133-story multifunctional skyscraper will be constructed in Sangam-dong. Once built, it will be the second highest after the 800-meter-high Burj Dubai, which is under construction, by South Korean developer Samsung CT. The construction will cost more than 3.3 trillion won (2.37 billion), the city estimates. To raise funds, 23 local developers signed an MOU at a Seoul hotel Monday with Seoul Mayor Oh Se-hoon attending. "The landmark building will help make Seoul more attractive and become a new tourist attraction here," Oh said. The multifunctional building will have hotels, offices, department stores, convention centers and various recreational facilities including an aquarium and movie theaters.</t>
+		<t>Seoul City said Monday a 690-meter-tall, 133-story multifunctional skyscraper will be constructed in Sangam-dong. Once built, it will be the second highest after the 800-meter-high Burj Dubai, which is under construction, by South Korean developer Samsung CT. The construction will cost more than 3.3 trillion won ($2.37 billion), the city estimates. To raise funds, 23 local developers signed an MOU at a Seoul hotel Monday with Seoul Mayor Oh Se-hoon attending. "The landmark building will help make Seoul more attractive and become a new tourist attraction here," Oh said. The multifunctional building will have hotels, offices, department stores, convention centers and various recreational facilities including an aquarium and movie theaters.</t>
 		<h>The highest skyscraper in the world is being built in Dubai.</h>
 		<a>skyscraper will be constructed in Sangam-dong. Once built, it will be the second highest after the 800-meter-high Burj Dubai</a>
 	</pair>
@@ -1052,7 +1052,7 @@
 	<pair id="211" entailment="UNKNOWN" task="IE">
 		<t>According to the Spanish daily, this type of bacterium is prevalent in hospitals throughout the world, but the incidence of infection in Madrid hospitals is lower than the Spanish average. The head of the Neonatal Unit at 12 de Octubre Hospital, Carmen Pay's, explained that the bacterium is very adaptable "and keeps on learning". The father of the dead baby, an Ecuadorian named Angel Marcelo, was quoted as saying that the progress of the baby had at first been "tremendous", and that he had even been taken off the respirator, but that a few days later he began to cough up blood, dying soon afterwards.</t>
 		<h>The Spanish daily is set in Madrid.</h>
-		<a></a>
+		<a>Spanish daily, this type of bacterium is prevalent in hospitals throughout the world, but the incidence of infection in Madrid hospitals</a>
 	</pair>
 	<pair id="212" entailment="UNKNOWN" task="IE">
 		<t>Police were called to the Highgrove House, the home belonging to Prince Charles and his wife Camilla on Tuesday night after police received a call that there was an intruder on the property. "He was detained within the grounds and did not gain access to any buildings," said a spokesperson for the police, Tony Rymer. A spokesperson for the estate refused to comment to the media calling it "a matter for the police" and that any comments on the intrusion should be given through them. According to a Gloucester Police spokeswoman, a man from Bristol, England was arrested after wielding a pitchfork around the property. The name of the 55-year-old has not been released, but police charged him with trespassing. He was later released after posting bail. Camilla and Charles, who were both present and sleeping on the estate at the time, were not injured.</t>
@@ -1432,7 +1432,7 @@
 	<pair id="287" entailment="ENTAILMENT" task="IE">
 		<t>The CBS Evening News commentary segment "Free Speech" , which made its debut with Katie Couric this month, was accused last Friday by Bill Maher of HBO's "Real Time with Bill Maher" of being "anything but free speech". Maher said he was asked by CBS News to appear on the segment. But when he asked if he could talk about religion, "that was a dealbreaker from the start". Instead, he said they would send over a list of "acceptable topics". CBS News executive producer Rome Hartman has since responded in an e-mail to TVNewser saying that, "Bill Maher was never told that he couldn't discuss religion in a Free Speech segment," and added, "In fact, Free Speech has already addressed religion and we expect others will in the future."</t>
 		<h>Free Speech is a part of the CBS Evening News.</h>
-		<a>The CBS Evening News commentary segment "Free Speechquot</a>
+		<a>The CBS Evening News commentary segment "Free Speech"</a>
 	</pair>
 	<pair id="288" entailment="ENTAILMENT" task="IE">
 		<t>Officials in Pakistan say parliamentary elections will be delayed until next month. VOA correspondent Nancy-Amelia Collins in Islamabad reports the Pakistan Election Commission says the delay is due to the destruction of election offices and materials in violence that broke out last week after Benazir Bhutto's assassination. Chief election commissioner Qazi Mohammed Farooq says the elections originally scheduled for January 8 are being postponed and will be held next month. "The polling will now be held on 18th February, 2008 instead of 8th January 2008," he said.</t>
@@ -1657,7 +1657,7 @@
 	<pair id="332" entailment="UNKNOWN" task="IE">
 		<t>At least 19 people have been killed in central Florida in the city of Lady Lake and Paisley after severe storms and a tornado ripped through the cities in the middle of the night. Eleven of those killed were in Paisley and three were in Lady Lake. The death toll is expected to rise as rescue crews resume tomorrow morning. Volusia, Sumter, Lake and Seminole counties have all been declared a state of an emergency as dozens of houses, mobile homes and a church were destroyed. Clothes and furniture are scattered around the wrecked houses and pieces of trees are scattered about. Cars are reported to have been turned over or thrown around in the air. "Our priority today is search and rescue," said Gov. of Florida, Charlie Crist. Rescuers are still looking through the wreckage to find survivors of those who might have been killed.</t>
 		<h>Gov. of Florida, Charlie Crist, has visited the cities of Lady Lake and Paisley.</h>
-		<a></a>
+		<a>"Our priority today is search and rescue," said Gov. of Florida, Charlie Crist</a>
 	</pair>
 	<pair id="333" entailment="ENTAILMENT" task="IE">
 		<t>The father of a British soldier who was killed in Iraq yesterday has paid tribute to his son. 29 year-old Corporal Matthew Cornish, who was married with two young children, sustained injuries after a mortar attack on a base in Basra. He was rushed to hospital, but he later died. He was the first soldier to be killed in an attack on a UK military compound in Iraq. "I'm proud of him as a soldier and as a son. He did the Army proud," 60 year-old Robin Cornish said of his son, the one hundred and fifteenth British soldier to be killed in Iraq since operations began in 2003.</t>
@@ -1787,7 +1787,7 @@
 	<pair id="358" entailment="ENTAILMENT" task="IE">
 		<t>Endon was respected for her humble, unassuming personality. She was popularly referred to as "Kak Endon," or "Elder Sister Endon." She discovered she had cancer in 2002 after her twin sister, Noraini, was earlier diagnosed with the disease. Noraini died in 2003. Endon had a breast removed and traveled to the United States regularly for treatment. She returned to Malaysia from Los Angeles on Oct. 1 after five rounds of chemotherapy since July. Endon had been deeply involved in awareness programs for breast cancer, the main cause of illness-related fatalities for Malaysian women. She has said she refused to feel sorry for herself, and felt fortunate she could obtain the best medical treatment.</t>
 		<h>Noraini had a twin sister called Endon.</h>
-		<a>She discovered she had cancer in 2002 after her twin sister, Noraini, was earlier diagnosed with the disease. Noraini died in 2003. Edon</a>
+		<a>She discovered she had cancer in 2002 after her twin sister, Noraini, was earlier diagnosed with the disease. Noraini died in 2003. Endon</a>
 	</pair>
 	<pair id="359" entailment="UNKNOWN" task="IE">
 		<t>Officials from TAG Heuer have announced that the company received the iF product design award, which was given away by the jury from the International Forum Design. TAG Heuer received the award for its concept watch, called Monaco Calibre 360 (Linear Second) Concept Chronograph. The jury that gives away the iF product design awards each year consists of leading design experts from all over the world gathered in one place. The iF awards are presented in Hanover, Germany, at the International Forum Design Hannover GMBH. There are a number of fields and disciplines which have their own awards.</t>
@@ -2247,7 +2247,7 @@
 	<pair id="450" entailment="UNKNOWN" task="IR">
 		<t>The European Organization for Nuclear Research (CERN) said on Monday that repairing the Large Hadron Collider (LHC) will cost up to €16.6 million or $21 million. The LHC, which is the world's largest and highest-energy particle accelerator, is located near the border of France and Switzerland and crosses the border four times. It has a diameter of 27 km (17 miles). It is designed to simulate the conditions shortly after the Big Bang, but it broke down on September 19 due to an electrical failure.</t>
 		<h>CERN head office is in Paris.</h>
-		<a>particle accelerator, located near the border of France and Switzerland</a>
+		<a>particle accelerator, is located near the border of France and Switzerland</a>
 	</pair>
 	<pair id="451" entailment="UNKNOWN" task="IR">
 		<t>Roddenberry was probably most known for her role as the voice of the computers in nearly every Star Trek television spinoff series from the 1960's to present time. She is also the voice of the computer in the upcoming movie by director J.J. Abrams, Star Trek. Majel also played Nurse Chapel in the original Star Trek series starring William Shatner and later played Lwaxana Troi in Star Trek: The Next Generation and Star Trek: Deep Space Nine.</t>
@@ -2257,7 +2257,7 @@
 	<pair id="452" entailment="ENTAILMENT" task="IR">
 		<t>With the arrival of the torch to Rome, it begins the ritual of the 2006 Winter Olympics of Turin. The torch will travel across Italy transported by more than 10'000 carriers and it will arrive in Turin on February 9, 2006, where the Winter Olympics will be inaugurated, after 11'000 km (6,835 miles) of travel. On November 27 the flame was burned on the altar of Hestia in Olympia, in Greece, and delivered to the first torch carrier, pole vaulter Kostas Fidippidis. The first Italian to carry the olympic flame is the marathoner Stefano Baldini, winner of gold medal at the Olympics in Athens. He received the torch from the President of the Italian Republic Carlo Azeglio Ciampi.</t>
 		<h>The Winter Olympics will be inaugurated in Turin.</h>
-		<a></a>
+		<a>it begins the ritual of the 2006 Winter Olympics of Turin</a>
 	</pair>
 	<pair id="453" entailment="ENTAILMENT" task="IR">
 		<t>On August 21, the Polish weekly Przekrj published an advertisement for Dan-Mark exercise books, bearing the logo of 4fun.tv, a Polish music/interactive   TV station. Part of the advertisement contained a definition of the word "exercise book". The wording looked familiar, and Wikinews consulted Wikipedia,   the collaborative online encyclopedia.  Upon seeing the Wikipedia definition, it appeared that the entry quoted in the promotional material was identical to the initial two paragraphs of the relevant Wikipedia entry.</t>
@@ -2802,7 +2802,7 @@
 	<pair id="561" entailment="UNKNOWN" task="IR">
 		<t>Figures released today show that the number of organs donated by New Zealanders in 2006 has decreased by four to a new record low of 25. In 2005 the number of organs donated equalled 29, a previous record low in New Zealand. Before 2005 the number of organ donations averaged 40, an already low number by international standards.</t>
 		<h>Organ transplant saves lives.</h>
-		<a></a>
+		<a>Figures released today show that the number of organs donated by New Zealanders</a>
 	</pair>
 	<pair id="562" entailment="UNKNOWN" task="IR">
 		<t>Feith, 63, started his career at age 25 at the ministry of Foreign Affairs. He worked at the Dutch embassies of Syria, Germany and Sudan, at the United Nations headquarters in New York and at NATO in Brussels. In 2004 he represented E.U. in Darfur and prepared an E.U.-mission in Iraq that trained police-officials and judges. A year later Feith was in charge of the E.U. operation in Aceh and supervised the peace negotiations between the Indonesian government and the rebels.</t>
