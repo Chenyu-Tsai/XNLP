@@ -9,6 +9,12 @@ from torch.nn import CrossEntropyLoss, BCEWithLogitsLoss
 from transformers import get_linear_schedule_with_warmup
 import pandas as pd
 import numpy as np
+from multiprocessing import Pool, cpu_count
+from functools import partial
+from tqdm import tqdm
+from torch.utils.data import TensorDataset
+
+
 
 tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased', do_lower_case=True)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -75,7 +81,7 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
                                               )
     
         hidden_states = transformer_outputs[0]
-        if task == 0 or task == 1:
+        if task == 0 or task == 1 or task == None:
             output = self.sequence_summary(hidden_states)
             
             if labels is None:
@@ -106,18 +112,23 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
             outputs = transformer_outputs[1:]
 
             if start_positions is not None and end_positions is not None:
+
                 end_logits = self.end_logits(hidden_states, start_positions=start_positions, p_mask=p_mask)
 
                 loss_fct = CrossEntropyLoss()
                 start_loss = loss_fct(start_logits, start_positions).to(device)
+                #print(start_logits, start_positions)
                 end_loss = loss_fct(end_logits, end_positions).to(device)
+                #print(end_logits, end_positions)
                 total_loss = (start_loss + end_loss) / 2
+                #print(start_loss, end_loss)
 
                 if cls_index is not None:
                     cls_logits = self.answer_class(hidden_states, start_positions=start_positions, cls_index=cls_index)
                     loss_fct_cls = nn.BCEWithLogitsLoss()
                     cls_loss = loss_fct_cls(cls_logits, torch.tensor([0], dtype=torch.float, device=device)).to(device)
                     total_loss += cls_loss * 0.5
+                    #print(cls_loss)
 
                 outputs = (total_loss,) + outputs
             
@@ -169,16 +180,16 @@ class Dataset_3Way(Dataset):
         if self.mode == "data/RTE5_test":
             text_a, text_b = self.df.iloc[idx, :2].values
             label_tensor = None
+            task = None
         else:
             text_a, text_b, label = self.df.iloc[idx, :].values
             label_tensor = torch.tensor(label).unsqueeze(0)
+            task = self.task
             
         inputs = tokenizer.encode_plus(text_a, text_b, return_tensors='pt', add_special_tokens=True)
         tokens_tensor = inputs['input_ids']
         segments_tensor = inputs['token_type_ids']
         masks_tensor = inputs['attention_mask']
-
-        task = self.task
             
         return (task, tokens_tensor, segments_tensor, masks_tensor, label_tensor)
     
@@ -208,19 +219,19 @@ class Dataset_Span_Detection(Dataset):
         features = squad_convert_example_to_features(example,
                                                      max_seq_length=384,
                                                      doc_stride=128,
-                                                     max_query_length=128
+                                                     max_query_length=64,
                                                     )
-        input_ids = torch.tensor(features[0].input_ids).unsqueeze(0)
-        attention_mask = torch.tensor(features[0].attention_mask).unsqueeze(0)
-        token_type_ids = torch.tensor(features[0].token_type_ids).unsqueeze(0)
-        start_position = torch.tensor(features[0].start_position).unsqueeze(0)
-        end_position = torch.tensor(features[0].end_position).unsqueeze(0)
-        cls_index = torch.tensor(features[0].cls_index).unsqueeze(0)
-        p_mask = torch.tensor(features[0].p_mask).unsqueeze(0)
+        input_ids = torch.tensor(features[0].input_ids, dtype=torch.long).unsqueeze(0)
+        attention_mask = torch.tensor(features[0].attention_mask, dtype=torch.long).unsqueeze(0)
+        token_type_ids = torch.tensor(features[0].token_type_ids, dtype=torch.long).unsqueeze(0)
+        start_position = torch.tensor(features[0].start_position, dtype=torch.long).unsqueeze(0)
+        end_position = torch.tensor(features[0].end_position, dtype=torch.long).unsqueeze(0)
+        cls_index = torch.tensor(features[0].cls_index, dtype=torch.long).unsqueeze(0)
+        p_mask = torch.tensor(features[0].p_mask, dtype=torch.float).unsqueeze(0)
         task = self.task
         
         return (task, input_ids, attention_mask, token_type_ids, start_position, end_position, cls_index, p_mask)
-    
+
     def __len__(self):
         return self.len
 
@@ -404,16 +415,14 @@ def squad_convert_example_to_features(example, max_seq_length, doc_stride, max_q
     truncated_query = tokenizer.encode(example.question_text, add_special_tokens=False, max_length=max_query_length)
     sequence_added_tokens = tokenizer.max_len - tokenizer.max_len_single_sentence
     sequence_pair_added_tokens = tokenizer.max_len - tokenizer.max_len_sentences_pair
-
     span_doc_tokens = all_doc_tokens
     while len(spans) * doc_stride < len(all_doc_tokens):
-
         encoded_dict = tokenizer.encode_plus(
             truncated_query if tokenizer.padding_side == "right" else span_doc_tokens,
             span_doc_tokens if tokenizer.padding_side == "right" else truncated_query,
             max_length=max_seq_length,
             return_overflowing_tokens=True,
-            pad_to_max_length=True,
+            pad_to_max_length=False,
             stride=max_seq_length - doc_stride - len(truncated_query) - sequence_pair_added_tokens,
             truncation_strategy="only_second" if tokenizer.padding_side == "right" else "only_first",
             return_token_type_ids=True,

@@ -51,6 +51,10 @@ def test_to_csv(file):
     entailment = []
     # attention span
     attention = []
+    # top 3, 5, 7 tokens
+    t3 = []
+    t5 = []
+    t7 = []
 
 
     for type_tag in root.findall('pair'):
@@ -72,12 +76,24 @@ def test_to_csv(file):
             a = a.replace(word.lower(), rep)
         a = preprocess_text(a, remove_space=True)
 
+        t3 = type_tag.find('t3').text
+        t3 = preprocess_text(t3, remove_space=True)
+
+        t5 = type_tag.find('t5').text
+        t5 = preprocess_text(t5, remove_space=True)
+
+        t7 = type_tag.find('t7').text
+        t7 = preprocess_text(t7, remove_space=True)
+
         text.append(t)
         hypothesis.append(h)
         attention.append(a)
         entailment.append(label_mapping[e])
+        t3.append(t3)
+        t5.append(t5)
+        t7.append(t7)
     
-    return text, hypothesis, attention, entailment
+    return text, hypothesis, attention, entailment, t3, t5, t7
 
 def SP_union(annotator1, annotator2):
     """ Get the unnion dataset of 2 annotator's labels """
@@ -202,8 +218,8 @@ def main():
     df_train.to_csv("RTE5_train.tsv", sep="\t", index=False, encoding="utf_8_sig")
     df_valid.to_csv("RTE5_valid.tsv", sep="\t", index=False, encoding="utf_8_sig")
 
-    text, hypothesis, attention, entailment = test_to_csv('raw/RTE5_test.xml')
-    df_test = pd.DataFrame((zip(text, hypothesis, attention, entailment)), columns=['text_a', 'text_b', 'eval_text','label'])
+    text, hypothesis, attention, entailment, t3, t5, t7 = test_to_csv('raw/RTE5_test.xml')
+    df_test = pd.DataFrame((zip(text, hypothesis, attention, entailment, t3, t5, t7)), columns=['text_a', 'text_b', 'eval_text','label', 't3', 't5', 't7'])
     df_test.to_csv("RTE5_test.tsv", sep="\t", index=False, encoding="utf_8_sig")
 
     df_sp = SP_union('raw/RTE5_SP1.csv', 'raw/RTE5_SP2.csv')

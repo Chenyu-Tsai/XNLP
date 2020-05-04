@@ -96,7 +96,7 @@ def MRR_mean(pair_truth, pair_all, top_k, times):
     final = final/times
     return final
 
-def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_sentence_a, unique=False):
+def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_sentence_a, unique=False, in_un=False, top_k=top_k):
     """ Evaluating MRR between model and attention span"""
     inputs = tokenizer.encode_plus(sentence_a, sentence_b, return_tensors='pt', add_special_tokens=True)
     input_ids = inputs['input_ids'].to(device)
@@ -135,107 +135,21 @@ def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_senten
     test_sentence_a_tokens = test_tokens[test_slice_a]
     test_sentence_b_tokens = test_tokens[test_slice_b]
     test_pair = pair_match(test_sentence_a_tokens, test_sentence_b_tokens, attn_data=None)
-    if unique:
+    if unique or in_un:
         test_pair = unique_pair_without_score(test_pair)
 
-    return MRR_calculate(test_pair, pair), len(test_pair)
+    if top_k:
+        score = MRR_mean(test_pair, pair, top_k=top_k, times=top_k)
+    elif in_un:
+        score = intersect_union(test_pair, pair)
+    else:
+        score = MRR_calculate(test_pair, pair)
+
+    return score, len(test_pair)
 
 """ Data Related Functions """
 
-class Dataset_multi(Dataset):
-    """ Multi label dataset"""
 
-    def __init__(self, mode, tokenizer):
-        assert mode in ["train", "test", "train_RTE", "test_RTE", "train_multi", "test_multi", "train_multi_500"]
-        self.mode = mode
-        self.df = pd.read_csv(mode + ".tsv", sep="\t").fillna("")
-        if self.mode == "train_multi":
-            self.df = self.df[['text_a', 'text_b', 'labels']]
-        self.len = len(self.df)
-        self.label_map = {'True': 0, 'False': 1}
-        self.tokenizer = tokenizer
-    
-    # return trainging data
-    def __getitem__(self, idx):
-        if self.mode in ["test", "train_RTE", "test_RTE", "test_multi", "test_2"]:
-            text_a, text_b = self.df.iloc[idx, :2].values
-            label_tensor = None
-        else:
-            text_a, text_b = self.df.iloc[idx, :2].values
-            label = self.df.iloc[idx, 2].replace('[', '')
-            label = label.replace(']','')
-            label = np.fromstring(label, dtype=int, sep=',')
-            #print(type(label.to_list()))
-            label_tensor = torch.tensor(label, dtype=torch.float)
-        
-        # sentence_a tokens
-        word_pieces = []
-        tokens_a = self.tokenizer.tokenize(text_a + '<SEP>')
-        word_pieces += tokens_a
-        len_a = len(tokens_a)
-        
-        # sentence_b tokens
-        tokens_b = self.tokenizer.tokenize(text_b + '<SEP><CLS>')
-        word_pieces += tokens_b
-        len_b = len(word_pieces) - len_a
-        
-        # 將 token 序列轉換成索引序列
-        ids = self.tokenizer.convert_tokens_to_ids(word_pieces)
-        tokens_tensor = torch.tensor(ids)
-        
-        # 將第一句 token 位置設為 0，其他為 1 表示第二句
-        segments_tensor = torch.tensor([0] * len_a + [1] * (len_b-1) + [2], 
-                                        dtype=torch.long)
-        
-        return (tokens_tensor, segments_tensor, label_tensor)
-    
-    def __len__(self):
-        return self.len
-
-class Dataset_3Way(Dataset):
-    """ RTE 3way dataset """
-    
-    def __init__(self, mode, tokenizer):
-        assert mode in ["train_filtered", "test", "train"]
-        self.mode = mode
-        self.df = pd.read_csv(mode + ".tsv", sep="\t").fillna("")
-        self.len = len(self.df)
-        self.label_map = {'ENTAILMENT': 0, 'UNKNOWN': 1, 'CONTRADICTION': 2}
-        self.tokenizer = tokenizer
-        
-    
-    # 回傳訓練資料的 function
-    def __getitem__(self, idx):
-        if self.mode == "test":
-            text_a, text_b, label = self.df.iloc[idx, :].values
-            label_tensor = torch.tensor(label)
-        else:
-            text_a, text_b, label = self.df.iloc[idx, :].values
-            label_tensor = torch.tensor(label)
-            
-        # 第一句 tokens
-        word_pieces = []
-        tokens_a = self.tokenizer.tokenize(text_a + '<SEP>')
-        word_pieces += tokens_a
-        len_a = len(tokens_a)
-        
-        # 第二句 tokens
-        tokens_b = self.tokenizer.tokenize(text_b + '<SEP><CLS>')
-        word_pieces += tokens_b
-        len_b = len(word_pieces) - len_a
-        
-        # 將 token 序列轉換成索引序列
-        ids = self.tokenizer.convert_tokens_to_ids(word_pieces)
-        tokens_tensor = torch.tensor(ids)
-        
-        # 將第一句 token 位置設為 0，其他為 1 表示第二句
-        segments_tensor = torch.tensor([0] * len_a + [1] * (len_b-1) + [2], 
-                                        dtype=torch.long)
-        
-        return (tokens_tensor, segments_tensor, label_tensor)
-    
-    def __len__(self):
-        return self.len
 
 class Dataset_MRR(Dataset):
     """ RTE 3way dataset """
