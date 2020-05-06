@@ -52,10 +52,9 @@ def test_to_csv(file):
     # attention span
     attention = []
     # top 3, 5, 7 tokens
-    t3 = []
-    t5 = []
-    t7 = []
-
+    top3 = []
+    top5 = []
+    top7 = []
 
     for type_tag in root.findall('pair'):
     
@@ -89,11 +88,11 @@ def test_to_csv(file):
         hypothesis.append(h)
         attention.append(a)
         entailment.append(label_mapping[e])
-        t3.append(t3)
-        t5.append(t5)
-        t7.append(t7)
+        top3.append(t3)
+        top5.append(t5)
+        top7.append(t7)
     
-    return text, hypothesis, attention, entailment, t3, t5, t7
+    return text, hypothesis, attention, entailment, top3, top5, top7
 
 def SP_union(annotator1, annotator2):
     """ Get the unnion dataset of 2 annotator's labels """
@@ -219,8 +218,11 @@ def main():
     df_valid.to_csv("RTE5_valid.tsv", sep="\t", index=False, encoding="utf_8_sig")
 
     text, hypothesis, attention, entailment, t3, t5, t7 = test_to_csv('raw/RTE5_test.xml')
-    df_test = pd.DataFrame((zip(text, hypothesis, attention, entailment, t3, t5, t7)), columns=['text_a', 'text_b', 'eval_text','label', 't3', 't5', 't7'])
+    df_test = pd.DataFrame((zip(text, hypothesis, attention, entailment)), columns=['text_a', 'text_b', 'eval_text','label'])
     df_test.to_csv("RTE5_test.tsv", sep="\t", index=False, encoding="utf_8_sig")
+    df_test_topk = pd.DataFrame((zip(text, hypothesis, attention, entailment, t3, t5, t7)), columns=['text_a', 'text_b', 'eval_text','label', 't3', 't5', 't7'])
+    df_test_topk.to_csv("RTE5_test_topk.tsv", sep="\t", index=False, encoding="utf_8_sig")
+
 
     df_sp = SP_union('raw/RTE5_SP1.csv', 'raw/RTE5_SP2.csv')
     df_multi_label = extract_semantic_phenomenons(df_sp, df_train)

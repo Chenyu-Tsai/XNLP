@@ -57,3 +57,4 @@ class DataProcessor:
         """ Read a tab separated file """
         with open(input_file, "r", encoding="utf-8-sig") as f:
             return list(csv.reader(f, delimiter="\t", quotechar=quotechar))
+

@@ -96,7 +96,7 @@ def MRR_mean(pair_truth, pair_all, top_k, times):
     final = final/times
     return final
 
-def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_sentence_a, unique=False, in_un=False, top_k=top_k):
+def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_sentence_a, unique=False, in_un=False, top_k=None):
     """ Evaluating MRR between model and attention span"""
     inputs = tokenizer.encode_plus(sentence_a, sentence_b, return_tensors='pt', add_special_tokens=True)
     input_ids = inputs['input_ids'].to(device)
@@ -106,7 +106,7 @@ def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_senten
     
     model.eval()
     with torch.no_grad():
-        attention = model(input_ids, token_type_ids=token_type_ids)[-1]
+        attention = model(input_ids, token_type_ids=token_type_ids, task=torch.tensor([0]))[-1]
     
     attn = format_attention(attention, tokens)  
     tokens = format_special_chars(tokens)

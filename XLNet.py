@@ -13,6 +13,8 @@ from multiprocessing import Pool, cpu_count
 from functools import partial
 from tqdm import tqdm
 from torch.utils.data import TensorDataset
+from torch.nn.utils.rnn import pad_sequence
+
 
 
 
@@ -81,7 +83,7 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
                                               )
     
         hidden_states = transformer_outputs[0]
-        if task == 0 or task == 1 or task == None:
+        if task == 0 or task == 1 or task is None:
             output = self.sequence_summary(hidden_states)
             
             if labels is None:
@@ -89,21 +91,20 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
                 outputs = (logits,) + transformer_outputs[1:]
 
             if labels is not None:
-                task_check = 0
-            
-                if labels.size() == torch.Size([1]):
+
+                if task == 0:#torch.tensor([0]):
                     logits_3way = self.logits_proj_3way(output)
                     outputs = (logits_3way,) + transformer_outputs[1:]
-                    task_check = 1
+
                 else:
                     logits_multi = self.logits_proj_multi(output)
                     outputs = (logits_multi,) + transformer_outputs[1:]
 
-                if task_check:
+                if task == 0:#torch.tensor([0]):
                     loss_fct = CrossEntropyLoss(weight=self.class_weights_3way)
                     loss = loss_fct(logits_3way.view(-1, self.num_labels_3way), labels.view(-1)).to(device)
                 else:
-                    loss_fct = BCEWithLogitsLoss(pos_weight=self.class_weights_multi)
+                    loss_fct = BCEWithLogitsLoss()#pos_weight=self.class_weights_multi)
                     loss = loss_fct(logits_multi.view(-1, self.num_labels_multi), labels).to(device)
                 outputs = (loss,) + outputs
         else:
@@ -136,15 +137,16 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
 
 class Dataset_multi(Dataset):
     
-    def __init__(self, mode, tokenizer):
-        assert mode in ["data/train_multi_label"]
+    def __init__(self, mode, tokenizer, three_tasks):
+        assert mode in ["train_multi_label"]
         self.mode = mode
-        self.df = pd.read_csv(mode + ".tsv", sep="\t").fillna("")
+        self.dir = "../data/"
+        self.df = pd.read_csv(self.dir + mode + ".tsv", sep="\t").fillna("")
         self.df = self.df[['text_a', 'text_b', 'labels']]
         self.len = len(self.df)
-        self.label_map = {'True': 0, 'False': 1}
         self.tokenizer = tokenizer
         self.task = 1
+        self.three_tasks = three_tasks
 
     def __getitem__(self, idx):
         text_a, text_b = self.df.iloc[idx, :2].values
@@ -152,7 +154,10 @@ class Dataset_multi(Dataset):
         label = self.df.iloc[idx, 2].replace('[', '')
         label = label.replace(']','')
         label = np.fromstring(label, dtype=int, sep=',')
-        label_tensor = torch.tensor(label, dtype=torch.float).unsqueeze(0)
+        if self.three_tasks:
+            label_tensor = torch.tensor(label, dtype=torch.float).unsqueeze(0)
+        else:
+            label_tensor = torch.tensor(label, dtype=torch.float)
             
         inputs = tokenizer.encode_plus(text_a, text_b, return_tensors='pt', add_special_tokens=True)
         tokens_tensor = inputs['input_ids']
@@ -168,23 +173,60 @@ class Dataset_multi(Dataset):
 
 class Dataset_3Way(Dataset):
     
-    def __init__(self, mode, tokenizer):
-        assert mode in ["data/RTE5_train", "data/RTE5_test"]
+    def __init__(self, mode, tokenizer, three_tasks):
+        assert mode in ["RTE5_train", "RTE5_test"]
         self.mode = mode
-        self.df = pd.read_csv(mode + ".tsv", sep="\t").fillna("")
+        self.dir = "../data/"
+        self.df = pd.read_csv(self.dir + mode + ".tsv", sep="\t").fillna("")
+        self.len = len(self.df)
+        self.tokenizer = tokenizer
+        self.task = 0
+        self.three_tasks = three_tasks
+        
+    def __getitem__(self, idx):
+        if self.mode == "RTE5_test":
+            text_a, text_b = self.df.iloc[idx, :2].values
+            label_tensor = None
+            task = self.task
+        else:
+            text_a, text_b, label = self.df.iloc[idx, :].values
+            if self.three_tasks:
+                label_tensor = torch.tensor(label).unsqueeze(0)
+            else:
+                label_tensor = torch.tensor(label)
+            task = self.task
+            
+        inputs = tokenizer.encode_plus(text_a, text_b, return_tensors='pt', add_special_tokens=True)
+        tokens_tensor = inputs['input_ids']
+        segments_tensor = inputs['token_type_ids']
+        masks_tensor = inputs['attention_mask']
+
+        if self.mode == "RTE5_test":
+            return (task, tokens_tensor, segments_tensor, masks_tensor)
+        else:    
+            return (task, tokens_tensor, segments_tensor, masks_tensor, label_tensor)
+    
+    def __len__(self):
+        return self.len
+
+class Dataset_3Way_test(Dataset):
+    
+    def __init__(self, mode, tokenizer):
+        assert mode in ["RTE5_test"]
+        self.mode = mode
+        self.dir = "../data/"
+        self.df = pd.read_csv(self.dir + mode + ".tsv", sep="\t").fillna("")
         self.len = len(self.df)
         self.tokenizer = tokenizer
         self.task = 0
         
     def __getitem__(self, idx):
-        if self.mode == "data/RTE5_test":
+        if self.mode == "RTE5_test":
             text_a, text_b = self.df.iloc[idx, :2].values
             label_tensor = None
-            task = None
         else:
             text_a, text_b, label = self.df.iloc[idx, :].values
-            label_tensor = torch.tensor(label).unsqueeze(0)
-            task = self.task
+            label_tensor = torch.tensor(label)
             
         inputs = tokenizer.encode_plus(text_a, text_b, return_tensors='pt', add_special_tokens=True)
         tokens_tensor = inputs['input_ids']
@@ -199,9 +241,10 @@ class Dataset_3Way(Dataset):
 class Dataset_Span_Detection(Dataset):
     
     def __init__(self, mode, tokenizer):
-        assert mode in ["data/train_span_detection"]
+        assert mode in ["train_span_detection"]
         self.mode = mode
-        self.df = pd.read_csv(mode + ".tsv", sep="\t").fillna("")
+        self.dir = "../data/"
+        self.df = pd.read_csv(self.dir + mode + ".tsv", sep="\t").fillna("")
         self.len = len(self.df)
         self.tokenizer = tokenizer
         self.task = 2
@@ -234,6 +277,21 @@ class Dataset_Span_Detection(Dataset):
 
     def __len__(self):
         return self.len
+
+def create_mini_batch_test(samples):
+    tokens_tensors = [s[0].squeeze(0) for s in samples]
+    segments_tensors = [s[1].squeeze(0) for s in samples]
+    masks_tensors = [s[2].squeeze(0) for s in samples]
+    if samples[0][3] is not None:
+        label_ids = torch.stack([s[3] for s in samples])
+    else:
+        label_ids = None
+    # zero pad 到同一序列長度
+    tokens_tensors = pad_sequence(tokens_tensors, batch_first=True)
+    segments_tensors = pad_sequence(segments_tensors, batch_first=True)
+    masks_tensors = pad_sequence(masks_tensors, batch_first=True)
+
+    return tokens_tensors.squeeze(1), segments_tensors.squeeze(1), masks_tensors.squeeze(1), label_ids
 
 class SquadExample(object):
     """
@@ -542,3 +600,38 @@ def squad_convert_example_to_features(example, max_seq_length, doc_stride, max_q
 def squad_convert_example_to_features_init(tokenizer_for_convert):
     global tokenizer
     tokenizer = tokenizer_for_convert
+
+def get_predictions(model, dataloader, compute_acc=False):
+    predictions = None
+    correct = 0
+    total = 0
+      
+    with torch.no_grad():
+        
+        for data in dataloader:
+            task = data[0]
+            if next(model.parameters()).is_cuda:
+                data = [t.to("cuda:0") for t in data[1:] if t is not None]
+            tokens_tensors, segments_tensors, masks_tensors = data[:]
+            outputs = model(input_ids=tokens_tensors.squeeze(0), 
+                            token_type_ids=segments_tensors.squeeze(0), 
+                            attention_mask=masks_tensors.squeeze(0),
+                            task=task)
+            logits = outputs[0]
+            
+            _, pred = torch.max(logits.data, 1)
+            
+            if compute_acc:
+                labels = data[3]
+                total += labels.size(0)
+                correct += (pred == labels).sum().item()
+                
+            if predictions is None:
+                predictions = pred
+            else:
+                predictions = torch.cat((predictions, pred))
+    
+    if compute_acc:
+        acc = correct / total
+        return predictions, acc
+    return predictions
