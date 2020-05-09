@@ -4,6 +4,8 @@ from torch.utils.data import Dataset
 from torch.utils.data.dataset import ConcatDataset
 from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
+from torch.nn import functional as F
+
 
 import pandas as pd
 
@@ -88,6 +90,9 @@ def MRR_calculate(pair_truth, pair_all):
 
 def MRR_mean(pair_truth, pair_all, top_k, times):
     """ Choose k tokens from tokens list for calculating MRR"""
+    # Handle when the pairs number is lower than top_k situation
+    if len(pair_truth) < top_k:
+        top_k = len(pair_truth)
     filtered = random.choices(pair_truth, k=top_k)
     final = 0.
     for i in range(times):
@@ -95,6 +100,43 @@ def MRR_mean(pair_truth, pair_all, top_k, times):
         final += score
     final = final/times
     return final
+
+def pair_match_accumulation(sentence_a_tokens, sentence_b_tokens, attn_data):
+    scores = []
+    for index_a, text in enumerate(sentence_a_tokens):
+        score_total = 0
+        for index_b, text in enumerate(sentence_b_tokens):
+            score = look_score(attn_data, index_a, index_b)
+            score_total += score
+        scores.append(score_total)
+    return scores
+
+def attention_weight_span(data, feature, output):
+
+    input_ids = feature[0].input_ids
+    tokens = feature[0].tokens
+    token_type_ids = feature[0].token_type_ids
+    
+    attention = output[5]
+    attn = format_attention(attention, tokens)
+    
+    sentence_b_start = token_type_ids.index(1)
+    slice_a = slice(0, sentence_b_start)
+    slice_b = slice(sentence_b_start, len(tokens))
+    
+    attn_data = attn[:, :, slice_a, slice_b]
+    sentence_a_tokens = tokens[slice_a]
+    sentence_b_tokens = tokens[slice_b]
+    attn_score = pair_match_accumulation(sentence_a_tokens, sentence_b_tokens, attn_data)
+    
+    attn_score = torch.tensor(attn_score)
+    start_log_probs = F.softmax(attn_score, dim=-1)
+    start_top_log_probs, start_top_index = torch.topk(start_log_probs, 5, dim=-1)
+    start_log_probs[start_top_index] = 0
+    end_top_log_probs, end_top_index = torch.topk(start_log_probs, 25, dim=-1)
+    cls_logits = 0
+    
+    return (start_top_log_probs, start_top_index, end_top_log_probs, end_top_index, cls_logits)
 
 def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_sentence_a, unique=False, in_un=False, top_k=None):
     """ Evaluating MRR between model and attention span"""
@@ -148,8 +190,6 @@ def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_senten
     return score, len(test_pair)
 
 """ Data Related Functions """
-
-
 
 class Dataset_MRR(Dataset):
     """ RTE 3way dataset """

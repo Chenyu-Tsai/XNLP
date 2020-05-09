@@ -10,7 +10,7 @@
 	<pair id="2" entailment="CONTRADICTION" task="QA">
 		<t>Euro MPs have voted overwhelmingly to cut the cost of texting and using the internet on mobiles abroad. The cap for a "roaming" text will fall to 11 euro cents (10p; 14 US cents) from about 29 cents on average today. The EU-wide caps excluding VAT will take effect in July. They cover text messages and data roaming services such as checking e-mails while abroad. The current price cap of 46 euro cents per minute for an outgoing voice call will also fall to 43 cents in July.</t>
 		<h>A roaming text cost 46 euro cents.</h>
-		<a>a roaming text will fall to 11 euro cents</a>
+		<a>a "roaming" text will fall to 11 euro cents</a>
 		<t3>11 euro cents</t3>
 		<t5>roaming text 11 euro cents</t5>
 		<t7>roaming text fall to 11 euro cents</t7>
@@ -40,12 +40,12 @@
 		<t7>rational basis to distinguish between people driving</t7>
 	</pair>
 	<pair id="6" entailment="ENTAILMENT" task="QA">
-		<t>Rain is pelting down on Doña Porcela's treatment room in Puerto Cabezas the main town on Nicaragua's Northern Caribbean coast. The room is barren except for a few plastic chairs a wooden table and some old plastic bottles balanced precariously on timber beams. Doña Porcela is a respected traditional healer here and the bottles are filled with her secret medicinal potions. Her patient today is a teenage girl asleep on a piece of cardboard serving as a mattress on the dirt floor.</t>
-		<h>Doña Porcela is a healer.</h>
-		<a>Doña Porcela is a respected traditional healer</a>
+		<t>Rain is pelting down on Dona Porcela's treatment room in Puerto Cabezas the main town on Nicaragua's Northern Caribbean coast. The room is barren except for a few plastic chairs a wooden table and some old plastic bottles balanced precariously on timber beams. Dona Porcela is a respected traditional healer here and the bottles are filled with her secret medicinal potions. Her patient today is a teenage girl asleep on a piece of cardboard serving as a mattress on the dirt floor.</t>
+		<h>Dona Porcela is a healer.</h>
+		<a>Dona Porcela is a respected traditional healer</a>
 		<t3>Porcela respected healer</t3>
-		<t5>Doña Porcela a respected healer</t5>
-		<t7>Doña Porcela is a respected traditional healer</t7>
+		<t5>Dona Porcela a respected healer</t5>
+		<t7>Dona Porcela is a respected traditional healer</t7>
 	</pair>
 	<pair id="7" entailment="CONTRADICTION" task="QA">
 		<t>Global technology giant IBM is in talks to buy Sun Microsystems in a deal that would expand its server market share the Wall Street Journal reported Wednesday. IBM may pay as much as US$6.5 billion in cash for Sun the newspaper reported on its Web site without naming its sources. That amount of money would be nearly double Sun's closing share price on Tuesday of $4.97 per share. The report cautioned that while the two companies are holding discussions a transaction may not occur.</t>
@@ -1234,7 +1234,7 @@
 	<pair id="155" entailment="ENTAILMENT" task="QA">
 		<t>HONG KONG (Reuters) Eating two and a half ounces of baby broccoli daily for two months may protect against a common stomach bug that is linked to gastritis ulcers and even stomach cancer a study in Japan has found. Fresh broccoli sprouts contain plenty of sulforaphane a natural biochemical that appears to trigger the production of enzymes in the gut that protect against oxygen radicals DNA-damaging chemicals and inflammation. In an article published in the journal Cancer Prevention Research scientists found that eating two and a half ounces of baby broccoli daily may help stave off some serious health problems.</t>
 		<h>Eating broccoli may protect against ulcers and stomach cancer.</h>
-		<a>Eating two and a half ounces of baby broccoli daily for two months may Eating broccoli a common stomach bug that is linked to gastritis ulcers and even stomach cancer</a>
+		<a>Eating two and a half ounces of baby broccoli daily for two months may protect against a common stomach bug that is linked to gastritis ulcers and even stomach cancer</a>
 		<t3>broccoli protect cancer</t3>
 		<t5>broccoli protect ulcers stomach cancer</t5>
 		<t7>Eating broccoli protect against ulcers stomach cancer</t7>
@@ -1280,7 +1280,7 @@
 		<t7>De Klerk South Africa's last white president</t7>
 	</pair>
 	<pair id="161" entailment="CONTRADICTION" task="QA">
-		<t>India has higher rates of malnourished children than sub-Saharan Africa despite having the money to tackle the problem according to a survey that raises grave questions about the country's economic rise Almost 46 per cent of Indian children under the age of 3 suffer from malnutrition according to the survey by the Indian Health Ministry in conjunction with Unicef the United Nations children's agency. That compares with about 35 per cent in sub-Saharan Africa and only 8 per cent in China whose economic growth India strives to emulate. It also represents only a slight decrease since the last National Family Health Survey in India seven years ago showed that 47 per centof its children were mal-nourished.</t>
+		<t>India has higher rates of malnourished children than sub-Saharan Africa despite having the money to tackle the problem according to a survey that raises grave questions about the country's economic rise Almost 46 per cent of Indian children under the age of 3 suffer from malnutrition according to the survey by the Indian Health Ministry in conjunction with Unicef the United Nations children's agency. That compares with about 35 per cent in sub-Saharan Africa and only 8 per cent in China whose economic growth India strives to emulate. It also represents only a slight decrease since the last National Family Health Survey in India seven years ago showed that 47 percent of its children were mal-nourished.</t>
 		<h>47% of Chinese children are mal-nourished.</h>
 		<a>in India seven years ago showed that 47 percent of its children were mal-nourished</a>
 		<t3>India 47 mal-nourished</t3>
@@ -2610,7 +2610,7 @@
 	<pair id="327" entailment="CONTRADICTION" task="IE">
 		<t>The President of Indonesia Susilo Bambang Yudhoyono offered his condolences to the victims of the disaster. "On behalf of the government I express my condolences to the families of the dead victims and may their souls be accepted by God almighty" he said. Indonesia's Vice President Yusuf Kalla has visited the scene of the incident. "We will provide emergency help to the victims. For those whose homes were destroyed the government will help with the repairs" he told Metro TV.</t>
 		<h>Yusuf Kalla is the President of Indonesia.</h>
-		<a>Indonesia Vice President Yusuf Kalla</a>
+		<a>Indonesia's Vice President Yusuf Kalla</a>
 		<t3>Indonesia Vice Kalla</t3>
 		<t5>Indonesia Vice President Yusuf Kalla</t5>
 		<t7>Indonesia Vice President Yusuf Kalla</t7>
@@ -3402,7 +3402,7 @@
 	<pair id="426" entailment="ENTAILMENT" task="IR">
 		<t>Brazilian comedienne and actress Dercy Gonçalves has died at the age of 101. Gonçalves died of pneumonia on Saturday in Rio de Janeiro Brazil. She was born Dolores Gonçalves Costa on June 23 1907 in Santa Maria Madalena Rio de Janeiro Brazil. In her 80-year long career Gonçalves has worked in the theater revues film radio and television becoming famous by her humorous use of vulgar language.</t>
 		<h>Dercy Gonçalves died of pneumonia.</h>
-		<a>Gonçalves died pneumonia</a>
+		<a>Gonçalves died of pneumonia</a>
 		<t3>Gonçalves died of pneumonia</t3>
 		<t5>Gonçalves died of pneumonia</t5>
 		<t7>Gonçalves died of pneumonia</t7>
@@ -3722,7 +3722,7 @@
 	<pair id="466" entailment="ENTAILMENT" task="IR">
 		<t>The Oxford English Dictionary (OED) defines McJob as "an unstimulating low-paid job with few prospects." The McDonald's fast-food giant has begun a campaign to have the word removed from the dictionary or to have its definition changed by lobbying British MPs. The company has also set up an online petition with the slogan "Change the definition. Sign the petition." Clive Betts MP for Sheffield Attercliffe agrees with the restaurant chain. Betts has tabled a Commons motion on the issue. The motion has so far gained the support of 15 other MPs.</t>
 		<h>A "McJob" is a low-paid job.</h>
-		<a>McJob as an unstimulating low-paid job</a>
+		<a>McJob as "an unstimulating low-paid job</a>
 		<t3>McJob low-paid job</t3>
 		<t5>McJob an low-paid job</t5>
 		<t7>McJob an unstimulating low-paid job</t7>
@@ -4034,7 +4034,7 @@
 	<pair id="505" entailment="UNKNOWN" task="IR">
 		<t>Mr Gonda credited the pub's success to the "excellent brewers we deal with our faithful and supportive pub regulars and our invaluable staff members." It was this community support which helped the pub recover so quickly after the 2007 flooding with Mr Wraith describing the day the waters entered the pub. "The funny thing was that it was difficult to get the customers to evacuate. They just wanted to keep on drinking but we did have to get them out eventually and some of them did get wet." Flood defences were erected after the customers left but to no avail; Mr Wraith stayed in the pub overnight despite the flooding and the lack of electricity.</t>
 		<h>Mr. Gonda is the manager of The Kelham Island Tavern.</h>
-		<a>Mr Gonda credited the pub's success to the excellent brewers</a>
+		<a>Mr Gonda credited the pub's success to the "excellent brewers</a>
 		<t3>Gonda excellent brewers</t3>
 		<t5>Gonda credited pub's excellent brewers</t5>
 		<t7>Gonda credited pub's success excellent brewers</t7>
@@ -4138,7 +4138,7 @@
 	<pair id="518" entailment="UNKNOWN" task="IR">
 		<t>With online gaming in persistent worlds becoming more prevalent a US congressional committee has begun to look into the tax implications of these booming online economies. Games such as World of Warcraft and Second Life have large player driven economic systems in which either following the rules or against them real world currencies are exchanged for in-game currencies. With the GDP of some of these economies rivaling that of some small countries the US government is wondering if it is missing out on a potential source of tax revenue: or as some gamers might put it the IRS is asking "You buy gold?"</t>
 		<h>The US Congress may re-establish luxury taxes.</h>
-		<a>US government is wondering if it is missing out a potential source</a>
+		<a>US government is wondering if it is missing out on a potential source</a>
 		<t3>US government missing</t3>
 		<t5>US government missing potential source</t5>
 		<t7>US government is wondering missing potential source</t7>
@@ -4714,7 +4714,7 @@
 	<pair id="590" entailment="ENTAILMENT" task="IR">
 		<t>The Simpsons has been on television for 17 seasons and FOX confirms that it will run at least two more seasons. The show is currently contracted through FOX until 2008 and is the longest running television show on prime-time in the United States. An estimated over nine million people watch the show every Sunday night but that number is down from earlier peak viewer numbers.</t>
 		<h>The Simpsons is a show broadcast in America.</h>
-		<a>the show is currently contracted through FOX until 2008 and is the longest running television show on prime-time in the United States</a>
+		<a>The show is currently contracted through FOX until 2008 and is the longest running television show on prime-time in the United States</a>
 		<t3>Simpsons television States</t3>
 		<t5>Simpsons television United States</t5>
 		<t7>Simpsons show longest television United States</t7>

@@ -46,11 +46,13 @@ def train_to_csv(file):
 def test_to_csv(file):
     """ extract the raw RTE testing dataset to TSV file """
     root = ET.parse(file).getroot()
+    uids = []
     text = []
     hypothesis = []
     entailment = []
     # attention span
     attention = []
+    start_position = []
     # top 3, 5, 7 tokens
     top3 = []
     top5 = []
@@ -59,6 +61,7 @@ def test_to_csv(file):
     for type_tag in root.findall('pair'):
     
         e = type_tag.get('entailment')
+        uid = type_tag.get('id')
 
         t = type_tag.find('t').text
         for word, rep in replacement.items():
@@ -75,6 +78,8 @@ def test_to_csv(file):
             a = a.replace(word.lower(), rep)
         a = preprocess_text(a, remove_space=True)
 
+        a_pos = re.search(a, t)
+        
         t3 = type_tag.find('t3').text
         t3 = preprocess_text(t3, remove_space=True)
 
@@ -83,16 +88,18 @@ def test_to_csv(file):
 
         t7 = type_tag.find('t7').text
         t7 = preprocess_text(t7, remove_space=True)
-
+        
+        uids.append(uid)
         text.append(t)
         hypothesis.append(h)
         attention.append(a)
+        start_position.append(a_pos.start())
         entailment.append(label_mapping[e])
         top3.append(t3)
         top5.append(t5)
         top7.append(t7)
     
-    return text, hypothesis, attention, entailment, top3, top5, top7
+    return text, hypothesis, attention, entailment, top3, top5, top7, start_position, uids
 
 def SP_union(annotator1, annotator2):
     """ Get the unnion dataset of 2 annotator's labels """
@@ -200,7 +207,7 @@ def train_to_span_detection(file):
         for word, rep in replacement.items():
             a = a.replace(word.lower(), rep)
         a = preprocess_text(a, remove_space=True)
-        print(a, t)
+
         a_pos = re.search(a, t)
         premise.append(t)
         hypothesis.append(h)
@@ -217,11 +224,13 @@ def main():
     df_train.to_csv("RTE5_train.tsv", sep="\t", index=False, encoding="utf_8_sig")
     df_valid.to_csv("RTE5_valid.tsv", sep="\t", index=False, encoding="utf_8_sig")
 
-    text, hypothesis, attention, entailment, t3, t5, t7 = test_to_csv('raw/RTE5_test.xml')
+    text, hypothesis, attention, entailment, t3, t5, t7, start_position, uids = test_to_csv('raw/RTE5_test.xml')
     df_test = pd.DataFrame((zip(text, hypothesis, attention, entailment)), columns=['text_a', 'text_b', 'eval_text','label'])
     df_test.to_csv("RTE5_test.tsv", sep="\t", index=False, encoding="utf_8_sig")
     df_test_topk = pd.DataFrame((zip(text, hypothesis, attention, entailment, t3, t5, t7)), columns=['text_a', 'text_b', 'eval_text','label', 't3', 't5', 't7'])
     df_test_topk.to_csv("RTE5_test_topk.tsv", sep="\t", index=False, encoding="utf_8_sig")
+    df_test_span = pd.DataFrame((zip(text, hypothesis, attention, start_position, uids)), columns=['premise', 'hyp', 'span', 'start_position', 'uid'])
+    df_test_span.to_csv("RTE5_test_span.tsv", sep="\t", index=False, encoding="utf_8_sig")
 
 
     df_sp = SP_union('raw/RTE5_SP1.csv', 'raw/RTE5_SP2.csv')
@@ -229,7 +238,7 @@ def main():
     df_multi_label.to_csv("train_multi_label.tsv", sep='\t', index=False, encoding="utf_8_sig")
 
     premise, hypothesis, span, start_position = train_to_span_detection('raw/RTE5_train.xml')
-    df_span_detection = pd.DataFrame((zip(premise, hypothesis, span, start_position)), columns=['premise', 'hyp', 'span','start_pos'])
+    df_span_detection = pd.DataFrame((zip(premise, hypothesis, span, start_position)), columns=['premise', 'hyp', 'span', 'start_pos'])
     df_span_detection.to_csv("train_span_detection.tsv", sep='\t', index=False, encoding="utf_8_sig")
 
 if __name__ == "__main__":

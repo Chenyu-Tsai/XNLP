@@ -1,7 +1,7 @@
 import torch
 from torch import nn
-from torch.utils.data import DataLoader
-from torch.utils.data import Dataset
+from torch.nn import functional as F
+from torch.utils.data import DataLoader, Dataset
 from transformers.modeling_utils import (WEIGHTS_NAME, PretrainedConfig, PreTrainedModel,
                              SequenceSummary, PoolerAnswerClass, PoolerEndLogits, PoolerStartLogits)
 from transformers import XLNetTokenizer, XLNetForSequenceClassification, XLNetPreTrainedModel, XLNetModel
@@ -118,11 +118,8 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
 
                 loss_fct = CrossEntropyLoss()
                 start_loss = loss_fct(start_logits, start_positions).to(device)
-                #print(start_logits, start_positions)
                 end_loss = loss_fct(end_logits, end_positions).to(device)
-                #print(end_logits, end_positions)
                 total_loss = (start_loss + end_loss) / 2
-                #print(start_loss, end_loss)
 
                 if cls_index is not None:
                     cls_logits = self.answer_class(hidden_states, start_positions=start_positions, cls_index=cls_index)
@@ -132,6 +129,40 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
                     #print(cls_loss)
 
                 outputs = (total_loss,) + outputs
+
+            else:
+                # during inference, compute the end Logits based on a beam search
+                bsz, slen, hsz = hidden_states.size()
+                start_log_probs = F.softmax(start_logits, dim=-1) # shape (bsz, slen)
+
+                start_top_log_probs, start_top_index = torch.topk(
+                    start_log_probs, self.start_n_top, dim=-1
+                ) # shape (bsz, start_n_top)
+
+                start_top_index_exp = start_top_index.unsqueeze(-1).expand(-1, -1, hsz) # shape (bsz, start_n_top, hsz)
+                start_states = torch.gather(hidden_states, -2, start_top_index_exp) # shape (bsz start_n_top, hsz)
+                start_states = start_states.unsqueeze(1).expand(-1, slen, -1, -1) # shape (bsz, slen, start_n_top, hsz)
+
+                hidden_states_expanded = hidden_states.unsqueeze(2).expand_as(
+                    start_states
+                ) # shape (bsz, slen, start_n_top, hsz)
+                p_mask = p_mask.unsqueeze(-1)
+                end_logits = self.end_logits(hidden_states_expanded, start_states=start_states, p_mask=p_mask)
+                end_log_probs = F.softmax(end_logits, dim=1) # shape (bsz, slen, start_n_top)
+
+                end_top_log_probs, end_top_index = torch.topk(
+                    end_log_probs, self.end_n_top, dim=1
+                ) # shape (bsz, end_n_top, start_n_top)
+                end_top_log_probs = end_top_log_probs.view(-1, self.start_n_top * self.end_n_top)
+                end_top_index = end_top_index.view(-1, self.start_n_top * self.end_n_top)
+
+                start_states = torch.einsum(
+                    "blh,bl->bh", hidden_states, start_log_probs
+                ) # get the representation of START as weighted sum of hidden states
+                cls_logits = self.answer_class(
+                    hidden_states, start_states=start_states, cls_index=cls_index
+                ) # shape (batch size,): one single cls logits for each sample
+                outputs = (start_top_log_probs, start_top_index, end_top_log_probs, end_top_index, cls_logits) + outputs
             
         return outputs
 
@@ -209,48 +240,23 @@ class Dataset_3Way(Dataset):
     def __len__(self):
         return self.len
 
-class Dataset_3Way_test(Dataset):
-    
-    def __init__(self, mode, tokenizer):
-        assert mode in ["RTE5_test"]
-        self.mode = mode
-        self.dir = "../data/"
-        self.df = pd.read_csv(self.dir + mode + ".tsv", sep="\t").fillna("")
-        self.len = len(self.df)
-        self.tokenizer = tokenizer
-        self.task = 0
-        
-    def __getitem__(self, idx):
-        if self.mode == "RTE5_test":
-            text_a, text_b = self.df.iloc[idx, :2].values
-            label_tensor = None
-        else:
-            text_a, text_b, label = self.df.iloc[idx, :].values
-            label_tensor = torch.tensor(label)
-            
-        inputs = tokenizer.encode_plus(text_a, text_b, return_tensors='pt', add_special_tokens=True)
-        tokens_tensor = inputs['input_ids']
-        segments_tensor = inputs['token_type_ids']
-        masks_tensor = inputs['attention_mask']
-            
-        return (task, tokens_tensor, segments_tensor, masks_tensor, label_tensor)
-    
-    def __len__(self):
-        return self.len
-
 class Dataset_Span_Detection(Dataset):
     
     def __init__(self, mode, tokenizer):
-        assert mode in ["train_span_detection"]
+        assert mode in ["train_span_detection", "RTE5_test_span"]
         self.mode = mode
         self.dir = "../data/"
         self.df = pd.read_csv(self.dir + mode + ".tsv", sep="\t").fillna("")
+        #self.df = self.df[:1]
         self.len = len(self.df)
         self.tokenizer = tokenizer
         self.task = 2
         
     def __getitem__(self, idx):
-        context_text, question_text, answer_text, start_position_character = self.df.iloc[idx,:].values
+        if self.mode == "RTE5_test_span":
+            context_text, question_text, answer_text, start_position_character = self.df.iloc[idx,:4].values
+        else:
+            context_text, question_text, answer_text, start_position_character = self.df.iloc[idx,:].values
         
         example = SquadExample(
             question_text=question_text,
@@ -263,6 +269,7 @@ class Dataset_Span_Detection(Dataset):
                                                      max_seq_length=384,
                                                      doc_stride=128,
                                                      max_query_length=64,
+                                                     is_training= True if self.mode == "train_span_detection" else False,
                                                     )
         input_ids = torch.tensor(features[0].input_ids, dtype=torch.long).unsqueeze(0)
         attention_mask = torch.tensor(features[0].attention_mask, dtype=torch.long).unsqueeze(0)
@@ -271,27 +278,29 @@ class Dataset_Span_Detection(Dataset):
         end_position = torch.tensor(features[0].end_position, dtype=torch.long).unsqueeze(0)
         cls_index = torch.tensor(features[0].cls_index, dtype=torch.long).unsqueeze(0)
         p_mask = torch.tensor(features[0].p_mask, dtype=torch.float).unsqueeze(0)
+        example_index = idx
+        unique_id = 1000001 + idx
         task = self.task
         
-        return (task, input_ids, attention_mask, token_type_ids, start_position, end_position, cls_index, p_mask)
+        if self.mode == "RTE5_test_span":
+            return (task, 
+                    input_ids, 
+                    attention_mask, 
+                    token_type_ids, 
+                    cls_index, 
+                    p_mask, 
+                    example_index, 
+                    unique_id, 
+                    question_text,
+                    context_text,
+                    answer_text,
+                    start_position_character,
+                    )
+        else:
+            return (task, input_ids, attention_mask, token_type_ids, start_position, end_position, cls_index, p_mask)
 
     def __len__(self):
         return self.len
-
-def create_mini_batch_test(samples):
-    tokens_tensors = [s[0].squeeze(0) for s in samples]
-    segments_tensors = [s[1].squeeze(0) for s in samples]
-    masks_tensors = [s[2].squeeze(0) for s in samples]
-    if samples[0][3] is not None:
-        label_ids = torch.stack([s[3] for s in samples])
-    else:
-        label_ids = None
-    # zero pad 到同一序列長度
-    tokens_tensors = pad_sequence(tokens_tensors, batch_first=True)
-    segments_tensors = pad_sequence(segments_tensors, batch_first=True)
-    masks_tensors = pad_sequence(masks_tensors, batch_first=True)
-
-    return tokens_tensors.squeeze(1), segments_tensors.squeeze(1), masks_tensors.squeeze(1), label_ids
 
 class SquadExample(object):
     """
@@ -309,10 +318,12 @@ class SquadExample(object):
         context_text,
         answer_text,
         start_position_character,
+        unique_id=None,
     ):
         self.question_text = question_text
         self.context_text = context_text
         self.answer_text = answer_text
+        self.unique_id = unique_id if unique_id else None
 
         self.start_position, self.end_position = 0, 0
 
@@ -341,6 +352,25 @@ class SquadExample(object):
             self.end_position = char_to_word_offset[
                 min(start_position_character + len(answer_text) - 1, len(char_to_word_offset) - 1)
             ]
+
+class SpanDetectionResult(object):
+    """
+    Constructs a SquadResult which can be used to evaluate a model's output on the SQuAD dataset.
+    Args:
+        unique_id: The unique identifier corresponding to that example.
+        start_logits: The logits corresponding to the start of the answer
+        end_logits: The logits corresponding to the end of the answer
+    """
+
+    def __init__(self, unique_id, start_logits, end_logits, start_top_index=None, end_top_index=None, cls_logits=None):
+        self.start_logits = start_logits
+        self.end_logits = end_logits
+        self.unique_id = unique_id
+
+        self.start_top_index = start_top_index
+        self.end_top_index = end_top_index
+        self.cls_logits = cls_logits
+        
 
 def _is_whitespace(c):
     if c == " " or c == "\t" or c == "\r" or c == "\n" or ord(c) == 0x202F:
@@ -381,28 +411,6 @@ def _new_check_is_max_context(doc_spans, cur_span_index, position):
     return cur_span_index == best_span_index
 
 class SquadFeatures(object):
-    """
-    Single squad example features to be fed to a model.
-    Those features are model-specific and can be crafted from :class:`~transformers.data.processors.squad.SquadExample`
-    using the :method:`~transformers.data.processors.squad.squad_convert_examples_to_features` method.
-    Args:
-        input_ids: Indices of input sequence tokens in the vocabulary.
-        attention_mask: Mask to avoid performing attention on padding token indices.
-        token_type_ids: Segment token indices to indicate first and second portions of the inputs.
-        cls_index: the index of the CLS token.
-        p_mask: Mask identifying tokens that can be answers vs. tokens that cannot.
-            Mask with 1 for tokens than cannot be in the answer and 0 for token that can be in an answer
-        example_index: the index of the example
-        unique_id: The unique Feature identifier
-        paragraph_len: The length of the context
-        token_is_max_context: List of booleans identifying which tokens have their maximum context in this feature object.
-            If a token does not have their maximum context in this feature object, it means that another feature object
-            has more information related to that token and should be prioritized over this feature for that token.
-        tokens: list of tokens corresponding to the input ids
-        token_to_orig_map: mapping between the tokens and the original text, needed in order to identify the answer.
-        start_position: start of the answer token index
-        end_position: end of the answer token index
-    """
 
     def __init__(
         self,
@@ -436,11 +444,15 @@ class SquadFeatures(object):
         self.start_position = start_position
         self.end_position = end_position
 
-def squad_convert_example_to_features(example, max_seq_length, doc_stride, max_query_length):
+def squad_convert_example_to_features(example, max_seq_length, doc_stride, max_query_length, is_training, example_index=None, unique_id=None):
     features = []
-    start_position = example.start_position
-    end_position = example.end_position
 
+    example_index = example_index.item() if example_index else 0
+    unique_id = unique_id.item() if unique_id else 0
+
+    if is_training:
+        start_position = example.start_position
+        end_position = example.end_position
         # # If the answer cannot be found in the text, then skip this example.
         # actual_text = " ".join(example.doc_tokens[start_position : (end_position + 1)])
         # cleaned_answer_text = " ".join(whitespace_tokenize(example.answer_text))
@@ -458,22 +470,23 @@ def squad_convert_example_to_features(example, max_seq_length, doc_stride, max_q
             tok_to_orig_index.append(i)
             all_doc_tokens.append(sub_token)
 
-
-    tok_start_position = orig_to_tok_index[example.start_position]
-    if example.end_position < len(example.doc_tokens) - 1:
-        tok_end_position = orig_to_tok_index[example.end_position + 1] - 1
-    else:
-        tok_end_position = len(all_doc_tokens) - 1
-    (tok_start_position, tok_end_position) = _improve_answer_span(
-        all_doc_tokens, tok_start_position, tok_end_position, tokenizer, example.answer_text
-    )
+    if is_training:
+        tok_start_position = orig_to_tok_index[example.start_position]
+        if example.end_position < len(example.doc_tokens) - 1:
+            tok_end_position = orig_to_tok_index[example.end_position + 1] - 1
+        else:
+            tok_end_position = len(all_doc_tokens) - 1
+        (tok_start_position, tok_end_position) = _improve_answer_span(
+            all_doc_tokens, tok_start_position, tok_end_position, tokenizer, example.answer_text
+        )
 
     spans = []
-
+    
     truncated_query = tokenizer.encode(example.question_text, add_special_tokens=False, max_length=max_query_length)
     sequence_added_tokens = tokenizer.max_len - tokenizer.max_len_single_sentence
     sequence_pair_added_tokens = tokenizer.max_len - tokenizer.max_len_sentences_pair
     span_doc_tokens = all_doc_tokens
+
     while len(spans) * doc_stride < len(all_doc_tokens):
         encoded_dict = tokenizer.encode_plus(
             truncated_query if tokenizer.padding_side == "right" else span_doc_tokens,
@@ -533,7 +546,6 @@ def squad_convert_example_to_features(example, max_seq_length, doc_stride, max_q
                 else spans[doc_span_index]["truncated_query_with_special_tokens_length"] + j
             )
             spans[doc_span_index]["token_is_max_context"][index] = is_max_context
-
     for span in spans:
         # Identify the position of the CLS token
         cls_index = span["input_ids"].index(tokenizer.cls_token_id)
@@ -557,25 +569,25 @@ def squad_convert_example_to_features(example, max_seq_length, doc_stride, max_q
         end_position = 0
         # For training, if our document chunk does not contain an annotation
         # we throw it out, since there is nothing to predict.
-        doc_start = span["start"]
-        doc_end = span["start"] + span["length"] - 1
-        out_of_span = False
+        if is_training:
+            doc_start = span["start"]
+            doc_end = span["start"] + span["length"] - 1
+            out_of_span = False
 
-        if not (tok_start_position >= doc_start and tok_end_position <= doc_end):
-            out_of_span = True
+            if not (tok_start_position >= doc_start and tok_end_position <= doc_end):
+                out_of_span = True
 
-        if out_of_span:
-            start_position = cls_index
-            end_position = cls_index
-            span_is_impossible = True
-        else:
-            if tokenizer.padding_side == "left":
-                doc_offset = 0
+            if out_of_span:
+                start_position = cls_index
+                end_position = cls_index
             else:
-                doc_offset = len(truncated_query) + sequence_added_tokens
+                if tokenizer.padding_side == "left":
+                    doc_offset = 0
+                else:
+                    doc_offset = len(truncated_query) + sequence_added_tokens
 
-            start_position = tok_start_position - doc_start + doc_offset
-            end_position = tok_end_position - doc_start + doc_offset
+                start_position = tok_start_position - doc_start + doc_offset
+                end_position = tok_end_position - doc_start + doc_offset
 
         features.append(
             SquadFeatures(
@@ -584,8 +596,8 @@ def squad_convert_example_to_features(example, max_seq_length, doc_stride, max_q
                 span["token_type_ids"],
                 cls_index,
                 p_mask.tolist(),
-                example_index=0,  # Can not set unique_id and example_index here. They will be set after multiple processing.
-                unique_id=0,
+                example_index=example_index,  # Can not set unique_id and example_index here. They will be set after multiple processing.
+                unique_id=unique_id,
                 paragraph_len=span["paragraph_len"],
                 token_is_max_context=span["token_is_max_context"],
                 tokens=span["tokens"],
@@ -594,8 +606,8 @@ def squad_convert_example_to_features(example, max_seq_length, doc_stride, max_q
                 end_position=end_position,
             )
         )
-    return features
 
+    return features
 
 def squad_convert_example_to_features_init(tokenizer_for_convert):
     global tokenizer
