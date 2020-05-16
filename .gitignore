@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+__pycache__
 *.py[cod]
 *$py.class
 
@@ -149,6 +150,7 @@ args.txt
 
 # tensorboard runs
 runs
+
 Untitled*
 *.pkl
 *.ipynb_checkpoints
