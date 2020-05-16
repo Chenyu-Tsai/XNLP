@@ -1,5 +1,7 @@
 import torch
 import random
+import math
+import collections
 from torch.utils.data import Dataset
 from torch.utils.data.dataset import ConcatDataset
 from torch.utils.data import DataLoader
@@ -56,6 +58,25 @@ def pair_match(sentence_a_tokens, sentence_b_tokens, attn_data=None):
                 pair = (sentence_a_tokens[index_a], sentence_b_tokens[index_b])
                 pairs.append(pair)
     return pairs
+
+def pair_match_span_detection(sentence_a_tokens, sentence_b_tokens, attn_data, top_percent):
+    """ Matching each token in sentence_a and sentence_b and making pairs """
+    pairs = []
+    for index_a in range(len(sentence_a_tokens)):
+        for index_b in range(len(sentence_b_tokens)):
+            score = look_score(attn_data, index_a, index_b)
+            pair = (index_a, score)
+            # filter the special token
+            if score != 0:
+                pairs.append(pair)
+    pairs = sorted(pairs, key=lambda pair: pair[1], reverse=True)
+    topk_slice = math.floor((len(pairs)/100)*top_percent)
+    pairs = pairs[:topk_slice]
+    tokens_count = []
+    for index, score in pairs:
+        tokens_count.append(index)
+    counter = collections.Counter(tokens_count)
+    return counter.most_common(10)
 
 def pair_without_score(pair):
     """ Return pairs without score """
@@ -123,20 +144,25 @@ def attention_weight_span(data, feature, output):
     sentence_b_start = token_type_ids.index(1)
     slice_a = slice(0, sentence_b_start)
     slice_b = slice(sentence_b_start, len(tokens))
-    
+    #head_slice = slice(0, 4)
     attn_data = attn[:, :, slice_a, slice_b]
     sentence_a_tokens = tokens[slice_a]
     sentence_b_tokens = tokens[slice_b]
-    attn_score = pair_match_accumulation(sentence_a_tokens, sentence_b_tokens, attn_data)
-    
-    attn_score = torch.tensor(attn_score)
-    start_log_probs = F.softmax(attn_score, dim=-1)
-    start_top_log_probs, start_top_index = torch.topk(start_log_probs, 5, dim=-1)
-    start_log_probs[start_top_index] = 0
-    end_top_log_probs, end_top_index = torch.topk(start_log_probs, 25, dim=-1)
+    top_tokens = pair_match_span_detection(sentence_a_tokens, sentence_b_tokens, attn_data, 1)
+    top_indexs = [pair[0] for pair in top_tokens]
+    top_probs = [pair[1] for pair in top_tokens]
+    top_n = len(top_indexs)
+
+    log_probs = torch.tensor(top_probs, dtype=torch.float)
+    start_top_log_probs = F.softmax(log_probs, dim=-1)
+    end_top_log_probs = F.softmax(log_probs, dim=-1)
+    end_top_log_probs = end_top_log_probs.unsqueeze(0).expand(top_n, -1).reshape(1, top_n*top_n)
+    start_top_index = torch.tensor(top_indexs)
+    end_top_index = torch.tensor(top_indexs)
+    end_top_index = end_top_index.unsqueeze(0).expand(top_n, -1).reshape(1, top_n*top_n)
     cls_logits = 0
     
-    return (start_top_log_probs, start_top_index, end_top_log_probs, end_top_index, cls_logits)
+    return (start_top_log_probs, start_top_index, end_top_log_probs, end_top_index, cls_logits, top_n)
 
 def explainability_compare(model, tokenizer, sentence_a, sentence_b, test_sentence_a, unique=False, in_un=False, top_k=None):
     """ Evaluating MRR between model and attention span"""

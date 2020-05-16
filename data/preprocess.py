@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import argparse
 import re
+import json
 
 # replace the word in raw RTE dataset
 replacement = {"hasn't": 'has not', 
@@ -14,6 +15,7 @@ replacement = {"hasn't": 'has not',
 
 # mapping the raw RTE dataset labels
 label_mapping = {'ENTAILMENT': 0, 'UNKNOWN': 1, 'CONTRADICTION': 2}
+label_mapping_snli = {'entailment': 0, 'neutral': 1, 'contradiction': 2}
 
 def train_to_csv(file):
     """ extract the raw RTE training dataset to TSV file """
@@ -138,10 +140,18 @@ def extract_semantic_phenomenons(df_sp, df_train):
     lst = []
     
     # SP dataset only have 218 subset of the orginal RTE dataset, we have to get these 218 examples
-    for idx in df_sp['id'].values:
+    # Get the original very long premise as text_a
+    if len(df_train.columns) == 3:
+        for idx in df_sp['id'].values:
         # Get the corresponded example by id
-        lst.append(df_train.loc[idx-1].values)
-    lst = pd.DataFrame(lst, columns=['text_a', 'text_b', 'entail'])
+            lst.append(df_train.loc[idx-1].values)
+        lst = pd.DataFrame(lst, columns=['text_a', 'text_b', 'entail'])
+    else:
+        # Get the attention span from df_span as the short version of premise
+        for idx in df_sp['id'].values:
+            lst.append(df_train.loc[idx-1].values)
+        lst = pd.DataFrame(lst, columns=['text_a', 'text_b', 'span', 'start_pos'])
+
     df = pd.concat([lst, df_sp], axis=1)
     df = df.drop(columns=['id'])
 
@@ -171,6 +181,7 @@ def extract_semantic_phenomenons(df_sp, df_train):
     df['labels'] = multi
 
     return df
+
 def preprocess_text(inputs, remove_space=True):
     if remove_space:
         outputs = ' '.join(inputs.strip().split())
@@ -216,30 +227,67 @@ def train_to_span_detection(file):
 
     return premise, hypothesis, span, start_position
 
+def SNLI_get_examples(data):
+
+    with open(data, 'r') as json_file:
+        json_list = list(json_file)
+
+    label = []
+    premise = []
+    hyp = []
+
+    for json_str in json_list:
+        result = json.loads(json_str)
+        if len(result['gold_label']) > 1:
+            label.append(label_mapping_snli[result['gold_label']])
+            premise.append(result['sentence1'])
+            hyp.append(result['sentence2'])
+
+    return premise, hyp, label
+
+
+
 def main():
 
     text, hypothesis, entailment = train_to_csv('raw/RTE5_train.xml')
     df_train = pd.DataFrame((zip(text[:500], hypothesis[:500], entailment[:500])), columns=['text_a', 'text_b', 'label'])
     df_valid = pd.DataFrame((zip(text[500:], hypothesis[500:], entailment[500:])), columns=['text_a', 'text_b', 'label'])
-    df_train.to_csv("RTE5_train.tsv", sep="\t", index=False, encoding="utf_8_sig")
-    df_valid.to_csv("RTE5_valid.tsv", sep="\t", index=False, encoding="utf_8_sig")
+    df_train.to_csv("rte5_train.tsv", sep="\t", index=False, encoding="utf-8-sig")
+    df_valid.to_csv("rte5_dev.tsv", sep="\t", index=False, encoding="utf-8-sig")
 
     text, hypothesis, attention, entailment, t3, t5, t7, start_position, uids = test_to_csv('raw/RTE5_test.xml')
     df_test = pd.DataFrame((zip(text, hypothesis, attention, entailment)), columns=['text_a', 'text_b', 'eval_text','label'])
-    df_test.to_csv("RTE5_test.tsv", sep="\t", index=False, encoding="utf_8_sig")
+    df_test.to_csv("rte5_test.tsv", sep="\t", index=False, encoding="utf-8-sig")
     df_test_topk = pd.DataFrame((zip(text, hypothesis, attention, entailment, t3, t5, t7)), columns=['text_a', 'text_b', 'eval_text','label', 't3', 't5', 't7'])
-    df_test_topk.to_csv("RTE5_test_topk.tsv", sep="\t", index=False, encoding="utf_8_sig")
-    df_test_span = pd.DataFrame((zip(text, hypothesis, attention, start_position, uids)), columns=['premise', 'hyp', 'span', 'start_position', 'uid'])
-    df_test_span.to_csv("RTE5_test_span.tsv", sep="\t", index=False, encoding="utf_8_sig")
+    df_test_topk.to_csv("rte5_test_topk.tsv", sep="\t", index=False, encoding="utf-8-sig")
+    df_test_span = pd.DataFrame((zip(text, hypothesis, attention, start_position, uids, entailment)), columns=['premise', 'hyp', 'span', 'start_position', 'uid', 'entailment'])
+    df_test_span.to_csv("rte_test_span_detection.tsv", sep="\t", index=False, encoding="utf-8-sig")
 
 
     df_sp = SP_union('raw/RTE5_SP1.csv', 'raw/RTE5_SP2.csv')
     df_multi_label = extract_semantic_phenomenons(df_sp, df_train)
-    df_multi_label.to_csv("train_multi_label.tsv", sep='\t', index=False, encoding="utf_8_sig")
+    df_multi_label.to_csv("rte5_train_multi_label.tsv", sep='\t', index=False, encoding="utf-8-sig")
 
     premise, hypothesis, span, start_position = train_to_span_detection('raw/RTE5_train.xml')
-    df_span_detection = pd.DataFrame((zip(premise, hypothesis, span, start_position)), columns=['premise', 'hyp', 'span', 'start_pos'])
-    df_span_detection.to_csv("train_span_detection.tsv", sep='\t', index=False, encoding="utf_8_sig")
+    df_train_span_detection = pd.DataFrame((zip(premise[:500], hypothesis[:500], span[:500], start_position[:500])), columns=['premise', 'hyp', 'span', 'start_pos'])
+    df_train_span_detection.to_csv("rte5_train_span_detection.tsv", sep='\t', index=False, encoding="utf-8-sig")
+    df_test_span_detection = pd.DataFrame((zip(premise[500:], hypothesis[500:], span[500:], start_position[500:])), columns=['premise', 'hyp', 'span', 'start_pos'])
+    df_test_span_detection.to_csv("rte5_dev_span_detection.tsv", sep='\t', index=False, encoding="utf-8-sig")
+
+    df_multi_label_with_span = extract_semantic_phenomenons(df_sp, df_train_span_detection)
+    df_multi_label_with_span.to_csv("rte5_train_multi_label_with_span.tsv", sep='\t', index=False, encoding="utf-8-sig")
+
+    premise, hypothesis, label = SNLI_get_examples("raw/snli_1.0_train.jsonl")
+    df_snli_train = pd.DataFrame(zip(premise, hypothesis, label), columns=['premise', 'hyp', 'label'])
+    df_snli_train.to_csv("snli_train.tsv", sep='\t', index=False, encoding="utf-8-sig")
+
+    premise, hypothesis, label = SNLI_get_examples("raw/snli_1.0_dev.jsonl")
+    df_snli_dev = pd.DataFrame(zip(premise, hypothesis, label), columns=['premise', 'hyp', 'label'])
+    df_snli_dev.to_csv("snli_dev.tsv", sep='\t', index=False, encoding="utf-8-sig")
+
+    premise, hypothesis, label = SNLI_get_examples("raw/snli_1.0_test.jsonl")
+    df_snli_test = pd.DataFrame(zip(premise, hypothesis, label), columns=['premise', 'hyp', 'label'])
+    df_snli_test.to_csv("snli_test.tsv", sep='\t', index=False, encoding="utf-8-sig")
 
 if __name__ == "__main__":
     main()

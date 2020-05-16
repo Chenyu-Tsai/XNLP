@@ -18,7 +18,7 @@ from torch.nn.utils.rnn import pad_sequence
 
 
 
-tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased', do_lower_case=True)
+tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
@@ -39,7 +39,7 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
         self.sequence_summary = SequenceSummary(config)
         self.logits_proj_3way = nn.Linear(config.d_model, self.num_labels_3way)
         self.logits_proj_multi = nn.Linear(config.d_model, self.num_labels_multi)
-        self.weights_3way = [1, 1.4, 3.3]
+        self.weights_3way = [1, 1, 1]
         self.weights_multi = [15, 10, 15, 5, 5]
         self.class_weights_3way = torch.FloatTensor(self.weights_3way).to(device)
         self.class_weights_multi = torch.FloatTensor(self.weights_multi).to(device)
@@ -81,7 +81,6 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
                                                head_mask=head_mask,
                                                inputs_embeds=inputs_embeds,
                                               )
-    
         hidden_states = transformer_outputs[0]
         if task == 0 or task == 1 or task is None:
             output = self.sequence_summary(hidden_states)
@@ -101,10 +100,10 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
                     outputs = (logits_multi,) + transformer_outputs[1:]
 
                 if task == 0:#torch.tensor([0]):
-                    loss_fct = CrossEntropyLoss(weight=self.class_weights_3way)
+                    loss_fct = CrossEntropyLoss()
                     loss = loss_fct(logits_3way.view(-1, self.num_labels_3way), labels.view(-1)).to(device)
                 else:
-                    loss_fct = BCEWithLogitsLoss()#pos_weight=self.class_weights_multi)
+                    loss_fct = BCEWithLogitsLoss(pos_weight=self.class_weights_multi)
                     loss = loss_fct(logits_multi.view(-1, self.num_labels_multi), labels).to(device)
                 outputs = (loss,) + outputs
         else:
@@ -151,10 +150,10 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
                 end_log_probs = F.softmax(end_logits, dim=1) # shape (bsz, slen, start_n_top)
 
                 end_top_log_probs, end_top_index = torch.topk(
-                    end_log_probs, self.end_n_top, dim=1
+                    end_log_probs, 5, dim=1
                 ) # shape (bsz, end_n_top, start_n_top)
-                end_top_log_probs = end_top_log_probs.view(-1, self.start_n_top * self.end_n_top)
-                end_top_index = end_top_index.view(-1, self.start_n_top * self.end_n_top)
+                end_top_log_probs = end_top_log_probs.view(-1, self.start_n_top * 5)
+                end_top_index = end_top_index.view(-1, self.start_n_top * 5)
 
                 start_states = torch.einsum(
                     "blh,bl->bh", hidden_states, start_log_probs
@@ -195,8 +194,6 @@ class Dataset_multi(Dataset):
         segments_tensor = inputs['token_type_ids']
         masks_tensor = inputs['attention_mask']
 
-        task = self.task
-
         return (task, tokens_tensor, segments_tensor, masks_tensor, label_tensor)
     
     def __len__(self):
@@ -205,7 +202,7 @@ class Dataset_multi(Dataset):
 class Dataset_3Way(Dataset):
     
     def __init__(self, mode, tokenizer, three_tasks):
-        assert mode in ["RTE5_train", "RTE5_test"]
+        assert mode in ["RTE5_train", "RTE5_test", "snli_train", "snli_dev", "snli_test"]
         self.mode = mode
         self.dir = "../data/"
         self.df = pd.read_csv(self.dir + mode + ".tsv", sep="\t").fillna("")
@@ -226,16 +223,24 @@ class Dataset_3Way(Dataset):
             else:
                 label_tensor = torch.tensor(label)
             task = self.task
-            
-        inputs = tokenizer.encode_plus(text_a, text_b, return_tensors='pt', add_special_tokens=True)
-        tokens_tensor = inputs['input_ids']
-        segments_tensor = inputs['token_type_ids']
-        masks_tensor = inputs['attention_mask']
 
-        if self.mode == "RTE5_test":
-            return (task, tokens_tensor, segments_tensor, masks_tensor)
-        else:    
-            return (task, tokens_tensor, segments_tensor, masks_tensor, label_tensor)
+        # if self.mode in ["snli_train", "snli_dev", "snli_test"]:
+        #     print("YA")
+        #     inputs = tokenizer.batch_encode_plus(text_a, text_b, return_tensor='pt', max_length=128, pad_to_max_length=True)
+        #     tokens_tensor = inputs['input_ids']
+        #     segments_tensor = inputs['token_type_ids']
+        #     masks_tensor = inputs['attention_mask']
+
+        # inputs = tokenizer.encode_plus(text_a, text_b, return_tensors='pt', add_special_tokens=True)
+        # tokens_tensor = inputs['input_ids']
+        # segments_tensor = inputs['token_type_ids']
+        # masks_tensor = inputs['attention_mask']
+
+        # if self.mode == "RTE5_test":
+        #     return (task, tokens_tensor, segments_tensor, masks_tensor)
+        # else:    
+        #     return (task, tokens_tensor, segments_tensor, masks_tensor, label_tensor)
+        return text_a, text_b, label_tensor
     
     def __len__(self):
         return self.len
@@ -247,7 +252,7 @@ class Dataset_Span_Detection(Dataset):
         self.mode = mode
         self.dir = "../data/"
         self.df = pd.read_csv(self.dir + mode + ".tsv", sep="\t").fillna("")
-        #self.df = self.df[:1]
+        #self.df = self.df[:5]
         self.len = len(self.df)
         self.tokenizer = tokenizer
         self.task = 2
@@ -255,6 +260,8 @@ class Dataset_Span_Detection(Dataset):
     def __getitem__(self, idx):
         if self.mode == "RTE5_test_span":
             context_text, question_text, answer_text, start_position_character = self.df.iloc[idx,:4].values
+            labels = self.df.iloc[idx, -1]
+            labels = torch.tensor(labels)
         else:
             context_text, question_text, answer_text, start_position_character = self.df.iloc[idx,:].values
         
@@ -295,6 +302,7 @@ class Dataset_Span_Detection(Dataset):
                     context_text,
                     answer_text,
                     start_position_character,
+                    labels,
                     )
         else:
             return (task, input_ids, attention_mask, token_type_ids, start_position, end_position, cls_index, p_mask)
@@ -319,11 +327,13 @@ class SquadExample(object):
         answer_text,
         start_position_character,
         unique_id=None,
+        pred=None,
     ):
         self.question_text = question_text
         self.context_text = context_text
         self.answer_text = answer_text
         self.unique_id = unique_id if unique_id else None
+        self.pred = pred
 
         self.start_position, self.end_position = 0, 0
 
@@ -354,15 +364,7 @@ class SquadExample(object):
             ]
 
 class SpanDetectionResult(object):
-    """
-    Constructs a SquadResult which can be used to evaluate a model's output on the SQuAD dataset.
-    Args:
-        unique_id: The unique identifier corresponding to that example.
-        start_logits: The logits corresponding to the start of the answer
-        end_logits: The logits corresponding to the end of the answer
-    """
-
-    def __init__(self, unique_id, start_logits, end_logits, start_top_index=None, end_top_index=None, cls_logits=None):
+    def __init__(self, unique_id, start_logits, end_logits, start_top_index=None, end_top_index=None, cls_logits=None, top_n=None, pred=None, label=None):
         self.start_logits = start_logits
         self.end_logits = end_logits
         self.unique_id = unique_id
@@ -370,6 +372,9 @@ class SpanDetectionResult(object):
         self.start_top_index = start_top_index
         self.end_top_index = end_top_index
         self.cls_logits = cls_logits
+        self.top_n = top_n
+        self.pred = pred
+        self.label = label
         
 
 def _is_whitespace(c):

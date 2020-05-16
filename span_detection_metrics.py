@@ -6,6 +6,9 @@ import re
 import string
 
 from transformers.tokenization_bert import BasicTokenizer
+from transformers import XLNetTokenizer, XLNetPreTrainedModel, XLNetModel
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -62,10 +65,11 @@ def get_raw_scores(examples, preds):
     """
     exact_scores = {}
     f1_scores = {}
+    best_answers = collections.OrderedDict()
 
     for example in examples:
         qas_id = example.unique_id.item()
-        gold_answers = [answer for answer in example.answer_text if normalize_answer(answer)]
+        gold_answers = normalize_answer(example.answer_text)
 
         if not gold_answers:
             # For unanswerable questions, only correct answer is empty string
@@ -76,40 +80,50 @@ def get_raw_scores(examples, preds):
             continue
 
         prediction = preds[qas_id]
-        exact_scores[qas_id] = max(compute_exact(a, prediction) for a in gold_answers)
-        f1_scores[qas_id] = max(compute_f1(a, prediction) for a in gold_answers)
+        exact_scores[qas_id] = max(compute_exact(gold_answers, pred) for pred in prediction)
 
-    return exact_scores, f1_scores
+        best_score = 0
+        best_answer = ''
+        output = collections.OrderedDict()
+        best_json = []
+        for pred in prediction:
+            cur_score = compute_f1(gold_answers, pred)
+            if cur_score > best_score:
+                best_score = cur_score
+                best_answer = pred
+        output["best_answer"] = best_answer
+        output["best_f1_score"]  = best_score
+        best_json.append(output)
 
+        f1_scores[qas_id] = best_score
+        best_answers[qas_id] = best_json
 
-def apply_no_ans_threshold(scores, na_probs, qid_to_has_ans, na_prob_thresh):
-    new_scores = {}
-    for qid, s in scores.items():
-        pred_na = na_probs[qid] > na_prob_thresh
-        if pred_na:
-            new_scores[qid] = float(not qid_to_has_ans[qid])
-        else:
-            new_scores[qid] = s
-    return new_scores
+    return exact_scores, f1_scores, best_answers
 
-
-def make_eval_dict(exact_scores, f1_scores, qid_list=None):
+def make_eval_dict(exact_scores, f1_scores, qid_list=None, label=None):
     if not qid_list:
         total = len(exact_scores)
         return collections.OrderedDict(
             [
-                ("exact", 100.0 * sum(exact_scores.values()) / total),
-                ("f1", 100.0 * sum(f1_scores.values()) / total),
+                ("exact", round(100.0 * sum(exact_scores.values()) / total, 2)),
+                ("f1", round(100.0 * sum(f1_scores.values()) / total, 2)),
                 ("total", total),
             ]
         )
     else:
         total = len(qid_list)
+        
+        if label == 0:
+            acc = (total/300)*100
+        elif label == 1:
+            acc = (total/210)*100
+        else:
+            acc = (total/90)*100
         return collections.OrderedDict(
             [
-                ("exact", 100.0 * sum(exact_scores[k] for k in qid_list) / total),
-                ("f1", 100.0 * sum(f1_scores[k] for k in qid_list) / total),
-                ("total", total),
+                ("exact", round(100.0 * sum(exact_scores[k] for k in qid_list) / total, 2)),
+                ("f1", round(100.0 * sum(f1_scores[k] for k in qid_list) / total, 2)),
+                ("accuracy", round(acc, 2)),
             ]
         )
 
@@ -118,112 +132,32 @@ def merge_eval(main_eval, new_eval, prefix):
     for k in new_eval:
         main_eval["%s_%s" % (prefix, k)] = new_eval[k]
 
-
-def find_best_thresh_v2(preds, scores, na_probs, qid_to_has_ans):
-    num_no_ans = sum(1 for k in qid_to_has_ans if not qid_to_has_ans[k])
-    cur_score = num_no_ans
-    best_score = cur_score
-    best_thresh = 0.0
-    qid_list = sorted(na_probs, key=lambda k: na_probs[k])
-    for i, qid in enumerate(qid_list):
-        if qid not in scores:
-            continue
-        if qid_to_has_ans[qid]:
-            diff = scores[qid]
-        else:
-            if preds[qid]:
-                diff = -1
-            else:
-                diff = 0
-        cur_score += diff
-        if cur_score > best_score:
-            best_score = cur_score
-            best_thresh = na_probs[qid]
-
-    has_ans_score, has_ans_cnt = 0, 0
-    for qid in qid_list:
-        if not qid_to_has_ans[qid]:
-            continue
-        has_ans_cnt += 1
-
-        if qid not in scores:
-            continue
-        has_ans_score += scores[qid]
-
-    return 100.0 * best_score / len(scores), best_thresh, 1.0 * has_ans_score / has_ans_cnt
-
-
-def find_all_best_thresh_v2(main_eval, preds, exact_raw, f1_raw, na_probs, qid_to_has_ans):
-    best_exact, exact_thresh, has_ans_exact = find_best_thresh_v2(preds, exact_raw, na_probs, qid_to_has_ans)
-    best_f1, f1_thresh, has_ans_f1 = find_best_thresh_v2(preds, f1_raw, na_probs, qid_to_has_ans)
-    main_eval["best_exact"] = best_exact
-    main_eval["best_exact_thresh"] = exact_thresh
-    main_eval["best_f1"] = best_f1
-    main_eval["best_f1_thresh"] = f1_thresh
-    main_eval["has_ans_exact"] = has_ans_exact
-    main_eval["has_ans_f1"] = has_ans_f1
-
-
-def find_best_thresh(preds, scores, na_probs, qid_to_has_ans):
-    num_no_ans = sum(1 for k in qid_to_has_ans if not qid_to_has_ans[k])
-    cur_score = num_no_ans
-    best_score = cur_score
-    best_thresh = 0.0
-    qid_list = sorted(na_probs, key=lambda k: na_probs[k])
-    for _, qid in enumerate(qid_list):
-        if qid not in scores:
-            continue
-        if qid_to_has_ans[qid]:
-            diff = scores[qid]
-        else:
-            if preds[qid]:
-                diff = -1
-            else:
-                diff = 0
-        cur_score += diff
-        if cur_score > best_score:
-            best_score = cur_score
-            best_thresh = na_probs[qid]
-    return 100.0 * best_score / len(scores), best_thresh
-
-
-def find_all_best_thresh(main_eval, preds, exact_raw, f1_raw, na_probs, qid_to_has_ans):
-    best_exact, exact_thresh = find_best_thresh(preds, exact_raw, na_probs, qid_to_has_ans)
-    best_f1, f1_thresh = find_best_thresh(preds, f1_raw, na_probs, qid_to_has_ans)
-
-    main_eval["best_exact"] = best_exact
-    main_eval["best_exact_thresh"] = exact_thresh
-    main_eval["best_f1"] = best_f1
-    main_eval["best_f1_thresh"] = f1_thresh
-
-
-def span_evaluate(examples, preds, no_answer_probs=None, no_answer_probability_threshold=1.0):
+def span_evaluate(examples, preds, output_best_answers_file, no_answer_probs=None, no_answer_probability_threshold=1.0, ):
     qas_id_to_has_answer = {example.unique_id.item(): bool(example.answer_text) for example in examples}
-    has_answer_qids = [qas_id for qas_id, has_answer in qas_id_to_has_answer.items() if has_answer]
-    no_answer_qids = [qas_id for qas_id, has_answer in qas_id_to_has_answer.items() if not has_answer]
 
-    if no_answer_probs is None:
-        no_answer_probs = {k: 0.0 for k in preds}
+    unique_id_pred = {example.unique_id.item(): example.pred for example in examples}
+    pred_entail_uids = [uid for uid, pred in unique_id_pred.items() if pred == 0]
+    pred_neutral_uids = [uid for uid, pred in unique_id_pred.items() if pred == 1]
+    pred_contra_uids = [uid for uid, pred in unique_id_pred.items() if pred == 2]
 
-    exact, f1 = get_raw_scores(examples, preds)
+    exact, f1, best_answers = get_raw_scores(examples, preds)
 
-    exact_threshold = apply_no_ans_threshold(
-        exact, no_answer_probs, qas_id_to_has_answer, no_answer_probability_threshold
-    )
-    f1_threshold = apply_no_ans_threshold(f1, no_answer_probs, qas_id_to_has_answer, no_answer_probability_threshold)
+    with open(output_best_answers_file, "w") as writer:
+        writer.write(json.dumps(best_answers, indent=4) + "\n")
 
-    evaluation = make_eval_dict(exact_threshold, f1_threshold)
+    evaluation = make_eval_dict(exact, f1)
 
-    if has_answer_qids:
-        has_ans_eval = make_eval_dict(exact_threshold, f1_threshold, qid_list=has_answer_qids)
-        merge_eval(evaluation, has_ans_eval, "HasAns")
+    if pred_entail_uids:
+        pred_entail_eval = make_eval_dict(exact, f1, qid_list=pred_entail_uids, label=0)
+        merge_eval(evaluation, pred_entail_eval, "Entailment")
 
-    if no_answer_qids:
-        no_ans_eval = make_eval_dict(exact_threshold, f1_threshold, qid_list=no_answer_qids)
-        merge_eval(evaluation, no_ans_eval, "NoAns")
+    if pred_neutral_uids:
+        pred_neutral_eval = make_eval_dict(exact, f1, qid_list=pred_neutral_uids, label=1)
+        merge_eval(evaluation, pred_neutral_eval, "Neutral")
 
-    if no_answer_probs:
-        find_all_best_thresh(evaluation, preds, exact, f1, no_answer_probs, qas_id_to_has_answer)
+    if pred_contra_uids:
+        pred_contra_eval = make_eval_dict(exact, f1, qid_list=pred_contra_uids, label=2)
+        merge_eval(evaluation, pred_contra_eval, "Contradiction")
 
     return evaluation
 
@@ -272,7 +206,7 @@ def get_final_text(pred_text, orig_text, do_lower_case, verbose_logging=False):
     # NOT the same length, the heuristic has failed. If they are the same
     # length, we assume the characters are one-to-one aligned.
     tokenizer = BasicTokenizer(do_lower_case=do_lower_case)
-
+    #tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
     tok_text = " ".join(tokenizer.tokenize(orig_text))
 
     start_position = tok_text.find(pred_text)
@@ -320,19 +254,6 @@ def get_final_text(pred_text, orig_text, do_lower_case, verbose_logging=False):
 
     output_text = orig_text[orig_start_position : (orig_end_position + 1)]
     return output_text
-
-
-def _get_best_indexes(logits, n_best_size):
-    """Get the n-best logits from a list."""
-    index_and_score = sorted(enumerate(logits), key=lambda x: x[1], reverse=True)
-
-    best_indexes = []
-    for i in range(len(index_and_score)):
-        if i >= n_best_size:
-            break
-        best_indexes.append(index_and_score[i][0])
-    return best_indexes
-
 
 def _compute_softmax(scores):
     """Compute softmax probability over raw logits."""
@@ -405,16 +326,16 @@ def compute_predictions_log_probs(
         score_null = 1000000  # large and positive
         for (feature_index, feature) in enumerate(features):
             result = unique_id_to_result[feature.unique_id]
-
             cur_null_score = result.cls_logits
             # if we could have irrelevant answers, get the min score of irrelevant
             score_null = min(score_null, cur_null_score)
-            for i in range(start_n_top):
-                for j in range(end_n_top):
+            top_n = result.top_n
+            for i in range(top_n):
+                for j in range(top_n):
                     start_log_prob = result.start_logits[0][i].item()
                     start_index = result.start_top_index[0][i].item()
 
-                    j_index = i * end_n_top + j
+                    j_index = i * top_n + j
 
                     end_log_prob = result.end_logits[0][j_index].item()
                     end_index = result.end_top_index[0][j_index].item()
@@ -450,14 +371,15 @@ def compute_predictions_log_probs(
         prelim_predictions = sorted(
             prelim_predictions, key=lambda x: (x.start_log_prob + x.end_log_prob), reverse=True
         )
-
+        
         seen_predictions = {}
         nbest = []
         for pred in prelim_predictions:
+            
             if len(nbest) >= n_best_size:
                 break
             feature = features[pred.feature_index]
-
+            
             # XLNet un-tokenizer
             # Let's keep it simple for now and see if we need all this later.
             #
@@ -491,7 +413,7 @@ def compute_predictions_log_probs(
                 continue
 
             seen_predictions[final_text] = True
-
+            
             nbest.append(
                 _NbestPrediction(text=final_text, start_log_prob=pred.start_log_prob, end_log_prob=pred.end_log_prob)
             )
@@ -503,13 +425,17 @@ def compute_predictions_log_probs(
 
         total_scores = []
         best_non_null_entry = None
+        answers = []
         for entry in nbest:
+            #print(entry)
             total_scores.append(entry.start_log_prob + entry.end_log_prob)
-            if not best_non_null_entry:
-                best_non_null_entry = entry
+            answers.append(entry.text)
+#             if not best_non_null_entry:
+#                 best_non_null_entry = entry
+#                 print(best_non_null_entry)
 
         probs = _compute_softmax(total_scores)
-
+        
         nbest_json = []
         for (i, entry) in enumerate(nbest):
             output = collections.OrderedDict()
@@ -520,13 +446,14 @@ def compute_predictions_log_probs(
             nbest_json.append(output)
 
         assert len(nbest_json) >= 1
-        assert best_non_null_entry is not None
+        #assert best_non_null_entry is not None
 
         score_diff = score_null
         scores_diff_json[example.unique_id.item()] = score_diff
+        #print(scores_diff_json[example.unique_id.item()])
         # note(zhiliny): always predict best_non_null_entry
         # and the evaluation script will search for the best threshold
-        all_predictions[example.unique_id.item()] = best_non_null_entry.text
+        all_predictions[example.unique_id.item()] = answers
         all_nbest_json[example.unique_id.item()] = nbest_json
 
     with open(output_prediction_file, "w") as writer:
