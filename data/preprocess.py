@@ -150,7 +150,7 @@ def extract_semantic_phenomenons(df_sp, df_train):
         # Get the attention span from df_span as the short version of premise
         for idx in df_sp['id'].values:
             lst.append(df_train.loc[idx-1].values)
-        lst = pd.DataFrame(lst, columns=['text_a', 'text_b', 'span', 'start_pos'])
+        lst = pd.DataFrame(lst, columns=['text_a', 'text_b', 'span', 'start_pos', 'entail'])
 
     df = pd.concat([lst, df_sp], axis=1)
     df = df.drop(columns=['id'])
@@ -198,6 +198,7 @@ def train_to_span_detection(file):
     hypothesis = []
     span = []
     start_position = []
+    entailment = []
     
 
     for type_tag in root.findall('pair'):
@@ -224,8 +225,9 @@ def train_to_span_detection(file):
         hypothesis.append(h)
         span.append(a)
         start_position.append(a_pos.start())
+        entailment.append(label_mapping[e])
 
-    return premise, hypothesis, span, start_position
+    return premise, hypothesis, span, start_position, entailment
 
 def SNLI_get_examples(data):
 
@@ -250,10 +252,8 @@ def SNLI_get_examples(data):
 def main():
 
     text, hypothesis, entailment = train_to_csv('raw/RTE5_train.xml')
-    df_train = pd.DataFrame((zip(text[:500], hypothesis[:500], entailment[:500])), columns=['text_a', 'text_b', 'label'])
-    df_valid = pd.DataFrame((zip(text[500:], hypothesis[500:], entailment[500:])), columns=['text_a', 'text_b', 'label'])
+    df_train = pd.DataFrame((zip(text, hypothesis, entailment)), columns=['text_a', 'text_b', 'label'])
     df_train.to_csv("rte5_train.tsv", sep="\t", index=False, encoding="utf-8-sig")
-    df_valid.to_csv("rte5_dev.tsv", sep="\t", index=False, encoding="utf-8-sig")
 
     text, hypothesis, attention, entailment, t3, t5, t7, start_position, uids = test_to_csv('raw/RTE5_test.xml')
     df_test = pd.DataFrame((zip(text, hypothesis, attention, entailment)), columns=['text_a', 'text_b', 'eval_text','label'])
@@ -268,11 +268,9 @@ def main():
     df_multi_label = extract_semantic_phenomenons(df_sp, df_train)
     df_multi_label.to_csv("rte5_train_multi_label.tsv", sep='\t', index=False, encoding="utf-8-sig")
 
-    premise, hypothesis, span, start_position = train_to_span_detection('raw/RTE5_train.xml')
-    df_train_span_detection = pd.DataFrame((zip(premise[:500], hypothesis[:500], span[:500], start_position[:500])), columns=['premise', 'hyp', 'span', 'start_pos'])
+    premise, hypothesis, span, start_position, entailment = train_to_span_detection('raw/RTE5_train.xml')
+    df_train_span_detection = pd.DataFrame((zip(premise, hypothesis, span, start_position, entailment)), columns=['premise', 'hyp', 'span', 'start_pos', 'entailment'])
     df_train_span_detection.to_csv("rte5_train_span_detection.tsv", sep='\t', index=False, encoding="utf-8-sig")
-    df_test_span_detection = pd.DataFrame((zip(premise[500:], hypothesis[500:], span[500:], start_position[500:])), columns=['premise', 'hyp', 'span', 'start_pos'])
-    df_test_span_detection.to_csv("rte5_dev_span_detection.tsv", sep='\t', index=False, encoding="utf-8-sig")
 
     df_multi_label_with_span = extract_semantic_phenomenons(df_sp, df_train_span_detection)
     df_multi_label_with_span.to_csv("rte5_train_multi_label_with_span.tsv", sep='\t', index=False, encoding="utf-8-sig")

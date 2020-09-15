@@ -255,6 +255,19 @@ def get_final_text(pred_text, orig_text, do_lower_case, verbose_logging=False):
     output_text = orig_text[orig_start_position : (orig_end_position + 1)]
     return output_text
 
+
+def _get_best_indexes(logits, n_best_size):
+    """Get the n-best logits from a list."""
+    index_and_score = sorted(enumerate(logits), key=lambda x: x[1], reverse=True)
+
+    best_indexes = []
+    for i in range(len(index_and_score)):
+        if i >= n_best_size:
+            break
+        best_indexes.append(index_and_score[i][0])
+    return best_indexes
+
+
 def _compute_softmax(scores):
     """Compute softmax probability over raw logits."""
     if not scores:

@@ -39,7 +39,7 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
         self.sequence_summary = SequenceSummary(config)
         self.logits_proj_3way = nn.Linear(config.d_model, self.num_labels_3way)
         self.logits_proj_multi = nn.Linear(config.d_model, self.num_labels_multi)
-        self.weights_3way = [1, 1, 1]
+        self.weights_3way = [1, 1.3, 3.3]
         self.weights_multi = [15, 10, 15, 5, 5]
         self.class_weights_3way = torch.FloatTensor(self.weights_3way).to(device)
         self.class_weights_multi = torch.FloatTensor(self.weights_multi).to(device)
@@ -106,6 +106,35 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
                     loss_fct = BCEWithLogitsLoss(pos_weight=self.class_weights_multi)
                     loss = loss_fct(logits_multi.view(-1, self.num_labels_multi), labels).to(device)
                 outputs = (loss,) + outputs
+        elif task == 4:
+            output_3way = self.sequence_summary(hidden_states)
+            logits_3way = self.logits_proj_3way(output_3way)
+            loss_fct_3way = CrossEntropyLoss(weight=self.class_weights_3way)
+            loss_3way = loss_fct_3way(logits_3way.view(-1, self.num_labels_3way), labels.view(-1)).to(device)
+
+            start_logits = self.start_logits(hidden_states, p_mask=p_mask)
+
+            outputs = transformer_outputs[1:]
+
+            if start_positions is not None and end_positions is not None:
+
+                end_logits = self.end_logits(hidden_states, start_positions=start_positions, p_mask=p_mask)
+
+                loss_fct = CrossEntropyLoss()
+                start_loss = loss_fct(start_logits, start_positions).to(device)
+                end_loss = loss_fct(end_logits, end_positions).to(device)
+                total_loss = (start_loss + end_loss) / 2
+
+                if cls_index is not None:
+                    cls_logits = self.answer_class(hidden_states, start_positions=start_positions, cls_index=cls_index)
+                    loss_fct_cls = nn.BCEWithLogitsLoss()
+                    cls_loss = loss_fct_cls(cls_logits, torch.zeros(cls_logits.size()).to(device)).to(device)
+                    total_loss += cls_loss * 0.5
+
+            loss = (loss_3way + total_loss)
+
+            outputs = (loss,) + outputs
+
         else:
             start_logits = self.start_logits(hidden_states, p_mask=p_mask)
 
@@ -123,7 +152,7 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
                 if cls_index is not None:
                     cls_logits = self.answer_class(hidden_states, start_positions=start_positions, cls_index=cls_index)
                     loss_fct_cls = nn.BCEWithLogitsLoss()
-                    cls_loss = loss_fct_cls(cls_logits, torch.tensor([0], dtype=torch.float, device=device)).to(device)
+                    cls_loss = loss_fct_cls(cls_logits, torch.zeros(cls_logits.size()).to(device)).to(device)
                     total_loss += cls_loss * 0.5
                     #print(cls_loss)
 
@@ -150,10 +179,10 @@ class XLNetForMultiSequenceClassification(XLNetPreTrainedModel):
                 end_log_probs = F.softmax(end_logits, dim=1) # shape (bsz, slen, start_n_top)
 
                 end_top_log_probs, end_top_index = torch.topk(
-                    end_log_probs, 5, dim=1
+                    end_log_probs, self.end_n_top, dim=1
                 ) # shape (bsz, end_n_top, start_n_top)
-                end_top_log_probs = end_top_log_probs.view(-1, self.start_n_top * 5)
-                end_top_index = end_top_index.view(-1, self.start_n_top * 5)
+                end_top_log_probs = end_top_log_probs.view(-1, self.start_n_top * self.end_n_top)
+                end_top_index = end_top_index.view(-1, self.start_n_top * self.end_n_top)
 
                 start_states = torch.einsum(
                     "blh,bl->bh", hidden_states, start_log_probs
@@ -263,7 +292,7 @@ class Dataset_Span_Detection(Dataset):
             labels = self.df.iloc[idx, -1]
             labels = torch.tensor(labels)
         else:
-            context_text, question_text, answer_text, start_position_character = self.df.iloc[idx,:].values
+            context_text, question_text, answer_text, start_position_character, entail_label = self.df.iloc[idx,:].values
         
         example = SquadExample(
             question_text=question_text,

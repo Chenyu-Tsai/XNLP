@@ -109,7 +109,7 @@ def train(args, train_dataset, model, tokenizer):
                         results = evalute(args, model, tokenizer)
                         for key, value in results.items():
                             tb_writer.add_scalar('eval_{}'.format(key), value, global_step)
-                    tb_writer.add_scalar('lr', scheduler.get_last_lr()[0], global_step)
+                    tb_writer.add_scalar('lr', scheduler.get_lr()[0], global_step)
                     tb_writer.add_scalar('loss', (tr_loss - logging_loss)/args.logging_steps, global_step)
                     logging_loss = tr_loss
                 
@@ -151,7 +151,7 @@ def evalute(args, model, tokenizer, prefix=""):
         if not os.path.exists(eval_output_dir):
             os.makedirs(eval_output_dir)
 
-        args.eval_batch_size = args.train_batch_size
+        args.eval_batch_size = 16
         eval_sampler = SequentialSampler(eval_dataset)
         eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=args.eval_batch_size)
 
@@ -223,7 +223,7 @@ def load_and_cache_examples(args, task, tokenizer, evaluate=False):
         logger.info("Creating features from dataset file at %s", args.data_dir)
 
         examples = (
-            processor.get_dev_examples(args.data_dir) if evaluate else processor.get_train_examples(args.data_dir)
+            processor.get_dev_examples(args.data_dir) if evaluate else processor.get_train_examples(args.data_dir, sample_size=args.sample_size)
         )
         features = convert_examples_to_features(
             examples,
@@ -327,6 +327,8 @@ def main():
     parser.add_argument("--overwrite_output_dir", action="store_true", help="Overwrite the content of the output directory.")
     parser.add_argument("--overwrite_cache", action="store_true", help="Overwrite the cache training and evaluation sets.")
     parser.add_argument("--seed", type=int, default=42, help="random seed for initialization.")
+    parser.add_argument("--sample_size", type=int, default=None, help="The sample size of trainin data.")
+
 
     args = parser.parse_args()
 

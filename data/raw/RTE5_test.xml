@@ -641,8 +641,8 @@
 	</pair>
 	<pair id="81" entailment="ENTAILMENT" task="QA">
 		<t>The pope flew by helicopter from Vatican City to a tent camp near the village of Onna where he led a prayer in the cold and rainy weather for the hundreds killed in the April 6 quake. The camp houses hundreds of families left homeless when the magnitude-6.3 quake destroyed their homes. Residents there welcomed the pope who kissed and hugged some of the children. "I have come here personally to this splendid and hurt land of yours which is living days of great pain and precariousness to express in the most direct way my kind closeness" the pope told residents. "I've followed the news with apprehension sharing with you your consternation ... for the dead along with your anxious worries about how much you've lost in a brief moment.</t>
-		<h>The pope flew by helicopter from Vatican City to a tent camp near the village of Onna where he led a prayer in the cold and rainy weather for the hundreds killed in the April 6 quake. The camp houses hundreds of families left homeless</h>
-		<a>The camp houses hundreds of families left homeless when the magnitude-6.3 quake destroyed their homes</a>
+		<h>The camp houses hundreds of families left homeless when the magnitude-6.3 quake destroyed their homes</h>
+		<a>The pope flew by helicopter from Vatican City to a tent camp near the village of Onna where he led a prayer in the cold and rainy weather for the hundreds killed in the April 6 quake. The camp houses hundreds of families left homeless</a>
 		<t3>pope Onna homeless</t3>
 		<t5>pope helicopter Onna left homeless</t5>
 		<t7>pope helicopter Onna houses families left homeless</t7>

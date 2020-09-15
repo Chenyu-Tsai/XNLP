@@ -3,6 +3,7 @@ import glob
 import logging
 import os
 import random
+import timeit
 
 import numpy as np
 import torch
@@ -19,8 +20,8 @@ from transformers import (
     get_linear_schedule_with_warmup
 )
 
-from processor import SnliProcessor, RteMultiLabelProcessor, convert_examples_to_features, snli_multi_task_convert_examples_to_features
-from metrics import snli_compute_metrics as compute_metrics
+from processor import SpanDetectionResult, SpanDetectionProcessor, span_detection_convert_examples_to_features
+from metrics import compute_predictions_log_probs, span_detection_evaluate
 
 logger = logging.getLogger(__name__)
 
@@ -35,6 +36,9 @@ def set_seed(args):
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
     torch.cuda.manual_seed_all(args.seed)
+
+def to_list(tensor):
+    return tensor.detach().cpu().tolist()
 
 
 def train(args, train_dataset, model, tokenizer):
@@ -80,23 +84,19 @@ def train(args, train_dataset, model, tokenizer):
         for step, batch in enumerate(epoch_iterator):
             model.train()
             batch = tuple(t.to(args.device) for t in batch)
-            inputs_snli = {'input_ids':      batch[0],
-                           'attention_mask': batch[1],
-                           'token_type_ids': batch[2],
-                           'labels':         batch[3],
-                           'task':                  0,
-                          }
-            outputs_snli = model(**inputs_snli)
+            inputs = {
+                      'input_ids':       batch[0],
+                      'attention_mask':  batch[1],
+                      'token_type_ids':  batch[2],
+                      'start_positions': batch[3],
+                      'end_positions':   batch[4],
+                      'cls_index':       batch[5],
+                      'p_mask':          batch[6],
+                      'task':                   2,
+            }
 
-            inputs_multi_label = {'input_ids':      batch[4],
-                                  'attention_mask': batch[5],
-                                  'token_type_ids': batch[6],
-                                  'labels':         batch[7],
-                                  'task':                  1,
-                                 }
-            outputs_multi_label = model(**inputs_multi_label)
-
-            loss = (outputs_snli[0] + outputs_multi_label[0])/2
+            outputs = model(**inputs)
+            loss = outputs[0]
 
             if args.gradient_accumulation_steps > 1:
                 loss = loss/args.gradient_accumulation_steps
@@ -114,7 +114,7 @@ def train(args, train_dataset, model, tokenizer):
                 if args.logging_steps > 0 and global_step % args.logging_steps == 0:
                     # Log metrics
                     if args.evaluate_during_training:
-                        results = evaluate(args, model, tokenizer)
+                        results = evalute(args, model, tokenizer)
                         for key, value in results.items():
                             tb_writer.add_scalar('eval_{}'.format(key), value, global_step)
                     tb_writer.add_scalar('lr', scheduler.get_lr()[0], global_step)
@@ -148,76 +148,93 @@ def train(args, train_dataset, model, tokenizer):
 
     return global_step, tr_loss / global_step
 
-def evaluate(args, model, tokenizer, prefix=""): 
-    eval_task_names = ("snli",)
-    eval_outputs_dirs = (args.output_dir,)
+def evalute(args, model, tokenizer, prefix=""): 
+    eval_task_names = ("span_detection",)
+    eval_dataset, examples, features = load_and_cache_examples(args, eval_task_names, tokenizer, evaluate=True, output_examples=True)
+
+    args.eval_batch_size = 1
+    eval_sampler = SequentialSampler(eval_dataset)
+    eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=args.eval_batch_size)
     
-    results = {}
-    for eval_task, eval_output_dir in zip(eval_task_names, eval_outputs_dirs):
-        eval_dataset = load_and_cache_examples(args, eval_task, tokenizer, evaluate=True)
+    # Eval!
+    logger.info("***** Running evaluation {} *****".format(prefix))
+    logger.info("  Num examples = %d", len(eval_dataset))
+    logger.info("  Batch size = %d", args.eval_batch_size)
 
-        if not os.path.exists(eval_output_dir):
-            os.makedirs(eval_output_dir)
+    all_results = []
+    start_time = timeit.default_timer()
 
-        args.eval_batch_size = 16
-        eval_sampler = SequentialSampler(eval_dataset)
-        eval_dataloader = DataLoader(eval_dataset, sampler=eval_sampler, batch_size=args.eval_batch_size)
+    for batch in tqdm(eval_dataloader, desc="Evaluating", position=0, leave=True, ncols=100):
+        model.eval()
+        batch = tuple(t.to(args.device) for t in batch)
 
-        # Eval!
-        logger.info("***** Running evaluation {} *****".format(prefix))
-        logger.info("  Num examples = %d", len(eval_dataset))
-        logger.info("  Batch size = %d", args.eval_batch_size)
-        eval_loss = 0.0
-        nb_eval_steps = 0
-        preds = None
-        out_label_ids = None
-        for batch in tqdm(eval_dataloader, desc="Evaluating", position=0, leave=True, ncols=100):
-            model.eval()
-            batch = tuple(t.to(args.device) for t in batch)
+        with torch.no_grad():
+            inputs ={
+                     "input_ids":      batch[0],
+                     "attention_mask": batch[1],
+                     "token_type_ids": batch[2],
+                     "cls_index":      batch[4],
+                     "p_mask":         batch[5],
+                     "task":                  2,
+            }
 
-            with torch.no_grad():
-                inputs = {'input_ids':      batch[0],
-                          'attention_mask': batch[1],
-                          'token_type_ids': batch[2],
-                          'labels':         batch[3],
-                          'task':                 0,
-                          }
-                outputs = model(**inputs)
-                tmp_eval_loss, logits = outputs[:2]
+        feature_indices = batch[3]
 
-                eval_loss += tmp_eval_loss.mean().item()
-            nb_eval_steps += 1
-            if preds is None:
-                preds = logits.detach().cpu().numpy()
-                out_label_ids = inputs['labels'].detach().cpu().numpy()
-            else:
-                preds = np.append(preds, logits.detach().cpu().numpy(), axis=0)
-                out_label_ids = np.append(out_label_ids, inputs['labels'].detach().cpu().numpy(), axis=0)
+        outputs = model(**inputs)
 
-        eval_loss = eval_loss / nb_eval_steps
-        preds = np.argmax(preds, axis=1)
+    for i, feature_index in enumerate(feature_indices):
+        eval_feature = features[feature_index.item()]
+        unique_id = int(eval_feature.unique_id)
 
-        result = compute_metrics('snli', preds, out_label_ids)
-        results.update(result)
+        output = [to_list(output[i]) for output in outputs]
 
-        output_eval_file = os.path.join(eval_output_dir, prefix, "eval_results.txt")
-        with open(output_eval_file, "w") as writer:
-            logger.info("***** Eval results {} *****".format(prefix))
-            for key in sorted(result.keys()):
-                logger.info(" %s = %s", key, str(result[key]))
-                writer.write("%s = %s\n" % (key, str(result[key])))
-                
+        start_logits = output[0]
+        start_top_index = output[1]
+        end_logits = output[2]
+        end_top_index = output[3]
+        cls_logits = output[4]
+
+        result = SpanDetectionResult(
+            unique_id,
+            start_logits,
+            end_logits,
+            start_top_index=start_top_index,
+            end_top_index=end_top_index,
+            cls_logits=cls_logits,
+            top_n=model.config.start_n_top,
+        )
+
+    all_results.append(result)
+    evalTime = timeit.default_timer() - start_time
+    logger.info("  Evaluation done in total %f secs (%f sec per example)", evalTime, evalTime / len(eval_dataset))
+
+    output_prediction_file = os.path.join(args.output_dir, "predictions_{}.json".format(prefix))
+    output_nbest_file = os.path.join(args.output_dir, "nbest_predictions{}.json".format(prefix))
+    output_best_file = os.path.join(args.output_dir, "best_predictions{}.json".format(prefix))
+
+    start_n_top = model.config.start_n_top
+    end_n_top = model.config.end_n_top
+
+    predictions = compute_predictions_log_probs(
+        examples,
+        features,
+        all_results,
+        args.n_best_size,
+        args.max_answer_length,
+        args.min_answer_length,
+        output_prediction_file,
+        output_nbest_file,
+        start_n_top,
+        end_n_top,
+        tokenizer,
+        args.verbose_logging,
+    )
+
+    results = span_detection_evaluate(examples, predictions, output_best_file)
     return results
-
-
-def load_and_cache_examples(args, task, tokenizer, evaluate=False):
-    snli_processor = SnliProcessor()
-    rte_processor = RteMultiLabelProcessor()
-
-    def _return_multi_label(label):
-        label = label.replace('[', '').replace(']','')
-        label = np.fromstring(label, dtype=int, sep=',')
-        return label
+    
+def load_and_cache_examples(args, task, tokenizer, evaluate=False, output_examples=False):
+    processor = SpanDetectionProcessor()
 
     # Load data features from cache or dataset file
     cached_features_file = os.path.join(
@@ -232,53 +249,34 @@ def load_and_cache_examples(args, task, tokenizer, evaluate=False):
 
     if os.path.exists(cached_features_file) and not args.overwrite_cache:
         logger.info("Loading features from cached file %s", cached_features_file)
-        features = torch.load(cached_features_file)
+        features_and_dataset = torch.load(cached_features_file)
+        features, dataset, examples = (
+            features_and_dataset["features"],
+            features_and_dataset["dataset"],
+            features_and_dataset["examples"],
+        )
     else:
         logger.info("Creating features from dataset file at %s", args.data_dir)
 
-        examples_snli = (
-            snli_processor.get_dev_examples(args.data_dir) if evaluate else snli_processor.get_train_examples(args.data_dir, sample_size=args.sample_size)
+        examples = (
+            processor.get_test_examples(args.data_dir) if evaluate else processor.get_train_examples(args.data_dir)
         )
-        examples_rte = rte_processor.get_train_examples_span(args.data_dir, len(examples_snli))
-
-        if evaluate:
-            features = convert_examples_to_features(
-                examples_snli,
-                tokenizer,
-                max_length=args.max_seq_length,
-            )
-
-        else:
-            features = snli_multi_task_convert_examples_to_features(
-                examples_snli,
-                examples_rte,
-                tokenizer,
-                max_length=args.max_seq_length,
-            )
+        features, dataset = span_detection_convert_examples_to_features(
+            examples=examples,
+            tokenizer=tokenizer,
+            max_seq_length=args.max_seq_length,
+            doc_stride=args.doc_stride,
+            max_query_length=args.max_query_length,
+            is_training=not evaluate,
+            return_dataset=True,
+            threads=args.threads,
+        )
 
     logger.info("Saving features into file %s", cached_features_file)
-    torch.save(features, cached_features_file)
-
-    # Convert to Tensors and build dataset
-    if evaluate:
-        all_inputs_ids = torch.tensor([f.input_ids for f in features], dtype=torch.long)
-        all_attention_mask = torch.tensor([f.attention_mask for f in features], dtype=torch.long)
-        all_token_type_ids = torch.tensor([f.token_type_ids for f in features], dtype=torch.long)
-        all_labels = torch.tensor([int(f.label) for f in features], dtype=torch.long)
-        
-        dataset = TensorDataset(all_inputs_ids, all_attention_mask, all_token_type_ids, all_labels)
-    else:
-        inputs_ids = torch.tensor([f.input_ids for f in features], dtype=torch.long)
-        attention_mask = torch.tensor([f.attention_mask for f in features], dtype=torch.long)
-        token_type_ids = torch.tensor([f.token_type_ids for f in features], dtype=torch.long)
-        labels = torch.tensor([int(f.label) for f in features], dtype=torch.long)
-        inputs_ids_2 = torch.tensor([f.input_ids_2 for f in features], dtype=torch.long)
-        attention_mask_2 = torch.tensor([f.attention_mask_2 for f in features], dtype=torch.long)
-        token_type_ids_2 = torch.tensor([f.token_type_ids_2 for f in features], dtype=torch.long)
-        labels_2 = torch.tensor([_return_multi_label(f.label_2) for f in features], dtype=torch.float)
-        
-        dataset = TensorDataset(inputs_ids, attention_mask, token_type_ids, labels, inputs_ids_2, attention_mask_2, token_type_ids_2, labels_2)
-
+    torch.save({"features": features, "dataset": dataset, "examples": examples}, cached_features_file)
+    
+    if output_examples:
+        return dataset, examples, features
     return dataset
 
 def main():
@@ -326,10 +324,39 @@ def main():
     )
     parser.add_argument(
         "--max_seq_length",
-        default=128,
+        default=384,
         type=int,
         help="The maximum total input sequence length after tokenization. Sequences longer "
-        "than this will be truncated, sequences shorter will be padded."
+        "than this will be truncated, sequences shorter will be padded.",
+    )
+    parser.add_argument(
+        "--doc_stride",
+        default=128,
+        type=int,
+        help="When splitting up a long document into chunks, how much stride to take between chunks.",
+    )
+    parser.add_argument(
+        "--max_query_length",
+        default=64,
+        type=int,
+        help="The maximum number of tokens for the question. Question longer than this will be truncated this lenght.",
+    )
+    parser.add_argument(
+        "--max_answer_length",
+        default=50,
+        type=int,
+        help="The maximum length of an answer that can be generated."
+    )
+    parser.add_argument(
+        "--min_answer_length",
+        default=5,
+        type=int,
+        help="Avoiding the span is too short."
+    )
+    parser.add_argument(
+        "verbose_logging",
+        action="store_false",
+        help="If true, all of the warnings related to data processing will be printed."
     )
     parser.add_argument("--do_train", action="store_true", help="Whether to run training.")
     parser.add_argument("--do_eval", action="store_true", help="Whether to run eval on the dev set.")
@@ -361,11 +388,17 @@ def main():
         action="store_true",
         help="Evaluate all checkpoints starting with the same prefix as model_name ending with step number.",
     )
+    parser.add_argument(
+        "--n_best_size",
+        default=20,
+        type=int,
+        help="The total number of n-best predictions to generate in the nbest_predictions.json output file."
+    )
     parser.add_argument("--no_cuda", action="store_true", help="Avoid using CUDA when available")
     parser.add_argument("--overwrite_output_dir", action="store_true", help="Overwrite the content of the output directory.")
     parser.add_argument("--overwrite_cache", action="store_true", help="Overwrite the cache training and evaluation sets.")
     parser.add_argument("--seed", type=int, default=42, help="random seed for initialization.")
-    parser.add_argument("--sample_size", type=int, default=None, help="The sample size of trainin data.")
+    parser.add_argument("--threads", type=int, default=1, help="multiple threads for converting example to features")
 
     args = parser.parse_args()
 
@@ -379,6 +412,7 @@ def main():
         raise ValueError(
             "Output directory ({}) already exists and is not empty. Use --overwrite_output_dir to overcome.".format(args.output_dir)
         )
+
     
     # Set CUDA, GPU
     device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
@@ -397,14 +431,12 @@ def main():
 
     # Set seed
     set_seed(args)
-    num_labels = 3
 
     args.model_type = args.model_type.lower()
     config_class, model_class, tokenizer_class = MODEL_CLASSES[args.model_type]
     config = config_class.from_pretrained(
         "xlnet-base-cased",
-        num_labels=num_labels,
-        finetuning_task="snli",
+        finetuning_task="span_detection",
         cache_dir=args.cache_dir if args.cache_dir else None,
     )
     tokenizer = tokenizer_class.from_pretrained(
@@ -424,7 +456,7 @@ def main():
 
     # Training
     if args.do_train:
-        train_dataset = load_and_cache_examples(args, "snli_multi_task", tokenizer, evaluate=False)
+        train_dataset = load_and_cache_examples(args, "span_detection", tokenizer, evaluate=False)
         global_step, tr_loss = train(args, train_dataset, model, tokenizer)
         logger.info(" global_step = %s, average loss = %s", global_step, tr_loss)
 
@@ -468,10 +500,13 @@ def main():
 
             model = model_class.from_pretrained(checkpoint)
             model.to(args.device)
-            result = evaluate(args, model, tokenizer, prefix=prefix)
+            result = evalute(args, model, tokenizer, prefix=prefix)
             result = dict((k + "_{}".format(global_step), v) for k, v in result.items())
             results.update(result)
     return results
             
 if __name__ == "__main__":
     print(main())
+
+
+#python span_detection.py --model_type xlnet --model_name_or_path xlnet-base-uncased --do_train --do_eval --data_dir data/ --max_seq_length 128 --evaluate_during_training  --train_batch_size 16 --learning_rate 2e-5 --num_train_epochs 300.0 --output_dir model_output --overwrite_output_dir --logging_steps 50 --save_steps 500
