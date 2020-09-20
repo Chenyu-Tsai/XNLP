@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Emmy Award winning American actress Estelle Getty has died at the age of 84. Getty had been previously diagnosed with dementia which had been in its advanced stages. She died while at her home in Hollywood California early Tuesday morning. "She was loved throughout the world in six continents and if they loved sitcoms in Antarctica she would have been loved on seven continents. She was one of the most talented comedic actresses who ever lived" said her son Carl Gettleman.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Estelle Getty was the recipient of an Emmy Award.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="261" id="261" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Baines' father a black born in 1863 two years before the end of the U.S. Civil War was likely a slave Young said. Baines has outlived her entire family. Her only daughter died of typhoid fever when she was a toddler. Featured on local television newscasts in November when she cast her ballot for Barack Obama for president Baines said she backed him "because he's for the coloured." She said she never thought she would live to see a black man become president. Baines received a letter from Obama wishing her a happy birthday. Baines worked as a maid in Ohio State University dormitories until her retirement and has lived at the Los Angeles convalescent hospital for more than 10 years. Since 1986 Young said the world's oldest person title has been held by a woman for all but 44 days.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Baines died of typhoid fever.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="262" id="262" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Supermodel Naomi Campbells billionaire Russian boyfriend Vladislav Doronin is married it has emerged. The catwalk queen and Doronin have been dating since last May and the 46-year-old tycoon himself talked about buying her an engagement ring. However Ekaterina who claims to be his wife and the mother of his 12-year- old daughter has told friends that she will not divorce her hubby. This is just a ridiculous affair. Vladislav is married to me and we are still a couple the News of the World quoted her as saying. Naomi is deluding herself if she thinks she can take my husband. But it is adultery and Naomi is flaunting it. It is sick and it is embarrassing she said. She added: Vladimir and I are not even legally separated. How can she possibly think she can get engaged to my husband when he is married to somebody else?</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Naomi Campbell is married to Vladislav Doronin.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="263" id="263" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The owner of the Santika Club site of the 2009 Bangkok nightclub fire is to be charged along with twelve other directors over the disaster. 62 people were killed and 229 injured by the blaze thought to have been triggered by New Year fireworks on the stage although investigations are ongoing. "I feel very sorry for what had happened. I want to apologise to victims' family members" said Mr Setsawat the club's owner. The club had just three exits of which one was known only to staff and another locked. A number of people died in the stampede for the door. There was also only one fire extinguisher and the venue was only licensed as a snack bar closing at midnight.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mr. Setsawat is the proprietor of the Santika Club.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="264" id="264" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The magazine states that she has been on the set of the soap opera at CBS Television City since March 11. For a while she didn't even tell her husband former Guiding Light actor Michael Tylo where she was really going. She told him that she was just going on "a lot of auditions" and that if she told sooner than she did the news might slip out accidentally. Her husband currently teaches a class at the University of Nevada Las Vegas and she couldn't afford any accidental hints that his students could have picked up on.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Michael Tylo is an employee of CBS Television.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="265" id="265" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">In Norway the Oslo and Akershus County Medical Officer has announced that it is launching an inquiry into a possible scientific hoax involving cancer researchers from Norway the U.S. and Finland. In October 2005 the Norwegian researcher Jon Sudbø along with 13 co-authors published the study in the prestigious medical journal The Lancet. The study claimed to detect a positive effect of ibuprofen in preventing oral cancer in smokers based on a controlled case-study entailing several hundred patients. On the basis of this study a broader prospective multicenter study was to be started in 2006 partly funded by the U.S. National Cancer Institute.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Cancer researchers from Finland collaborate with researchers from Norway and the U.S.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="266" id="266" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Over 2000 NATO troops stood at attention at Kandahar Airfield Monday morning to mourn the death of the fifth Canadian soldier in a week to die in Afghanistan. Master Cpl. Raymond Arndt a 32 year-old reservist from Peers Alberta was killed in a traffic accident August 5th when the G-Wagon he was travelling collided head-on with a civilian truck 35 kilometres southeast of Kandahar. The vehicle was part of a convoy delivering medical supplies. Three other soldiers were injured in the crash which occurred as the military was preparing to transport home the bodies of four other Canadian soldiers who were killed August 3rd during heavy combat with Taliban insurgents.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Raymond Arndt is the killer of three other soldiers.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="267" id="267" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Andry Rajoelina who ousted Madagascan ex-president President Marc Ravalomanana earlier this week officially became the leader of the country after being sworn in on Saturday. National television broadcast the inauguration which occurred at a soccer field in Antananarivo the capital of Madagascar. Tens of thousands of people attended the event although approximately 2000 supporters of Ravalomanana held protests in the capital's Democracy Square.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Marc Ravalomanana was born in Madagascar.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="268" id="268" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The eruption happened at around 1:30 PM local time the United States Geological Survey reported. The volcano had erupted four times on Friday billowing ash up to 51000 feet up into the air. These are the latest in a series of eruptions from Mount Redoubt which started on March 22. The volcano had not erupted since a four-month period in 1989-90. The Alaska Volcano Observatory set its alert level at red the highest possible level meaning that an eruption is imminent and that it would send a "significant emission of volcanic ash into the atmosphere."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mount Redoubt is located in Alaska.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="269" id="269" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">In the latest attempt to evict Prime Minister Thaksin Shinawatra ahead of next week's election tens of thousands of protesters have rallied in Bangkok Thailand. Officials say as many as 10000 police have been mobilised for the protest against the Thai PM. Another 10000 officers are on standby. Police estimated the crowd at 30000 people. Organisers had hoped the rally would draw one million people but officials said about the same number of monks were chanting prayers for peace and unity nearby far fewer than the 100000 that attended earlier demonstrations. Thaskin has called a snap election three years early in hopes of ending the crisis.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Thaksin Shinawatra is a citizen of Thailand.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="270" id="270" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Hydrogen fluoride is a hazardous and highly corrosive chemical compound used mostly for industrial purposes. It is also an ingredient in high-octane gasoline refrigerants and light bulbs. The driver of the truck Raymond Leblanc 54 of Harrow Ontario was treated at Pocono Medical Center in East Stroudsburg for minor injuries and released Saturday. A passenger Joseph Dault 51 of Ontario was not hurt.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Joseph Dault is Raymond Leblanc's best friend.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="271" id="271" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A major security hole was discovered in the pseudo-random number generator (PRNG) of the Debian version of OpenSSL. OpenSSL is one of the most used cryptographic software that allows the creation of secure network connections with the protocols called SSL and TLS. It is included in many popular computer programs like the Mozilla Firefox web browser and the Apache web server. Debian is one of the most used GNU/Linux distributions on which are based other distributions like Ubuntu and Knoppix. The problem affects all the Debian-based distributions that were used to create cryptographic keys since the September 17 2006. The bug was discovered by Luciano Bello an argentine Debian package maintainer and was announced on May 13 2008.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Luciano Bello lives in Argentina.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="272" id="272" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">At first after the earliest attacks the government seemed to blame the Mojahedin-e-Khalq (MeK) organization. It later expanded its accusations to allege U.S. facilitation and imply infiltration via U.S. occupied Iraq or Afghanistan both of which share extensive borders with Iran. The MeK which formerly operated under Saddam Hussein's protection in Iraq has claimed bombings in the past but vehemently denies participating in the recent spate of attacks. The group seems to have moved away from violent acts in recent years as it tries to curry favor with Western governments and shed its terrorist image (the group is currently listed on U.S. and many European terrorist watch lists). The affiliated National Council of Resistance of Iran (NCRI) has also denied involvement.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Saddam Hussein is connected to Mojahedin-e-Khalq.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="273" id="273" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Maori Party co-leader Doctor Pita Sharples has said that gangs are again starting to imping on on society like in the 1970s. He says we should include gangs into society instead of disrupting them. Wikinews previously reported on a letterbox for sale on New Zealand internet auction site TradeMe which has now reached a bid of $26.03 by Eliz "polysstew".</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Pita Sharples participates in internet auctions.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="274" id="274" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Paris Hilton is out of jail after serving three weeks in the same. She was imprisoned due to a violation of her probation which came as a result of a Driving Under the Influence (DUI) charge. Reuters reported that her face expressed joy at her release as she left the Century Regional Detention Facility in Lynwood California where she served 23 days at 12:15 a.m. PT. Hilton also reportedly left the jail looking a few pounds thinner than when she entered.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Paris Hilton lives in California.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="275" id="275" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Brawn-Mercedes driver Jenson Button wins FIA Formula One 2009 Petronas Malaysian Grand Prix at Sepang International Circuit Sepang Selangor Malaysia. The race was suspended by red flag due to heavy rain after 33 laps and later stopped after more than half an hour of waiting the track to dry up. All drivers earned only half possible points counted after 31 laps. Nick Heidfeld on his KERS-equipped BMW Sauber car placed second from 11th place on the starting grid. Both Toyota drivers Timo Glock and Jarno Trulli ended up behind Heidfeld. Button's teammate Rubens Barrichello finished 5th. Mark Webber's Red Bull gained one place from the start finishing 6th.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Jenson Button was born in Malaysia.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="276" id="276" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Russian space agency has ordered design work to start for a next-generation spaceship capable of flying missions to the moon setting the ground for a potential new space race with the United States. The space agency granted the state-controlled RKK Energiya company a US$23 million contract for initial work on a new reusable craft to replace the 40-year-old Soyuz. The as-yet-unnamed Russian spaceship could emerge as a potential competitor to NASA's prospective Orion spacecraft. Design requirements for the Russian craft appear similar to Orion's specification prompting some experts to nickname it "Orionski." Orion is scheduled to carrying humans to the International Space Station beginning in 2015 and to the moon by 2020.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Orion is produced by the Russian space agency.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="277" id="277" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Thousands of residents are evacuating coastal areas of far north Queensland (QLD) set to be lashed by Cyclone Larry tomorrow morning. The Australian Bureau of Meteorology warns that the "very destructive core of Severe Tropical Cyclone Larry with extreme gusts up to 280 km/hr (174 mph) should cross the coast between 7 a.m. and 9 a.m. AEST on Monday (Sunday 2100 to 2300 UTC). Destructive winds are expected to commence along the coast between Ingham and Port Douglas. Gales are already being experienced along the exposed coast in the warning area."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Port Douglas is located in Australia.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="278" id="278" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Stock markets around the world particularly those in the United Kingdom have increased dramatically today. This is due to the ongoing events in the financial world including the United States government's announcement that it would buy billions of dollars of bad loans from US banks. The primary UK index the FTSE 100 rose in value by 8.04% which is 392.50 points to above the 5000 mark at 5272.50. The Dow Jones was up 3.10% at 14:58 UTC an increase of 330.89. The Dow Jones currently has a value of 11350.58 points. The NASDAQ index has risen by 2.53% to 2248.63 while the Dax was 5.06% higher than the start of the day as of 14:58 UTC.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Dax has risen to above the 2000 mark.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="279" id="279" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A Spanish court is considering opening a criminal investigation into whether six former George W. Bush administration officials gave legal cover for torture at Guantanamo Bay. Baltasar Garzón a Spanish judge with an international reputation for bringing cases against high-profile alleged human rights violators sent the case to the prosecutor's office to review whether it has any merit. Among the officials identified in the potential case is former Attorney General Alberto Gonzales.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Baltasar Garzón set up his residency in Spain.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="280" id="280" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

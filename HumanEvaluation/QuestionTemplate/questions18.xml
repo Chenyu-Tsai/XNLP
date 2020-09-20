@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Over 1600 volunteers registered to help build approximately 65000 of the 500000 sandbags to create dikes 20.5 feet (6.2 meters) high to protect the City of Winnipeg Manitoba in the war against the Red River of the North flood. 700 volunteers answered at the rural municipality of St. Andrews alone. Once sandbags are filled for West St. Paul St. Andrews and Selkirk then frozen culverts must be cleared. The height of the river is expected to be Thursday and predictions are that it will be less than Flood of the Century of 1997. There is no precipitation in the forecast and snow in the province should be melted by the end of the week.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Red River will overflow its banks.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="341" id="341" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The National Basketball Association (NBA) has released the rosters for the 2007 NBA All-Star Game. The starting rosters can be found on the newly launched 2007 All-Star Game website. The 56th All-Star Game is scheduled to take place on Sunday February 18 at the Thomas Mack Center in Las Vegas Nevada. 2007 Eastern Conference All-Stars Starters Gilbert Arenas (Washington) Chris Bosh (Toronto) LeBron James (Cleveland) Shaquille O'Neal (Miami) Dwayne Wade (Miami) 2007 Western Conference All-Stars Starters Kobe Bryant (L.A. Lakers) Tim Duncan (San Antonio) Kevin Garnett (Minnesota) Tracy McGrady (Houston) Yao Ming (Houston) The All Star Website was also launched at about noon EST on January 26. The website features pictures of the players on the rosters and other information.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">NBA headquarters are located in Las Vegas.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="342" id="342" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">USC Trojans running back Reggie Bush has decided to enter the NFL draft and forfeit his final year of college football eligibility. The Heisman Trophy winner is the favorite to be the top pick in the draft in which case he would play for the Houston Texans. Bush rushed for 1740 yards during his final college season and led the Trojans to the Rose Bowl. Quarterbacks Marcus Vick of the Virginia Tech Hokies and Vince Young of the Texas Longhorns are also likely to among the top draft picks this year.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Reggie Bush is the recipient of the Heisman Trophy.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="343" id="343" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">WEDDING bells are set to ring in Aras an Uachtarain after it emerged that the President's eldest daughter is to tie the knot. Emma McAleese the eldest child of Mary McAleese and her husband Martin has become engaged to her boyfriend of five years Michael O'Connell. A spokesperson for the President has confirmed the news after 27-year-old Emma was spotted wearing a diamond on her engagement finger.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Emma McAleese was born in Aras an Uachtarain.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="344" id="344" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">In Los Angeles California singer and actress Britney Spears 24 has filled papers in Los Angeles County Superior Court to divorce her husband Kevin Federline 28. A spokeswoman for the court Kathy Roberts stated that the papers cited "irreconcilable differences" as the reason for the divorce and have according to the courts been legally separated as of Monday November 6 the same day that Spears appeared on Late Night with David Letterman. The fact that the papers were filed on the same day as the U.S. general elections prompted ABC News to speculate that the star may have been hoping to receive less attention amid national election coverage. The two were married on October 6 2004 according to the petition a date that E! Online noted was in conflict with a photo spread in People which gave their wedding date as September 18 2004. The couple currently have two sons the first named Sean Preston 1 and a recent baby boy named Jayden James Federline who was born on September 12 2006. Spears is attempting to gain both full legal and physical custody of both of the children with Federline having visitation rights.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Britney Spears married Kevin Federline in Los Angeles.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="345" id="345" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">November 19 2004 RIO DE JANEIRO Juan Carlos Concero aged 34 a Spanish tourist was shot in the head during an assault in Rio de Janeiro today. He was carried to Souza Aguiar Hospital where he was in a coma breathing with the help of life support machines. Hours later doctors pronounced him braindead. The Brazilian police offices in charge of the case announced the arrest of three man suspected of shooting Concero.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Souza Aguiar Hospital is situated in Rio de Janeiro.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="346" id="346" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">At 5:30 p.m. on Thursday 10-15 UFOs were spotted over north London in the inner-city district of Islington. The Islington police said they started receiving phone calls only minutes after the objects started appearing. 34 year-old market stall trader Alix McAlister who witnessed the objects said that "I just picked up my son from nursery in Bredgar Road. I had just come out of the door when I noticed what was going on in the sky. There were a group of them 10 to 15 of them moving together. My first impression was that they reminded me of a squadron of aeroplanes in formation. But they didn't have a proper formation and they were all moving at the same speed. I thought for a while that something was happening in the centre of London.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Alix McAlister has a market stall in Bredgar Road.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="347" id="347" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The alleged mastermind behind the London bombings was reported captured in Cairo Egypt last week. Police believe that a U.S. trained chemist Magdi Asdi el-Nashar 33 helped build the bombs that killed over 50 people. Mr. el-Nashar who has a PhD from Leeds University left England two weeks before the bombings. After the London bombings British authorities initiated a worldwide manhunt that found him in Cairo. State security officials reported they have begun questioning el-Nashar with British agents in attendance.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Cairo is situated in Egypt.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="348" id="348" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Quiznos published a press release on March 24 announcing the new line of sandwiches. They stated that their price of US$4 helps to ease the economic pinch. In a statement to Wikinews Quiznos stated that their commercials are within the company's character and they were designed to get people talking. "We developed our new ads to be consistent with the Quiznos brand and to get people excited about our new Toasty Torpedoes. Some of the ads are edgy and provocative but they're well within the confines of the Quiznos brand character" said Rebecca Steinfort chief marketing officer for Quiznos to Wikinews.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Quiznos's sandwiches are sold for US$4.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="349" id="349" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">For the next year the U.S. Treasury will insure the holdings of any publicly offered eligible money market mutual fund both retail and institutional that pays a fee to participate in the program." Henry Paulson the US Treasury Secretary explained the government's reasoning behind its plan. He said that the government was buying bad loans "to restore confidence in our markets and our financial institutions so they can fuel continued growth and prosperity we must address the underlying problem." President George W. Bush speaking at a press conference alongside Paulson said "this is a pivotal moment for America's economy." The government plan is permitted under the Gold Reserve Act of 1934 which gives the Treasury the permission "to deal in gold foreign exchange and other instruments of credit and securities."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">George W. Bush has invested in bad loans.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="350" id="350" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The family of a woman who committed suicide recently after appearing on CNN Headline News Nancy Grace's self titled show said Tuesday that they will be taking her to court. Melinda Duckett the mother of an infant son Trenton Duckett reported him missing on August 27 and fatally shot herself in her grandparents' retirement home on September 8. Shortly before her death she had appeared on Grace's show where she engaged in debate with the former Georgia prosecutor regarding her perceived lack of transparency regarding the disappearance. A suicide note was later found at the scene. The case made national headlines after her appearance.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Melinda Duckett is her own slayer.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="351" id="351" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">On Monday a FedEx McDonnell Douglas MD-11 cargo jet flying from Guangzhou China to Tokyo Japan crash-landed at Tokyo's Narita International Airport at around 7 a.m. local time. The plane landed during high winds and bounced twice upon landing before flipping over and bursting into flames. Firecrews were dispatched to the scene and the airport was closed. The fire subsequently destroyed most of the aircraft. Incoming flights were diverted to other airports. Wind gusts around the time of the accident were 30 to 50 mph.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Narita Airport is situated in Japan.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="352" id="352" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The government of Peru declared a state of emergency in the vicinity of the Ubinas volcano on Saturday as it began to spew out ash and smoke over a 6km area indicating a possible eruption in the near future. The civil defense institute has recommended the total evacuation of the 3500 residents of the district of Ubinas. The Peruvian military has been ordered to aid in the evacuation of civilians from the area. Aid shipments of tents water and powdered milk are being sent to the affected area.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Ubinas volcano is situated in Peru.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="353" id="353" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Actor Bob Denver best known for his roles as "Gilligan" on Gilligan's Island (1964-1967) and "Maynard G. Krebs" on The Many Loves of Dobie Gillis (1959-1963) died Friday at the age of 70. Denver gained popularity on Dobie Gillis playing the title character's best friend a beatnik. The show which ran for four years was Denver's first major acting role. It is said that the popular cartoon Scooby-Doo Where Are You! was based on the show and Denver's role of Krebs was the inspiration for the character "Shaggy". Denver's real fame however came with the role of "Gilligan" a kind but naive and incompetent bumbler stuck on an island with six other castaways. Nearly every episode involved a plot to get off the island; however Gilligan always ended up causing the plot to fail in one way or another.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Bob Denver was part of Gilligan's Island.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="354" id="354" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">American singer Brandy Norwood known for her role as a judge on America's Got Talent amongst other roles has been sued for US$50 million by the family of a woman who was killed in a car crash. California Highway Patrol (CHP) said that Brandy 27 should be charged with a misdemeanor count of vehicular manslaughter for being part of the fatal car crash that killed Awatef Aboudihaj 38. Aboudihaj's family lawsuit accuses Noorwood known as Brandy of "reckless driving". Brandy in a Land Rover SUV on December 30 2006 bumped into the Toyota which had Awatef Aboudihaj in it. The Toyota slammed into another vehicle and slid on the freeway's center divider. Aboudihaj was sent to Providence Holy Cross Medical Centre but died the next evening.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Awatef Aboudihaj died on December 31 2006.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="355" id="355" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Wiz is not really running for President. But he is one of the top-rated Presidential candidates on U4Prez.com a website that allows users to run a virtual campaign complete with supporters press releases and caucuses which are lively discussions on serious political issues. They can even compare their rating with the likes of John McCain Hillary Clinton and Barack Obama all of whom have profiles set up. One blogger described it as "the MySpace of politics"</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Wiz is fond of John McCain Hillary Clinton and Barack Obama.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="356" id="356" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">It is Frank Messina who has personalities as diverse as Joe Benigno the archetype of the New York sportscaster at WFAN reflecting on love and poetry. "No one would question a poet writing about love for a woman" said Benigno "but when you're a fan of a team the emotional attachment is even stronger...." Benigno sounded similar to avant-garde writer and musician David Amram who said Messina's poems paint "the stark beauty of the streets the pain of 9/11 the joy of everyday life the mysteries of love all fill the pages of this book. It's a feast of images and sounds that stay with you." I spoke with the person Bowery Poetry Club founder Bob Holman called the "Rock n' Roll Poet Laureate" recently in Washington Square Park.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Bowery Poetry Club was destroyed by Bob Holman.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="357" id="357" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Australian treasurer Peter Costello (Higgins Liberal) told parliament on Tuesday that the greatest threat to Australia's economy would be for opposition leader Kim Beazley (Brand Labor) to gain office. Mr Costello said that the Australian economy would suffer with Mr Beazley at the helm. "The greatest threat to the Australian economy domestically would be the election of the Leader of the Opposition" said the treasurer. "I can think of nothing that could be worse for the Australian economy than Kim Beazley being in a position of influence."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Kim Beazley is not supported by Peter Costello.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="358" id="358" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">One conspirator Li Yong 29 from China led the policemen to the apartment and tricked Kaneo Ito 49 from Japan to open the door. Ito managed to discharge one bullet before being restrained by an assistant police inspector the first man in the room. The other man involved in the kidnap of Kanako was Choi Gi Ho 54 from South Korea. Kanato was freed unharmed. The Tokyo Metropolitan Police Department arrested three men on suspicion of conspiring to kidnap a woman and hold her to a reported 300 million yen ransom.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Kanato is employed by the Tokyo Metropolitan Police Department.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="359" id="359" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Kramer a Catholic Republican Judge appointed by Pete Wilson California's previous conservative governor issued a "stay" on his order making it a tentative decision by delaying its implementation for 60 days to allow the same-sex marriage opponents time to file an appeal to his ruling. The case is widely expected to be brought before the California Supreme Court. Less than a year ago the state's Supreme Court annulled more than 4000 same-sex marriages which took place in San Francisco County in 2004. The court did not rule on the constitutionality of same-sex marriages but ruled more narrowly that San Francisco mayor Gavin Newsom overstepped his authority by unilaterally deciding not to follow state laws he did not agree with instead of challenging the laws in court which is the proper legal way to overturn or affirm laws in California and much of the United States.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Pete Wilson is Gavin Newsom's fiancée.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="360" id="360" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

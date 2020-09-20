@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">LOSAIL Qatar (AFP) Torrential rain caused the season-opening Qatar MotoGP to be cancelled on Sunday leaving officials and teams in a frenzy before deciding to race on Monday instead at this floodlit desert venue. Monsoon-like conditions accompanied by swirling winds arrived just moments before Australia's Casey Stoner on pole position was due to lead defending world champion Valentino Rossi and the other riders away on the warm-up lap. "It's just unlucky with the weather" said Australian Ducati rider Stoner the 2007 world champion who was bidding for a third successive win here.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Valentino Rossi won the season-opening Qatar MotoGP.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="1" id="1" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Euro MPs have voted overwhelmingly to cut the cost of texting and using the internet on mobiles abroad. The cap for a "roaming" text will fall to 11 euro cents (10p; 14 US cents) from about 29 cents on average today. The EU-wide caps excluding VAT will take effect in July. They cover text messages and data roaming services such as checking e-mails while abroad. The current price cap of 46 euro cents per minute for an outgoing voice call will also fall to 43 cents in July.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">A roaming text cost 46 euro cents.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="2" id="2" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">However Mr Johnson said it was likely there would still be more cases and there was the possibility of a second wave in the autumn or winter. The advice was followed by news that the number of confirmed cases of swine flu in the UK has risen to 18. Health officials are trying to trace those on the same flight as a Scottish man diagnosed with swine flu on Sunday. The man from Ayrshire Scotland's fourth confirmed case flew from Birmingham International to Glasgow Airport on Thursday. He is thought to have picked up the virus while in Texas but the authorities said no other flights were affected.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mr. Johnson is a health official.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="3" id="3" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A Spanish man who has admitted killing a Welsh couple has expressed remorse for his actions and apologised to their son in his murder trial. Brian and Tina Johnson were bludgeoned to death with a hammer on Fuerteventura in the Canary Islands in July 2006. Juan Carmelo Santana told the jury at Las Palmas criminal court that he blamed the drink and drugs he had taken for the attacks. The jury is expected to begin its deliberations later.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mr. and Mrs. Johnson were killed by Santana.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="4" id="4" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">"There is a rational basis to distinguish between people driving cars and semi trucks" Jambois said. "All I would say is I think he has an uphill battle." The lawsuit says the truckers' Fifth and Fourteenth amendment rights are being violated because there is no way for them to apply for an occupational license. Mutschler said the state is taking away the truckers' right to drive a truck for a living. He said he will argue that while driving is a privilege once a person has a license for work it becomes a right.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Fifth Amendment right is about driving license.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="5" id="5" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Rain is pelting down on Dona Porcela's treatment room in Puerto Cabezas the main town on Nicaragua's Northern Caribbean coast. The room is barren except for a few plastic chairs a wooden table and some old plastic bottles balanced precariously on timber beams. Dona Porcela is a respected traditional healer here and the bottles are filled with her secret medicinal potions. Her patient today is a teenage girl asleep on a piece of cardboard serving as a mattress on the dirt floor.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Dona Porcela is a healer.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="6" id="6" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Global technology giant IBM is in talks to buy Sun Microsystems in a deal that would expand its server market share the Wall Street Journal reported Wednesday. IBM may pay as much as US$6.5 billion in cash for Sun the newspaper reported on its Web site without naming its sources. That amount of money would be nearly double Sun's closing share price on Tuesday of $4.97 per share. The report cautioned that while the two companies are holding discussions a transaction may not occur.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The price of Sun Microsystems is $4.97.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="7" id="7" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">DEFENDER Zdenek Grygera scored on a header in added time to earn 10-man Juventus a 1-1 draw with Inter Milan on Saturday although it may have not been enough to prevent Inter from clinching its fourth successive Serie A title. Teenager Mario Balotelli scored in the 64th minute for Inter and Juventus midfielder Tiago Mendes was shown a red card in the 76th. "To go down a goal lose a man and then be able to draw satisfies me" Juventus coach Claudio Ranieri said. Inter remained 10 points ahead of Juventus with six rounds remaining.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Claudio Ranieri is the Juventus' coach.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="8" id="8" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">India's economy has grown by more than 8 per cent annually since 2003 and hit $4 trillion (based on purchasing power parity) by the end of last year more than double that of the whole of Africa. The country now has the sort of budget foreign exchange reserves transport infrastructure human resources and stable political environment that are the envy of most sub-Saharan countries. Yet its child malnourishment levels are worse than Ethiopia's and on a par with those of Eritrea and Burkina Faso.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">India Eritrea and Burkina Faso have the same rate of child malnourishment.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="9" id="9" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A teenager who bashed a tourist to death with a baseball bat could be out of jail by his mid-20s. Jahche Broughton who was just 14 when he murdered Karen Aim in Taupo will spend a minimum non-parole period of 12 and a half years in prison. It seemed almost incomprehensible a boy of just 15 standing in the dock after pleading guilty to murdering one woman and 12 days earlier smashing another to within inches of her life with a rock.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Jahche Broughton was a baseball player.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="10" id="10" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A Soyuz capsule carrying a Russian cosmonaut an American astronaut and U.S. billionaire tourist Charles Simonyi has docked at the international space station. Russian cosmonaut Gennady Padalka manually guided the capsule to a stop ahead of schedule Saturday two days after blasting off from the Baikonur cosmodrome in Kazakhstan. The crews of the capsule and the station will spend around three hours checking seals before opening the air locks and meeting up face-to-face.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Charles Simonyi is a Russian cosmonaut.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="11" id="11" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">WASHINGTON Russell Dunham a World War II Army veteran who received the Medal of Honor the military's highest decoration for valor after he assaulted three German machine gun emplacements killed nine German soldiers and took two prisoners on a snowy morning in 1945 died Monday at his home in Godfrey Ill. of congestive heart failure. He was 89. On Jan. 8 1945 Technical Sergeant Dunham's company part of the Third Infantry Division was facing a formidable German force at the small town of Kayserberg France near the German border. The men were issued white mattress covers as camouflage in the deep snow.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Russell Dunham was killed by nine German soldiers.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="12" id="12" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">HONOLULU Hawaii (CNN) — Battered by the current economic recession Hawaii's economy could get a strong boost from two key sporting events. The National Football League's Pro Bowl Game will return to Honolulu in 2011 — an event that is expected to bring millions of dollars in revenue. Honolulu Mayor Mufi Hannemann is also hoping to lure the 31st Summer Olympic Games — but not to his city. He's actively supporting Chicago's bid to host the 2016 Games.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mufi Hannemann is the coach of The National Football League.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="13" id="13" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Three major bombings in less than a week will be causing some anxiety among political leaders in Baghdad and Washington. Last Thursday 10 people were killed by a car bomb at a crowded cattle market in Babel province south of Baghdad. On Sunday more than 30 died when a suicide bomber riding a motorbike blew himself up at a police academy in the capital. Tuesday's bombing in Abu Ghraib also killed and wounded a large number of people including journalists and local officials.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">In less than a week there were 3 major bombings in Iraq killing more than 40 people.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="14" id="14" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A spokesperson for Britain's The Islamic Cultural Centre  The London Central Mosque has commented on the episode telling U.K. newspaper the Daily Star "I hope Muslims take no notice of the show." But Groening has come out in defense of the plot saying "Cartoons deal in stereotypes. We try to be sensitive." It is not the first time the show has been mired in controversy with Simpsons bosses recently being criticized for a storyline which implied America's Republican party was involved in a vote-rigging scandal at the 2008 presidential election.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Groening is the creator of "The Simpsons".</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="15" id="15" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Looking drawn and moving stiffly after three days in the hospital this week Cardinal Edward M. Egan returned to the pulpit of St. Patrick's Cathedral on Thursday to participate in Holy Week services for the last time as archbishop of the Roman Catholic Archdiocese of New York. A little more than a week before his retirement Cardinal Egan 77 was stricken with severe stomach pains on Saturday night and driven to St. Vincent's Hospital Manhattan in Greenwich Village. He was released on Tuesday after treatment for a gastrointestinal virus with an unspecified appointment to come back for pacemaker implantation surgery and with instructions from doctors to rest.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Edward M. Egan is the New York Catholic Archbishop.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="16" id="16" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Although it won't discuss it the Chinese government frequently blocks foreign Web sites that it deems to have objectionable content. Access to YouTube was also blocked in 2007 and 2008 during high-profile government meetings and following last year's unrest in Tibet. YouTube has been blocked at least twice in the last month according to Herdict Web a censorship tracking system run by Harvard University's Berkman Center for Internet and Society. The first block came on March 4 coinciding with the 50th anniversary of the Tibetan Uprising on March 10. The current block began on March 23.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The ban is not the first ban for YouTube in China.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="17" id="17" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">"Ken Lewis has now become the lightning rod of controversy and that is highly distracting" said Jeffrey A. Sonnenfeld a professor at the Yale School of Management who believes Mr. Lewis should resign. "Even if everything he did was appropriate it has hampered his legitimacy to lead." It was not long ago that Mr. Lewis was celebrated for his vision. His daring takeover of Merrill Lynch was the latest in a series of high-profile acquisitions that helped transform Bank of America into a national powerhouse. His conquests included the Countrywide Financial Group the giant mortgage lender which for many came to symbolize the excesses of the subprime era. In December the American Banker the daily chronicle of the banking industry named him 2008 Banker of the Year.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Ken Lewis studied at the Yale School of Management.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="18" id="18" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">THE Black Saturday bushfires royal commission which sits for the first time today will initially focus on the lack of warnings to communities of approaching firestorms and the Brumby Government's "stay or go" policy. But the commission which will have only four months to produce an interim report has already come under criticism for refusing permission for scores of survivors and the families of victims to appear before it. Individuals applying for leave to appear at the hearings have been refused permission and told instead to lodge written submissions to the inquiry.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Only 2 people were killed during the Black Saturday bushfires.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="19" id="19" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Ian Tomlinson 47 died last Wednesday after encountering riot police near the Bank of England as he returned home from his work as a newsagent. The footage released yesterday by The Guardian reveals a docile-looking Mr Tomlinson walking with his back to police officers at about 7.20pm. One Metropolitan Police officer appears to lunge at him with a baton from behind and he falls to the ground. A bystander had to help him to his feet. Mr Tomlinson is understood to have then walked on to Cornhill where he collapsed. A New York fund manager visiting London shot the footage.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Ian Tomlinson was a newspaper vendor.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="20" id="20" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

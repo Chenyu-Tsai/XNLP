@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">On October 14 2008 Canadians will be heading to the polls for the federal election. Christian Heritage Party candidate Ron Gray is standing for election in the riding of Langley. Wikinews contacted Ron Gray to talk about the issues facing Canadians and what they and their party would do to address them. Wikinews is in the process of contacting every candidate in every riding across the country no matter their political stripe. All interviews are conducted over e-mail and interviews are published unedited allowing candidates to impart their full message to our readers uninterrupted. Mr. Gray has been leader of the Christian Heritage Party since 1995. He first ran for office in 1988.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Christian Heritage Party has won the 2008 Canadian federal election.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="241" id="241" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">On Sunday Memoirs: 1939-1993 a memoir written by former Prime Minister of Canada Brian Mulroney will be released. The 1152 page tome outlines Mulroney's version of events during his time as prime minister. CTV will broadcast a documentary on Brian Mulroney on the eve of his book launch. In addition the network plans to air Triumph  Treachery: The Brian Mulroney Story on Sunday CTV says the 90-minute special will be the most complete interview the former prime minister has ever given and his first comprehensive interview since leaving office in 1993.The Quebec French language TVA network will air a similar documentary exclusively in French later that night.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Brian Mulroney is the author of a memoir.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="242" id="242" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Henan province has registered seven dead children and 4761 HFMD cases. Shandong has reported five children dead from HFMD and 3280 cases to deal with. HFMD can start from a variety of viruses of which Enterovirus 71 (EV-71) is the most common followed by the Coxsackie A virus (Cox A16). There is an Incubation period from time of contact to appearance of symptoms between three to seven days.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Shandong is not far from Henan province.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="243" id="243" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Nepal's 10-year civil war has come to a peaceful conclusion with the signing of a historic accord between Prime Minister Girija Prasad Koirala and Prachanda leader of the Maoist rebel faction that had been fighting for political change. The deal was signed in Kathmandu on Tuesday. The deal would allow the Maoists into the Nepalese government and place both Maoist and government weapons under UN scrutiny. The Maoists had been observing a ceasefire since its declaration more than six months previously. Prachanda said that the peace agreement would end the 238-year old feudal system. He added that his party would work with new responsibility and make new strong Nepal.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Girija Prasad Koirala is the leader of a Maoist rebel faction.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="244" id="244" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Four paintings were stolen in broad daylight from a branch of the Pinacoteca Museum located in São Paulo Brazil. In this the second high-scale art robbery in São Paulo in less then a year the three armed robbers overpowered three unarmed museum guards before walking out with the paintings frames and all in two large bags. The combined value of the four paintings has been put between US$568400 and $612000. The paintings were Pablo Picasso's "The Painter and the Model" and "Minotaur Drinker and Women" both insured at $4200 and two paintings by Emiliano Di Cavalcanti "Women at the Window" insured at $500000 and "Couple" insured at $60000. All works stolen were owned by the Jose and Paulina Nemirovsky Foundation. This comes just several months after a December 20 robbery in São Paulo in which another Picasso painting as well as a painting by Candido Portinari were stolen after-hours. The paintings were recovered January 8.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">"The painter and women" is a painting of Picasso.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="245" id="245" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Jaslene Gonzalez is not your typical model. She rose to fame after winning Cycle 8 of America's Next Top Model and since then has been aggressively tapping into the fashion industry. As a result of her Latin background Gonzalez has been successful at marketing herself both in the English-speaking and Spanish-speaking worlds. However Gonzalez is much much more a fighter a humanitarian and a good Latin granddaughter. Born in Chicago to a Latina mother and a Puerto Rican-born father Gonzalez had in many ways a typical U.S. Latino experience her tight knit family grandparents and spirituality played an intrinsic part in her upbringing.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Jaslene Gonzalez is a member of the Latino community in the US.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="246" id="246" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">According to Reporters Without Borders (RWB or Reporters Sans Frontières) a Paris-based international non-governmental organization that advocates freedom of the press the sentence imposed was "a serious violation of free expression." The group has expressed concern at the use of the Lèse majesté laws to suppress political discussion and dissenting voices. Meanwhile on Tuesday the Thai police filed a lèse majesté case against Dr. Giles Ji Ungpakorn 55 a political science professor at Chulalongkorn University and Thailand's leading leftist political analyst. "The government the prime minister should order that they (the lese majeste laws) cease being used against people and that a whole review of the law should take place" Giles said.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Reporters Without Borders is based in Paris.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="247" id="247" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Clarence Ray Allen convicted of ordering a hit in 1980 that resulted in the deaths of the target and two bystanders was executed just after his 76th birthday making him the second-oldest man in U.S. history to be executed. He had been in prison for ordering the murder of his son's girlfriend when he ordered the hit that resulted in the death penalty conviction. However appeals caused him to remain on death row for 23 years. His lawyers had attempted to make the case that it would be cruel and unusual to execute the man attempting to save his life under the Eighth Amendment to the United States Constitution. However the courts rejected the appeal and the Supreme Court refused to hear the case upholding the death penalty conviction.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Clarence Ray Allen was killed by his girlfriend's son.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="248" id="248" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Contrary to Steven Harper's plan to put Canada's newly created Civil Marriage Bill back on the floor of the House of Commons for a free vote The Bloc Quebecois plans to oppose any attempts by the Conservatives to revisit the issue when Parliament returns in the fall. "It is simply believed that the debate has taken place and it is not relevant to start it again" said Bloc Leader Gilles Duceppe.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Steven Harper is a conservative.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="249" id="249" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Local activist Frank Del Vecchio asked Posner if she would appear in the eight-minute Close the Loophole video directed by Emmy award-winning documentarian Robyn Symon to state her belief that a loophole that allows popular local restaurants such as Prime One Twelve and Devito South Beach to exist in her residential neighborhood should be amended to limit the amount of seats in the establishments in proportion to their number of rooms. Her segment began "Hi I'm Trisha Posner. I'm a journalist and columnist for Ocean Drive magazine. I am married to Gerald Posner the author." Within a few hours after her appearance she was fired by Ocean Drive publisher Jerry Powers.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Gerald Posner is the spouse of Trisha.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="250" id="250" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Indeed he has. Wolfson was lead counsel before the Supreme Court in Boy Scouts of America v. Dale the case arguing against the expulsion of gay scoutmasters. As an intrepid young assistant district attorney in Brooklyn Wolfson worked on People v. Liberta to end the exemption that allowed women to be raped by their husbands legally a right in New York State as early as 1984. And he helped end the practice of choosing jurors based upon their race. Wolfson's entire career has been at the center of the most explosive legal and cultural issues of the last 30 years in the United States and his influence has been profound. David Shankbone sat down with him to discuss some of the recent decisions affecting gay marriage gender in marriage and reactions in the gay community to his fight for their rights.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Wolfson now lives in Brooklyn.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="251" id="251" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A bid made by Singapore Airlines for a 24% stake in China Eastern Airlines was turned down by minority shareholders. Talks about a sale started in March 2007 when Singapore Airlines and China Eastern started negotiations about a possible deal. According to Forbes the deal would have helped China Eastern's earnings and accelerate the consolidation and would have improved the market position of China's third-largest airline. Talks went on throughout the year and both companies suspended trading of their shares on May 21 2007 according to a AFP press release.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">China Eastern Airlines is owned by Singapore Airlines.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="252" id="252" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">During the large demonstration against the impending so-called First Employment Contract law (in French: Contrat de Première Embauche CPE) on Saturday in Paris one of the demonstrators was perilously injured in the head. Now allegations have been brought against the French riot police Compagnies Républicaines de Sécurité (CRS). Eyewitnesses report that officers of the CRS kicked 39-year-old Cyril Ferez while he was lying on the ground. A report of a CRS-officer draws a different picture of the incident. The incident happened during the evacuation of the Place de la Nation by the CRS at the end of the demonstration against the first employment contracts at about 8.30 p.m. Cyril Ferez works for the Orange telecommunication company in Torcy and is a member of the trade union Sud-PTT which represents workers at post offices and telecommunication companies.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Cyril Ferez set up his residency in Paris.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="253" id="253" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Robin Williams recently suffered a heart surgery that fortunately for the wonderful actor was a success. The decision of making this surgery was made while he was on his 'Weapons of Self-Destruction' comedy tour this month. Feeling shortness of breath he consulted the doctors who programed him for surgery. The 56 years old actor is now recovering at Ohio's renowned Cleveland Clinic. According to his doctor "his heart is strong and he will have normal heart function in the coming weeks with no limitations on what he'll be able to do."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Robin Williams suffered from heart attack.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="254" id="254" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">He also told the outlet he stressed how such bans were blocking Chinese perspectives in the global media. "[The] Chinese people would like to contribute to Wikipedia to give the Chinese point of view for the entire world to see. And China needs to be better understood by the rest of the world." The third block of Wikipedia which was implemented 19 October 2005 was issued without explanation or an expected length. Wikipedia has been blocked twice before the first from 2-21 June 2004 due to the 15th anniversary of the Tian'anmen Square Incident. A website called baidu.com runs a self-censored wiki-based encyclopedia website called baidubaike.com launched in April of this year. Wikipedia is a project of the Wikimedia Foundation a non-profit organisation based out of St. Petersberg Florida. Its 2007 annual convention Wikimania is set to take place in Taipei.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Wikimedia foundation is located in Florida.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="255" id="255" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Alexei Krasnov the chief of manned space programs for the Russian space agency said last week that the prospective Russian spacecraft is set to make its maiden flight before 2020 without elaborating. James Oberg an experienced aerospace engineer who worked on NASA's space shuttle program and is now a space consultant wrote in a commentary that the new Russian space program could help NASA win funds for its plan to return astronauts to the moon. "This will give NASA a long hoped for boost in Congress by echoing the space race motivations of the 1960s" Oberg said. Energiya beat the other leading state-controlled spacecraft builder the Khrunichev company for the prestigious order. It was announced on a government website. Energiya has until June 2010 to complete the initial design. The company builds the Soyuz and its unmanned cargo version named Progress which are not reusable.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Alexei Krasnov is the builder of the spacecraft Energiya.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="256" id="256" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Scott David Dover 45 a father of two young boys in Cedar City Utah was arrested on Thursday and charges against the father could be filed today. Police say he used electric dog collars to discipline his children. Conviction could result in up to 15 years in prison. Dover is being held in Iron County Jail; bail was set at ten thousand dollars. Police Sgt. Jerry Womack said that the boys both about six years old did not have any burns or marks on them and that it was not known whether the collars had ever been placed around their necks. He also said however that Dover admitted to using the collars on his sons. "It sounds bad but it actually administers a mild shock. He just felt that was an option for discipline. We disagree vehemently" said Womack. Cedar City Police were contacted on Wednesday by the Department of Child and Family Services.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Scott David Dover is accused of using electric collars on his sons.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="257" id="257" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Chesapeake Bay Foundation a not-for-profit organization had praise for Maryland Governor Robert Ehrlich and the state's Department of Natural Resources. They secured a commitment from the Atlantic States Marine Fisheries Commission (ASMFC) to seek a cap on commercial harvesting of Atlantic Menhaden. A coalition of recreational anglers and environmentalists called Menhaden Matter also joined the debate by saying coast-wide population of Atlantic Menhaden has fallen to near record lows. They are also against an encroachment by Omega into Chesapeake waters.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Chesapeake Bay Foundation includes Robert Ehrlich among its members.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="258" id="258" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A magnitude 8.1 undersea earthquake triggered a tsunami that has killed at least fifteen people including six children in the Solomon Islands. Tsunami warnings have been issued for parts of Australia as well. According to the US Geological Survey the magnitude 8.0 quake struck Sunday April 1 2007 at 20:39:56 (UTC) about 45 km (25 mi) south-southeast of Gizo New Georgia Islands Solomon Islands at a depth of 10 km.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Solomon Islands are in the South-southeast of Gizo.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="259" id="259" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">To raise funding and awareness for children living with AIDS in Africa the tallest mountain peak in every state in the United States will be scaled this spring. The American Foundation for Children with AIDS (AFCA) in partnership with the American Alpine Institute is sponsoring "Climb Up the 50." Funding from this synchronized climb-a-thon will pay for the uphill battle to support children with AIDS. Funds raised will cover AIDS-related medication supplies and food for children infected with the disease in the hardest-hit countries including Kenya Uganda and Zimbabwe. The program includes Climb Up the 50 Climb Up the World and Climb Up Kilimanjaro. Climb Up the 50 is based in the United States with participants climbing or hiking up the highest point in their state sometime during May 23-31. Other teams of people will join them to climb the highest peak in their state.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">"Climb Up the 50" is sponsored by The American Foundation for Children with AIDS.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="260" id="260" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

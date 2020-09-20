@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Italy and Inter Milan defender Marco Materazzi revealed the slur he said to Zinedine Zidane at last year's FIFA World Cup in Germany which led to Zidane's headbutting of Materazzi and subsequent red card for Zidane. Materazzi said in an interview with the TV Sorrisi e Canzoni magazine that the insult was: "I prefer the whore that is your sister." The Interview is set to be released on Monday.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Materazzi insulted Zidane.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="561" id="561" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Kansas senator Sam Brownback said "It's stunning to me that we would outsource the production of these airplanes to Europe instead of building them in America. I'll be calling upon the Secretary of Defense for a full debriefing and expect there will be a protest of the award by Boeing." Todd Tiahrt a Kansas representative said "We should have an American tanker built by an American company with American workers. I cannot believe we would create French jobs in place of Kansas jobs."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Sam Brownback is not a Republican.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="562" id="562" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The actress was crowned winner of Celebrity Big Brother following confrontations with fellow housemates Jade Goody Jo O'Meara and Danielle Lloyd who were accused of bullying and racism. Despite denying the claims all three lost most of their major endorsements and Jade and Danielle's partners are said to have left them. Politicians became embroiled in the proceedings when media regulator Ofcom received more than 40000 complaints from viewers. This resulted in the row reached both the House of Commons and India where chancellor Gordon Brown's bridge-building visit was overshadowed by controversy caused by the programme.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Jade Goody is a contestant in Celebrity Big Brother.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="563" id="563" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">"The CBBA is calling on the Federal Government to commit $14 million in new funding for content production infrastructure training and sector co-ordination and planning" Ms Walch says. "With $10.4 billion being spent on 'strengthening the economy' this is highly targeted $14 million will assist in skills development and employment pathways for many volunteers involved in local stations as well as strengthening local communities ability to sustain themselves in tough times."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">CBAA stands for Community Broadcasting Association of Animals.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="564" id="564" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Robinho is considered one of the best Brazilian forward players at the present time and he is an important player for Santos. The authorities are cautious to release any information concerning the case as this could jeopardize both the investigations and Ms. Souza's life.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Ms. Souza is Robinho's sister.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="565" id="565" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Mr. P V Narasimha Rao former prime minister of India passed away this morning after suffering cardiac arrest in a private hospital in New Delhi. He had been in critical condition for the past few days. He was admitted to the All India Institute of Medical Sciences (AIIMS) on December 9 after he complained of breathlessnes.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mr. Rao had cancer.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="566" id="566" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A statement given by Dr. Lee Schwamm and Dr. Larry Ronan of Massachusetts General Hospital stated "Over the course of the last several days we've done a series of tests on Senator Kennedy to determine the cause of his seizure. He has had no further seizures remains in good overall condition and is up and walking around the hospital."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Ted Kennedy is dead.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="567" id="567" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Two fossilized trees with their roots trunks and heads still attached and are said to be over 380 million years old have been found in the state of New York inside a rock quarry near Gilboa New York in the USA. Researchers call the extinct tree a Wattieza and this particular tree stood over 30 feet tall and used spores to reproduce rather than seeds. It may have even looked like many palms trees that exist today but did not have any leaves. Instead they had fronds much like a fern.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Fossilized trees have been found in the USA.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="568" id="568" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A private security guard attached to Brad Pitt and Angelina Jolie pulled out his revolver to threaten a lensman in Pune India. The Associated Press photographer was also roughed up by the guard Sunil Singh who works for Tops Securities. Defamer.com a tabloid in Los Angeles however says that two guards were involved in the attack. The incident occurred at the Sindh Society area in the suburb of Aundh.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Brad Pitt and Angelina Jolie have a daughter.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="569" id="569" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Two court filings in response to a lawsuit brought by Nebraska State Senator Ernie Chambers were filed on behalf of God according to John Friend clerk of the Douglas County District Court in Omaha Nebraska. "This one miraculously appeared on the counter. It just all of a sudden was here — poof!" said Mr. Friend. In one filing St. Michael the Archangel is listed as a witness.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Senator Ernie Chambers has sued God.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="570" id="570" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Russia has made delivery of its first shipment of nuclear fuel to Iran's Bushehr facility which is also being built by Russia. Both the Kremlin and the White House say that this should allow Iran to shut down its controversial uranium enrichment program. The Russian company Atomstroiexport said that the shipments began on Sunday. It was also confirmed by Gholam Reza Aghazadeh the head of the Atomic Energy Organization of Iran.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Iran received nuclear fuel from Russia.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="571" id="571" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">U.S. Secretary of State Condoleezza Rice and Foreign Affairs Minister Peter MacKay made a visit to MacKay's Nova Scotia riding Pictou Nova Scotia yesterday. Rice spent 23 hours in Canada. She thanked people in Atlantic Canada who helped thousands of Americans stranded when their planes were forced to land in the region. Rice and MacKay travelled together to and from the riding. It was a a 90-minute drive each way from Halifax.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Condoleeza Rice went to Nova Scotia.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="572" id="572" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">"Oxfam has estimated that for all developing countries to adapt to climate change will cost at least $50 billion a year" she said. "And for that to be done with justice we believe that the rich and the most polluting countries should pay the vast share of the money to make possible for those countries most vulnerable and least responsible for causing the problem to cope with the new realities they have to deal with."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Oxfam is the name of an anti-poverty group.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="573" id="573" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Today Wikipedia the free encyclopedia that anyone with access to the Internet can edit was the victim of an onslaught of practical jokes as April Fool's Day kicked in various timezones around the world at least those parts which follow the Gregorian calendar. It is believed that Wikipedia contributors were kept busy tidying up and removing prank articles and changes made by other Wikipedia contributors and were expecting to be cleaning up the aftermath for days afterwards.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">All internet users can edit Wikipedia.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="574" id="574" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A Russian journalist Anna Politkovskaya who received wide acclaim and prominence for her critical coverage of the Chechen war and opposition to the Putin administration was found shot dead at her apartment building in Moscow today. Coincidentally October 7 is the birthday of Russian President Vladimir Putin. Anna Politkovskaya worked for the Novaya Gazeta newspaper. She rose to fame for her coverage of the human costs of the Chechen conflict and her harsh criticism of the Kremlin's policies on Chechnya. She was also one of the people who went into the Moscow theatre during the 2002 hostage taking to attempt negotiations at the behest of the Chechen militants.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Politkovskaya was killed.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="575" id="575" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The group's tactics have been criticized. Co-founder Pacheco who is no longer with PETA called them "stupid human tricks." Some feminists criticize their campaigns featuring the Lettuce Ladies and "I'd Rather Go Naked Than Wear Fur" ads as objectifying women. Of their Holocaust on a Plate campaign Anti-Defamation League Chairman Abraham Foxman said "The effort by PETA to compare the deliberate systematic murder of millions of Jews to the issue of animal rights is abhorrent." (Newkirk later issued an apology for any hurt it caused). Perhaps most controversial amongst politicians the public and even other animal rights organizations is PETA's refusal to condemn the actions of the Animal Liberation Front which in January 2005 was named as a terrorist threat by the United States Department of Homeland Security.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">PETA stands for People for the Ethical Treatment of Animals.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="576" id="576" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">On Sunday suicide bombers killed 11 African Union (AU) peacekeepers in Somalia and injured at least 15 others. Two bombers drove a truck loaded with explosives into the AU camp housing Burundi soldiers in Mogadishu and detonated it. "These attacks have reached today an unprecedented level resulting in the killing of 11 Burundian soldiers while 15 others have sustained serious injuries" the African Union said in a statement. Troops were unloading supplies for their camp when militants drove a truck into the camp then detonating it.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Eleven African Union peacekeepers were killed in Somalia.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="577" id="577" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Twenty-four people among them seven children were killed on Sunday after their airplane crashed in a river in Brazil. Four people survived the crash including a 9-year-old boy. The aircraft which was a twin-engine Embraer turboprop chartered by Manaus Aerotaxis was carrying 26 passengers and two crew members when it crashed.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">26 people died in Brazil on Sunday.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="578" id="578" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A whale that became stranded in the River Thames has died after a massive rescue attempt to save its life. The 18ft (5m) northern bottle-nosed whale was first spotted in the river on Friday and rescuers began an attempt to save it on Saturday morning. But the whale died at about 1900 GMT on Saturday as rescuers transported it on a barge towards deeper water in the Thames Estuary.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">A whale died in the River Thames.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="579" id="579" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The incident reached the scale that it did due to operator error after the initial rupture. The 8 5/8-inch diameter steel pipeline which was operated by Enterprise Products Operating L.P. burst at 11:15 a.m. in an agricultural area about 6 miles east of Kingman Kansas. A drop in pipeline pressure indicating abnormal conditions or a possible compromise in pipeline integrity set off alarms displayed on the computerized pipeline monitoring system. Shortly after the first alarm the pipeline controller in an attempt to remedy the low pressure increased the flow of anhydrous ammonia into the affected section of pipeline. A total of 33 minutes elapsed between the time when the first alarm indicated a problem with the pipeline and the initiation of a shutdown.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">NTSB is responsible for investigating transportation accidents in the United States.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="580" id="580" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

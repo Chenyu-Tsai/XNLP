@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">According to reports two United States Senators Ted Kennedy and Robert Byrd suffered medical problems during a luncheon with new U.S. President Barack Obama. Kennedy collapsed as a result of a seizure and was taken away by paramedics in a wheelchair. In May Kennedy was diagnosed with brain cancer which required an operation. Kennedy is at Washington Hospital in Washington D.C. where his family says he is awake and talking. At the time of his collapse he was reported to be sitting with John Kerry another Massachusetts Senator 2004 presidential candidate and close friend of Kennedy.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Ted Kennedy is dead.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="501" id="501" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A mathematical summer school in Turkey run by mathematics professor Ali Nesin has been closed by the authorities apparently for "teaching without a permit" and "founding an illegal institution". The attention of the international scientific community was attracted to this action on the blog of a mathematics professor at Manchester. Alexandre Borovik's "Mathematics under the microscope" blog had previously written in glowing terms about the summer camp at which he also taught. The story was broken with a photo of a "Blackboard under arrest" and carried a photograph of a board covered with advanced mathematics surrounded by police tape.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Turkey closed a mathematics summer camp.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="502" id="502" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">In a written statement ABC Radio Networks president Jim Robinson said "Paul Harvey was one of the most gifted and beloved broadcasters in our nation's history. As he delivered the news each day with his own unique style and commentary his voice became a trusted friend in American households." Former president George W. Bush in a statement condoled Harvey's death by saying "Laura and I are saddened by the death of Paul Harvey. Paul was a friendly and familiar voice in the lives of millions of Americans. His commentary entertained enlightened and informed. Laura and I are pleased to have known this fine man and our thoughts and prayers are with his family."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Paul Harvey was an American broadcaster.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="503" id="503" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">In an interview on NBC's Today show with Matt Lauer Tom Cruise aggressively defended his opposition to psychiatry and anti-depressive drugs. This occurred after being asked questions about his criticism of Brooke Shields who has been taking drugs including Paxil for postpartum depression. Cruise is usually known for keeping his cool in interviews but recently he has been slightly more unbound. Cruise's statements including "Psychiatry is a pseudoscience" and "There is no such thing as a chemical imbalance in a body" reflect the beliefs of the Church of Scientology of which he is a member. The interview became particularly tense when Lauer mentioned that he knew people who had been helped by taking Ritalin an attention-deficit disorder drug.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Scientology is against psychiatry.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="504" id="504" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Mr Gonda credited the pub's success to the "excellent brewers we deal with our faithful and supportive pub regulars and our invaluable staff members." It was this community support which helped the pub recover so quickly after the 2007 flooding with Mr Wraith describing the day the waters entered the pub. "The funny thing was that it was difficult to get the customers to evacuate. They just wanted to keep on drinking but we did have to get them out eventually and some of them did get wet." Flood defences were erected after the customers left but to no avail; Mr Wraith stayed in the pub overnight despite the flooding and the lack of electricity.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mr. Gonda is the manager of The Kelham Island Tavern.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="505" id="505" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Seven miners have been killed and seven more are missing after a coal mine flooded in north China's Hebei province. The Xinhua news agency reports the latest coal mine disaster occurred around 5:00 a.m. on Saturday in Xingtai City.A reason for the accident has not yet been given. Owners of the coal mine have been detained by local police and the investigation into the cause of the flooding is underway. State media reports say the disaster occurred at a pit in Xingtai City but gave few other details.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">A coal mine accident killed more than 73 people in China.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="506" id="506" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Firefighters have confirmed that the large James Bond sound stage at Pinewood Studios has been destroyed by fire. It is thought eight fire engines were called to the scene near Iver Heath in Buckinghamshire on Sunday morning where filming for Casino Royale the latest Bond movie has been completed. Jen McVean witnessed the event and she said the stage was "completely on fire". The set had been transformed into a replica of the Italian city of Venice but Mrs McVean who owns a firm at the studios said: "Nothing is salvageable and there are many many fire engines there." One spokesman said around 40 to 50 firefighters were at the scene.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">James Bond was created by Ian Fleming.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="507" id="507" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Constable Erwood will return to his job on Monday but has been given the job in North Taranaki as rural liaison officer. He will start on February 5. Mr Lammas said: Rural police officers in small and somewhat isolated communities in particular have a fine and sometimes difficult balance to achieve in being active members of their community but also being seen to be impartial in the discharge of their duties as a police officer.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mr. Erwood drives when he's sober.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="508" id="508" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Rosa Parks the African American woman who served as a catalyst to the American Civil Rights Movement died of natural causes on Monday night at her home in Detroit Michigan. She was 92. Parks was best known for her refusal to yield her seat to a white man who demanded it on a city bus. Her defiance led to the Montgomery Bus Boycott in Alabama in 1955.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Rosa Parks died on Monday.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="509" id="509" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Fans of the American hard rock band Aerosmith have launched legal action against the band in response to a late cancellation of a scheduled concert on the Hawaiian Island of Maui. Attorney Brandee Faria filed a class action suit in Hawaii Circuit Court on October 19. The suit alleges that the band's cancellation cost fans between US$500000 (€349944) and $3 million (€2.1 million) in travel and accommodation costs as well as other related expenses.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Aerosmith have cancelled a concert in Maui.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="510" id="510" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Australian senator Barnaby Joyce (Nationals Queensland) has moved to oppose the government's planned changes to the country's petrol retail industry. The National Party of which Senator Joyce is a member governs Australia in coalition with the Liberal Party. The government plans to amend regulations governing the petrol industry to allow oil companies to own more than five percent of petrol stations. Senator Joyce has given notice to disallow regulations that would force the government to debate them in the House of Representatives and the Senate.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mr. Joyce is an Australian Senator.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="511" id="511" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Bolivian President Evo Morales 49 has claimed victory after voters ratified a new leftist constitution granting more power to the country's indigenous majority. "The indigenous farmers the most marginalized sector throughout the history of the republic are now recognized as people with the same rights as any citizen. Here begins the new Bolivia. Here we begin to reach true equality" Morales told a crowd in front of the flag-draped balcony of Palacio Quemado in La Paz the administrative capital of Bolivia.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Morales is the President of Bolivia.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="512" id="512" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">U.S. Senator Sam Brownback formerly the chairman of the Senate Foreign Relations subcommittee with responsibility for Southeast Asia commented: I offer my deepest condolences for the loss of Benazir Bhutto and to the families of those killed today. This is a terrible loss to her supporters the people of Pakistan and for democracy. I hope and pray that that the people of Pakistan and President Musharraf can avoid further bloodshed and continue down the road to democracy. Pakistan has been a good friend to the United States in fighting fundamentalist terrorism and I sincerely hope we can continue to work together. Pakistan needs to continue to work toward a peaceful stable and democratic nation if they hope to maintain our strong friendship.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Sam Brownback is not a Republican.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="513" id="513" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">An appeals court in Eastern France has confirmed the Swedish car manufacturer Volvo is guilty over the deaths of two schoolchildren aged nine and ten and the serious injury of a third after a brakes failure caused an accident in 1999. The Volvo 850 TDI was being driven by a local teacher when it struck the children who had been on their way to school. Driver Catherine Kohtz later asserted that the brake pedal had become stiff and the brakes themselves unresponsive as she traveled along the steep road.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Volvo is a car manufacturer from Finland.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="514" id="514" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">BELFAST UNITED KINGDOM Thieves have gotten away with money believed to be in excess of £20m ($39m) from the headquarters of Northern Bank a subsidiary of National Australia Bank in Northern Ireland. Other sources have stimated the total to be as much as $58m. In what appears to be a meticulously planned operation the families of two executives were held hostage on Sunday night by armed gunmen. The two executives were made to go to work yesterday as if everything was normal after closing the bank they opened the vault for a number of robbers who then proceeded to empty the contents into a waiting truck over a two hour period.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Belfast is in the UK.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="515" id="515" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">It is the first time in the history of the Volvo Adventure Award that a Kenyan project has been selected as an international finalist. Emwatsi Primary School is a member of the Lake Victoria Schools Agroforestry  Environmental Education Network which is facilitated by the World Agroforestry Centre (ICRAF) and the Kenya Forestry Research Institute (KEFRI) within the framework of the 'Farmers of the Future' initiative.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Volvo is a car manufacturer from Finland.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="516" id="516" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Chinese Foreign Ministry spokesman Qin Gang told reporters that China is protesting Japan's plan to allow drilling for gas and oil in disputed waters in the East China Sea characterizing the move as "a serious provocation". On Wednesday Japan announced that they would begin processing applications to allow oil and gas drilling firms to explore in the disputed area east of the "demarcation line" which has held up applications to drill in the area for decades.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">China won't receive money from Japan.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="517" id="517" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">With online gaming in persistent worlds becoming more prevalent a US congressional committee has begun to look into the tax implications of these booming online economies. Games such as World of Warcraft and Second Life have large player driven economic systems in which either following the rules or against them real world currencies are exchanged for in-game currencies. With the GDP of some of these economies rivaling that of some small countries the US government is wondering if it is missing out on a potential source of tax revenue: or as some gamers might put it the IRS is asking "You buy gold?"</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The US Congress may re-establish luxury taxes.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="518" id="518" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Kelham Island Tavern in Sheffield's Kelham Island Quarter was in a "semi derelict" state when it was purchased in 2001. After it was re-opened in 2002 by licensee Trevor Wraith and manager Lewis Gonda business quickly picked up and the pub has been awarded Sheffield CAMRA's local Pub of the Year award for the past four years. The pub won the award despite six weeks of closure a year and a half ago when the pub's cellar and floor were affected by the flooding of the River Don and the nearby Kelham goit. The pub also received Yorkshire CAMRA's Pub of the Year award in 2004 and 2007.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mr. Gonda is the manager of The Kelham Island Tavern.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="519" id="519" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The police have cordoned off roads around Upper Woburn Place following a massive explosion on a bus in the vicinity. Traffic is at a standstill in many places in the capital. Defra's security branch are reporting that police are advising everyone in London not to use any public transport and the Cabinet Office are advising staff to remain in offices until further notice. A further email sent to all staff by Defra's permanent secretary indicates that Charing Cross and Waterloo mainline railway stations have been closed down for police searches and that other stations could close for similar reasons later today.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Charing Cross is in London.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="520" id="520" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

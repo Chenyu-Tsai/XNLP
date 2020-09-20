@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">India has higher rates of malnourished children than sub-Saharan Africa despite having the money to tackle the problem according to a survey that raises grave questions about the country's economic rise Almost 46 per cent of Indian children under the age of 3 suffer from malnutrition according to the survey by the Indian Health Ministry in conjunction with Unicef the United Nations children's agency. That compares with about 35 per cent in sub-Saharan Africa and only 8 per cent in China whose economic growth India strives to emulate. It also represents only a slight decrease since the last National Family Health Survey in India seven years ago showed that 47 percent of its children were mal-nourished.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">47% of Chinese children are mal-nourished.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="161" id="161" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A man who spent 27 years in jail for the murder of a barmaid in Southampton had his conviction quashed at the Court of Appeal today after DNA tests proved that he could not have been the killer. Sean Hodgson 57 was found guilty in 1982 of killing Teresa de Simone 22 who was found strangled in her Ford Escort three years earlier in a car park below the pub where she worked part-time. He has long pleaded his innocence after retracting a confession initially given to a Roman Catholic prison chaplain one of hundreds of crimes to which he pleaded guilty because as he told his original trial he was a "pathological liar".</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Sean Hodgson was in jail for 22 years.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="162" id="162" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">In 2007 the 550-seat double-decker A380 Airbus overtook the 747 as the largest passenger airliner in service a development that some aviation experts saw as signalling the end of the 747. Dwindling 747 orders have cast a dark cloud over the future of the airliner. Most are now are freighters as traditionally loyal customers such as Qantas Virgin Atlantic and Singapore Airlines turn to the A380. The last remaining commercially flown 747 in Australia is the 747-400: with Qantas discontinuing the 747-300 model two weeks ago.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Airbus A380 can carry 550 people.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="163" id="163" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A man who spent 27 years in jail for a murder he did not commit finally had his conviction overturned today after DNA tests destroyed the prosecution case against him. But even as Sean Hodgson a frail 57-year-old celebrated his freedom on the steps of the Royal Courts of Justice it emerged that the DNA tests which freed him should have been carried out 11 years ago. Mr Hodgson was found guilty in 1982 of killing Teresa De Simone 22 who had been found strangled in her Ford Escort three years earlier in a car park below the Southampton pub where she was a part-time barmaid.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Sean Hodgson was convicted of the murder of Teresa De Simone.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="164" id="164" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Seven Democratic representatives traveled to Havana but an official communique read on the air said only six attended the meeting with Castro. The statement provided no details of what was discussed or how long the meeting lasted. It added that the group also spoke in recent days with the head of parliament and the country's foreign minister. The lawmakers came to talk about improving U.S.-Cuba relations amid speculation that Washington is ready to loosen some facets of its 47-year-old trade embargo against the island.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The U.S. embargo on Cuba has been in place for 47 years.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="165" id="165" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Advocates for the detainees today said the new position is at best a modest departure from Bush policy but is a public-relations effort to move away from the loaded term "enemy combatants" that critics across the world associate with the former president. The brief maintains the US government's ability to hold terrorist suspects without charge said Tom Malinowski Washington director of Human Rights Watch and applies international laws of war to suspects captured far from the battlefields of Afghanistan and Iraq. "It's a symbolic effort to distance the new administration from the Bush approach" he said. "But they've preserved significant aspects of the previous administration's detention authority."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Tom Malinowski works for Human Rights Watch.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="166" id="166" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">More than three months into a medical leave from Apple Inc. Chief Executive Steve Jobs remains closely involved in key aspects of running the company say people familiar with the matter. Chief Operating Officer Tim Cook runs the day-to-day operations at Apple these people say. But Jobs has continued to work on the company's most important strategies and products from home they say. He regularly reviews products and product plans and was particularly involved in the user interface of the new iPhone operating system that Apple unveiled last month these people say.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Steve Jobs is the co-founder of Apple.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="167" id="167" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">As he campaigns for a third term Mayor Michael R. Bloomberg is counting on his reputation as a top-notch manager who tamed a once-unruly metropolis. Yet to remarkable degree the task of managing New York City over the last four years has fallen to Mr. Skyler a lanky 35-year-old former Ivy League fencer and "Star Wars" buff who once tackled a mugger who was trying to steal a cellphone in Midtown Manhattan. When a steam pipe exploded near Grand Central Terminal in 2007 it was Mr. Skyler who coordinated the cleanup.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Bloomberg has been mayor twice.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="168" id="168" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Israeli scientists predict the world's coral reefs could begin to collapse in as little as 30 years from now. Studies show the oceans are becoming increasingly acidic as they soak up manmade emissions of carbon dioxide. The Hebrew University of Jerusalem researchers say this will make it difficult for many coral organisms to produce skeletal and other hard parts. The team's work on corals in the Red Sea suggests a tipping point will be reached in between 30 and 70 years. Then the forces of erosion eating away at corals will outstrip the organisms' ability to make the reefs.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The oceans are getting more acidic due to the carbon dioxide emissions.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="169" id="169" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">It is also worth considering the impact of global warming on human health as well. With increasing surface temperature heat waves are expected to occur more frequently possibly endangering children and the elderly. Many pathogens proliferate much faster in warm environment. Increasing atmospheric temperature could very well mean faster proliferation of these pathogens that would cause numerous diseases and illnesses to humans. There is also expected spread of fatal tropical diseases as the world becomes warmer and warmer placing those living in temperate regions at higher risks.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Global warming is dangerous to public health because it could cause the diffusion of tropical diseases.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="170" id="170" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Ninty-seven years ago Tuesday the Titanic the largest passenger steamship in the world struck an iceberg and began to sink during her maiden voyage. On April 14 1912 the cruise liner headed from England to New York struck the iceberg. It took only 2 hours 40 minutes for the 882-foot ship to be totally engulfed by the icy waters off the coast of Halifax. Killed were 1517 people — although initial news bulletins indicated that all passengers had been safely transported to other ships.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Titanic sank in 1912.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="171" id="171" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">It's official: California's unemployment insurance benefits will be extended an additional five months beginning immediately. Gov. Arnold Schwarzenegger signed legislation Friday that will assist about 469000 longtime jobless Californians by year's end. The goal is to help families wracked by the recession buy food and pay rent in a year when the state's unemployment rate tops 10 percent. Roughly $3 billion in federal stimulus funds will bankroll the 20-week extension for out-of-work residents who exhaust their existing benefits.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Arnold Schwarzenegger was an actor.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="172" id="172" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">WELLINGTON NEW ZEALAND: New Zealand reported suspected swine flu cases on Monday among a second group of teenagers returning from Mexico even as Asian nations with potent memories of SARS and bird flu outbreaks screened travelers for illness with thermal scanners. Hong Kong assigned a team of scientists to find a quick test for the latest virus to raise fears of a pandemic following confirmed human cases of the disease in Mexico United States and Canada.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">More than 100 people in Mexico are believed to have died of swine flu.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="173" id="173" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Russell Dunham who as an Army sergeant in World War II received the Medal of Honor for charging up a snowy hill in the Alsace region of France and single-handedly killing wounding or capturing 18 German soldiers died Monday in Godfrey Ill. He was 89. The cause was congestive heart failure said his daughter Mary Lee Neal. On the afternoon of Jan. 8 1945 Sergeant Dunham was leading a platoon in the 30th Infantry Third Infantry Division when the soldiers among them his brother Ralph were pinned down by German fire. They were at the bottom of a hill near the village of Kaysersberg the birthplace of the Nobel Peace Prize winner Dr. Albert Schweitzer.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Russell Dunham was a soldier during the Second World War.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="174" id="174" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Jefferson County Deputy Coroner Jim Wesley said Page had slid from his hospital-type bed as Wesley said he would occasionally sometime between 3 a.m. and 5 a.m. ET when his wife found him and that his death was consistent with positional asphyxia. Page was found sitting on the floor with his head lodged between the bed and the rail Wesley said. Patricia Page immediately moved him to try to resuscitate him Wesley said. Page told The Associated Press her husband "is in a better place now." The March 9 2001 fight left Page in a coma for nearly a week. He then had a stroke during post-fight surgery. He was paralyzed on his left side and received intensive physical therapy.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Greg Page was a World Boxing Association champion.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="175" id="175" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">As Mel Gibson walked hand in hand with his new Russian girlfriend on the red carpet last night a few new grey hairs were the only sign that he is a man about to lose $US500 million. The Australian actor in the middle of what is expected to become one of the world's most expensive divorces attended a movie premiere in Los Angeles with Russian songstress Oksana Grigorieva the woman at the centre of worldwide speculation about his marital split. The public debut of his girlfriend at the premiere of XMen Origins: Wolverine put to rest the rumours which have dogged the Oscar-winning Braveheart star since it was announced he was divorcing his wife of 28 years former dental nurse Robyn Gibson.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mel Gibson comes from Australia.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="176" id="176" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">DOHA Qatar (AP) — Casey Stoner led from start to finish to win the MotoGP season opener on Monday and complete a personal hat trick of victories in Qatar. The Ducati rider produced a near-perfect race under lights to win the 22-lap race with a time of 42 minutes 53.984 seconds at the 5.38 kilometer (3.34 mile) Losail International Circuit. The 23-year-old Australian finished ahead of defending world champion Valentino Rossi of Italy and Jorge Lorenzo of Spain. Yamaha rider Rossi crossed the finish line 7.771 seconds behind Stoner.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Valentino Rossi is the Ducati rider in the MotoGP.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="177" id="177" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">BOSTON — Derrick Rose the baby-faced Chicago Bulls point guard is similar to nearly every other N.B.A. player in that he talks with his agent B. J. Armstrong about everything from the meaningful to the mundane. Their relationship diverges only because they discuss not only signatures on endorsement deals but also signature plays. Once Armstrong was also a baby-faced point guard for the Bulls. Their futures are conjoined through the agent-player relationship and by similar career paths. Armstrong churned through the Midwest pressure cooker first delivering the ball to Michael Jordan during a period when they won three N.B.A. titles together.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Michael Jordan played basketball.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="178" id="178" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">This gap in knowledge makes earthquake prediction a frustrating and chancy exercise and complicates the effort to calculate the risk that a human construction like a water reservoir or a geothermal power plant could inadvertently set off a deadly quake. Last month Giampaolo Giuliani a technician who works on a neutrino experiment at the Gran Sasso National Laboratory in Italy issued an urgent warning that a large earthquake was about to strike the Abruzzo region. The prediction was based on measurements he had made of high levels of radon gas presumably released from rocks that were being ground up by the stresses of an incipient quake.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Giampaolo Giuliani is a researcher at the Swiss Federal Institute of Technology in Zurich.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="179" id="179" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Afrol News 24 March The Swiss Foreign Minister Micheline Calmy-Rey has said the country's authorities will not apologise or compensate to the Libyan government over the arrest of the son of Libyan leader Muammar Gaddafi saying that police were not at fault when Hannibal Gaddafi and his wife were arrested. The Minister has outrightly rejected the notion of compensation to the government saying the Libyan government was wrong to demand compensation for the arrest that was foreseen.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Muammar Gaddafi is the Swiss Foreign Minister.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="180" id="180" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

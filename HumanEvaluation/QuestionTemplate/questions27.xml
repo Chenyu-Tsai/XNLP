@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">James Horwitz Chairman of the UTA Department of Physics was contacted by the Dallas Mavericks owner Mark Cuban to study the new ball. Horwitz asked UTA physics professor Kaushik De to lead the project. De's team found that the new balls are tackier when dry but become much more slippery than leather balls when they get damp. Traditional leather basketballs provide more grip when they are slightly wet.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mark Cuban is a billionaire.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="521" id="521" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Movie studio company New Line Cinema has announced that movie director Peter Jackson will never be allowed to work on another New Line film. This announcement will also mean that Mr Jackson will not be allowed to film the prequel titled The Hobbit to The Lord of the Rings films he directed. The announcement was made mainly because New Zealander Mr Jackson and his partner Fran Walsh filed a law suit against New Line in 2005 as they believed New Line owed them much more money than they received for The Lord of the Rings trilogy as shown to them by a partial audit of The Fellowship of the Ring. Mr Jackson described it as "financial anomalies" which New Line refused to account for. "Fundamentally our legal action is about holding New Line to its contractual obligations and promises." The film trilogies have so far managed to earn US$3 billion in ticket sales since 2001.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">New Line wants to work with Peter Jackson.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="522" id="522" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">One of the most visible Satanic organizations though one that was never a suspect or charged in any of the Satanic Panic cases-is the Church of Satan founded by Anton LaVey. Members of the Church such as Peter H. Gilmore Peggy Nadramia Boyd Rice Adam Parfrey Diabolos Rex and musician King Diamond were active in media appearances to refute allegations of criminal activity and the FBI would later issue an official report debunking the criminal conspiracy theories of this time.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Peter Gilmore is a member of a satanic organization.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="523" id="523" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">CNET editor former Fresh Gear contributor and Lab analyst James Kim has been missing since Saturday. Police have opened a missing person investigations and called on those especially from the Oregon area having any information on the whereabouts of the missing family to contact them. The information below is from the official investigation by the San Francisco Police Department (SFPD) missing family members include: James Kati Penelope (age 4.5) and Sabine (6 months).</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">James Kim worked for CNET.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="524" id="524" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">John Yelenic was found dead in his home on April 13 2006 one day before he was planning on signing his divorce papers. Prosecutors said Foley killed Yelenic after going to the dentist's house to confront him over the terms of the divorce. Prosecutors claim Foley slashed Yelenic several times with a knife and pushed his head through a small window causing a further gash on his neck. Yelenic bled to death.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Yelenic molested his adopted son.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="525" id="525" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Frank was a Jewish girl who was hiding from the German occupation of the Netherlands during World War II and often referred to the tree as being "comforting" as she looked out the hidden apartment skylight. Officials for the city of Amsterdam and the Anne Frank Museum state that the tree is infected with a fungus and poses a public health hazard as they argue that it was in imminent danger of falling over. It had been scheduled to be cut down on Tuesday but was saved after an emergency court ruling.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">America won World War II.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="526" id="526" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">At least 28 people drowned and were confirmed dead 46 were rescued while 34 others remain missing on Sunday after an overcrowded passenger motorboat capsized off waters in Ballesteros a town of 17000 people the Cagayan police reported. 'M/B Mae Jan' a wooden-hulled ferry was carrying 102 passengers after an eight-hour voyage from Calayan Island in the Luzon Strait for Appari when it capsized less than 300 meters (984 feet) from its destination at 8:30 p.m. Its bamboo outrigger broke due to strong waves as it reached the mouth of the Cagayan River ('Bannag' Rio Grande de Cagayan 'Ilog ng Kagayan') along Barangay Linao about 50 meters from the shoreline of Pallog village.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">More than 800 people died in a ferryboat accident in the Philippines.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="527" id="527" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">After the aeroplane pulled up abruptly it then pitched down at an angle of 31 degrees rolling left and right partially upside-down. This sort of stall is known as an aggravated stall and it can be very difficult to return the aeroplane to normal flight from one. In this case the pilot had less than two thousand feet to do so before the aircraft crashed into the ground. The pilot's training has now been put into question and it was discovered that the captain Marvin Renslow aged 47 had logged only 110 hours in this particular aircraft though he had thousands of hours in similar aircraft. Experts say his experience should have adequately prepared him.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">A daily commuter flight crashed in Buffalo.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="528" id="528" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The movie is offered under a Creative Commons Attribution-Noncommercial-ShareAlike 2.5 license; this allows people to use edit or share the movie in any way (except commercially) as long as they credit the creators. All of the raw unedited footage including audio files is offered under a Creative Commons Attribution 2.5 license; as long as the creators are credited users can do whatever they want with the files privately or commercially.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">"Boy Who Never Slept" is the title of an open source movie.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="529" id="529" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The first major hurdle is Turkish recognition of Cyprus. EU leaders including European Commission President José Manuel Barroso have made recognising the island member-state a key pre-requisite for talks however Turkish Prime Minister Recep Tayyip Erdogan has previously said that he would not bow to demands to recognise the nation citing this as one of four red lines he will not cross. Erdogan has said that recognition is entirely dempendent upon the Greek-Cypriots accepting a United Nations peace plan to re-unify the island which previously they rejected.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">During the EU summit there will be talks with Turkey.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="530" id="530" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">"You cannot dial 911 because you are unhappy with your burger ok. I know you don't seriously think that the police need to make Burger King give you food faster" says the operator as Fortune continued to complain. "If it takes 15 minutes to cook it takes 15 minutes to cook ok. You don't need to call 911." It turns out after nearly three minutes of arguing with the operator Fortune never even placed an order. "Have you given them any money?" asks the operator. Fortune replies "no." The operator then asks Fortune "have they given you any food?" Again Fortune replies "no." The operator then tells Fortune that he is able to "just drive away" from the situation but he disagrees and tells her he will "just move [his] car". The operator warns Fortune that the police are on their way and then tells him to not block the drive-thru.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Eating in fast food restaurants is not healthy.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="531" id="531" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Sheikh Hasina (Shekh Hasina Oajed) was the Prime Minister of Bangladesh from 1996 to 2001. She has been the President of the Awami League a major political party in Bangladesh since 1981. She was the second female prime minister of Bangladesh. Bangladesh officially the People's Republic of Bangladesh ( Gônoprojatontri Bangladesh) is a country in South Asia. It is bordered by India on all sides except for a small border with Burma (Myanmar) to the far southeast and by the Bay of Bengal to the south. Together with the Indian state of West Bengal it makes up the ethno-linguistic region of Bengal.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Sheikh Hasina was Bangladesh's Prime Minister.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="532" id="532" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Two British Army soldiers have been killed in a gun attack outside an army base in County Antrim Northern IrelandThe attack occurred at 21:40 GMT outside the Massereene army base home to 38 Engineering Regiment 16 miles north west of Belfast. According to the police four others two other soldiers and two civilians have been hurt one critically.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Real IRA is not responsible for gun attacks.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="533" id="533" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">On Sunday Memoirs: 1939-1993 a memoir written by former Prime Minister of Canada Brian Mulroney will be released. The 1152 page tome outlines Mulroney's version of events during his time as prime minister. CTV will broadcast a documentary on Brian Mulroney on the eve of his book launch. In addition the network plans to air Triumph  Treachery: The Brian Mulroney Story on Sunday CTV says the 90-minute special will be the most complete interview the former prime minister has ever given and his first comprehensive interview since leaving office in 1993.The Quebec French language TVA network will air a similar documentary exclusively in French later that night.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Brian Mulroney was Prime Minister of Canada.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="534" id="534" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Reggie Bibbs is a 43-year-old-man living in Houston Texas. Mr Bibbs was born with a genetic disease called neurofibromatosis (NF) which causes him to develop tumors on his body (see infobox on the right). NF can be a subtle disease but in Bibbs' case it has left him with a disfigured face and deformed leg. But he is happy with the way he looks and doesn't want to change his appearance to please other people. He has launched a successful campaign entitled "Just Ask" and that's just what Wikinews did in a video-interview.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Neurofibromatosis is a genetic disease.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="535" id="535" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">President Barack Obama of the United States had his first full interview since his inauguration on Al Arabiya television. The Dubai television network in the United Arab Emirates had exclusive access to the President. Barack Obama in his historic interview on Al Arabia. During the interview Obama repeated a campaign promise to deliver a speech in a Muslim capital and urged that the peace process between Israel and Palestine resume. "We cannot tell either the Israelis or the Palestinians what's best for them. They're going to have to make some decisions. But I do believe that the moment is ripe for both sides to realize that the path that they are on is one that is not going to result in prosperity and security for their people" Obama said.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Barak Obama is the 44th President of the United States.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="536" id="536" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Five policemen and two bystanders were killed and seven members of the Sri Lankan cricket team have been injured in a coordinated gun and rocket attack by 12 to 14 gunmen in Lahore Pakistan at about 8.00 a.m local time. The Sri Lankan players were ambushed en route to the Gaddafi stadium to play the third day of the second test near the liberty round about. According to eye witnesses the team convoy was stopped by two vehicles blocking their path.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Seven members of the Sri Lankan Cricket team have been injured in Lahore.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="537" id="537" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Long John Baldry English-born blues legend passed away at the Vancouver General Hospital Vancouver British Columbia Thursday evening after fighting a severe chest infection for the past four months. Baldry was considered an innovator and inspiration in blues music in the 1950s and 60s and is credited with inspiring other music legends such as Elton John Rod Stewart Eric Clapton and The Rolling Stones.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">A musician has died at the age of 60.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="538" id="538" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Canadian Conservative Party plans to reject the federal budget. A recently amended provision allowing the government to control greenhouse gas emissions is "completely unacceptable" says its leader Stephen Harper. Harper said Thursday his party plans to vote against the omnibus budget bill if it includes the amendment to the Canadian Environmental Protection Act. It would add greenhouse gas emissions to the list of controlled substances allowing the Canadian government to regulate those emissions he contends. "This is an attempt by the government to get unlimited power to impose multimillion-dollar fines on any basis without any parliamentary approval or discussion whatsoever." Harper said.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">In Canada Mr. Harper and his party will support the budget bill.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="539" id="539" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">It can be difficult to be John Reed. Christopher Hitchens called him a "Bin Ladenist" and Cathy Young editorialized in The Boston Globe that he "blames the victims of terrorism" when he puts out a novel like Snowball's Chance a biting send-up of George Orwell's Animal Farm which he was inspired to write after the terrorist attacks on September 11. "The clear references to 9/11 in the apocalyptic ending can only bring Orwell's name into disrepute in the U.S." wrote William Hamilton the British literary executor of the Orwell estate. That process had already begun: it was revealed Orwell gave the British Foreign Office a list of people he suspected of being "crypto-Communists and fellow travelers" labeling some of them as Jews and homosexuals. "I really wanted to explode that book" Reed told The New York Times. "I wanted to completely undermine it."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Christopher Hitchens described John Reed as a "Bin Ladenist".</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="540" id="540" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

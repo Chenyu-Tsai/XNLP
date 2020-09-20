@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Varun and his estranged cousins are the grandchildren of Indira Gandhi the former prime minister who was assassinated in 1984. Her two sons Rajiv Gandhi who became premier after Indira's assassination and Sanjay Gandhi who died in an aircraft crash while doing aerobatics married women with very different personalities. Varun's mother Maneka widow of Sanjay Gandhi is headstrong voluble and strident. Rahul and Priyanka's mother is the Italian-born Roman Catholic Sonia Gandhi who was widowed by Rajiv's assassination was more demure as a daughter-in-law.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Indira Gandhi died doing aerobatics.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="41" id="41" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">On a mundane morning in late summer in Paris the impossible happened. The Mona Lisa vanished. On Sunday evening August 20 1911 Leonardo da Vinci's best-known painting was hanging in her usual place on the wall of the Salon Carré between Correggio's Mystical Marriage and Titian's Allegory of Alfonso d'Avalos. On Tuesday morning when the Louvre reopened to the public she was gone. Within hours of the discovery of the empty frame stashed behind a radiator the story broke in an extra edition of Le Temps the leading morning newspaper. Incredulous reporters from local papers and international news services converged on the museum. Georges Bénédite the acting director and his curators were speculating freely to the press.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Leonardo da Vinci painted the Mona Lisa.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="42" id="42" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Milwaukee Archbishop Timothy M. Dolan a defender of Roman Catholic orthodoxy who led the elite seminary for U.S. priests becoming known for his energy wit and warmth was named archbishop of New York on Monday. The Vatican said Dolan would succeed Cardinal Edward Egan 76 who is retiring as archbishop after nearly nine years. The post is the most prominent in the American Catholic Church. Pope John Paul II called the job "archbishop of the capital of the world."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The 76-year-old Timothy M. Dolan is the new archbishop of New York.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="43" id="43" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">SEOUL South Korea — North Korea's rubber-stamp parliament appointed Kim Jong Il to a third term Thursday as leader of one of the world's most reclusive nations buoyed by a rocket launch heralded in state media as "historic" but assailed elsewhere as provocative. State media said lawmakers re-elected Kim chairman of the powerful National Defense Commission at the opening session of the new parliament an appointment that under the constitution makes him the nation's top leader.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Kim Jong Il is the ex-chairman of the National Defense Commission.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="44" id="44" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Pope courted further controversy on his first trip to Africa today by declaring that condoms were not a solution to the Aids epidemic but were instead part of the problem. In his first public comments on condom use the pontiff told reporters en route to Cameroon that Aids "is a tragedy that cannot be overcome by money alone and that cannot be overcome through the distribution of condoms which even aggravates the problems". Pope Benedict has previously stressed that the Roman Catholic Church is in the forefront of the battle against Aids. The Vatican encourages sexual abstinence to fight the spread of the disease.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Pope thinks condoms cause AIDS.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="45" id="45" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">When UN secretary-general Ban Ki-moon's special representative for Nepal Ian Martin completed his tenure in Nepal it was at the Reporters' Club that he held his last press conference. It was the same organisation that gave Bollywood stars Manisha Koirala and Govinda to the media when they were passing through Nepal. However on Wednesday the well-connected Dhamala whose contacts included Maoist Prime Minister Pushpa Kamal Dahal Prachanda deputy premier and home minister Bam Dev Gautam and other ministers industrialists politicians and foreign envoys hit the headlines for a different reason. The Metropolitan Police said the high-flying journalist has been arrested Tuesday for being involved with an underground organisation and is likely to be charged with violating the Arms Act and even treason.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Prime Minister Pushpa Kamal Dahal is Maoist.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="46" id="46" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">China yesterday threw down a challenge to America's 50-year dominance of the global economy as it proposed replacing the dollar as the world's main reserve currency with a new global system under the control of the International Monetary Fund. In a muscle-flexing move that will be seen as an attempt to exploit the big shifts in economic power created by the recession sweeping the West Beijing said that the dollar's role could eventually be taken over by the IMF's so-called Special Drawing Right (SDR) a quasi-currency that was created in 1969.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The SDR is the world's main reserve currency.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="47" id="47" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">CAIRO — Even in old age the imposingly tall athletic German known to locals as Tarek Hussein Farid maintained the discipline to walk some 15 miles each day through the busy streets of Egypt's capital. He walked to the world-renowned Al Azhar mosque here where he converted to Islam and to the ornate J. Groppi Cafe downtown where he ordered the chocolate cakes he sent to friends and bought the bonbons he gave to their children who called him Uncle Tarek. Friends and acquaintances here in Egypt also remember him as an avid amateur photographer who almost always wore a camera around his neck but never allowed himself to be photographed. And with good reason: Uncle Tarek was born Aribert Ferdinand Heim a member of Hitler's elite Waffen-SS and a medical doctor at the Buchenwald Sachsenhausen and Mauthausen concentration camps.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The real name of Tarek Hussein Farid was Aribert Ferdinand Heim.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="48" id="48" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The earthquake happened at 0332 (0132 GMT) hours after a 4.6-magnitude tremor shook the area but caused no reported damage. Thousands of the city's 70000 residents ran into the streets in panic during the 30 second tremor. A student dormitory was said to be one of the buildings badly damaged. It was not clear if anyone remained trapped inside. One student told Rai state TV that he managed to escape the building before the roof collapsed.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">A powerful earthquake strikes central Italy.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="49" id="49" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">ContourGlobal's $325 million Kivuwatt project will be the first large scale facility to extract methane from the depths of Lake Kivu a deep water lake located on the border of Rwanda and the Democratic Republic of Congo. Lake Kivu possesses a unique source of energy methane gas held in solution deep within the lake water. This gas can be harvested for power generation. Extracting the gas also greatly mitigates the environmental hazards associated with a natural release of the lake gasses and provides an environmentally friendly and sustainable source of power generation.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Lake Kivu separates Rwanda from the Democratic Republic of Congo.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="50" id="50" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Hundreds of Climate Camp demonstrators behind direct action protests at Heathrow Airport and power stations in North Yorkshire and Kent have pitched tents in protest against carbon markets. Several hundred anti-war demonstrators are marching to a rally in Trafalgar Square from the US Embassy in central London. On Wednesday morning protest groups under the G20 Meltdown banner had marched from Tube stations to the Bank of England urging those who had lost their homes jobs savings or pensions to join them in following four "horsemen of the apocalypse" to "lay siege" to financial institutions.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Trafalgar Square is in London.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="51" id="51" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Porsche driver identified as Jeffrey David Kirby 51 of Costa Mesa was arrested after allegedly abandoning his car on a side street near the collision and taking off on foot with his female passenger. Kirby is being held on suspicion of felony drunk driving and driving under the influence. Bail is set at $2 million. Kirby's passenger Lynn Marie Nabozny 32 of Newport Beach was arrested for public intoxication and later released. The motion picture database imdb.com lists a Lynn Marie Nabozny as having acted in the 1997 television series "The Heartbreak Cafe."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Lynn Marie Nabozny was arrested for public intoxication.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="52" id="52" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">MADAGASCAR'S constitutional court declared Andry Rajoelina as the new president of the vast Indian Ocean island today a day after his arch rival was swept from office by the army. Mr Rajoelina who was expected to address his supporters in the capital later in the day moved swiftly to assert his authority in the wake of Marc Ravalomanana's ouster at the end of a months-long deadly power struggle. "You can call me president" the 34-year-old former disc jockey told French television.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Andry Rajoelina was proclaimed president of Madagascar.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="53" id="53" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Washington DC — Josh Schwartz creator of the hit series Chuck Gossip Girl The O.C. and the new web series Rockville CA will address NAB Show attendees during a Super Session titled "Josh Schwartz: Creating in the New Media Landscape" held Wednesday April 22 in Las Vegas. Schwartz will be interviewed by media industry veteran Joe Flint director of industry programs at The Paley Center for Media. During the Session Flint will ask Schwartz about the future of the entertainment industry and the impact that new digital technologies have on the creative side of content production. Schwartz will discuss his many projects including Rockville CA a new web based series comprised of four-minute episodes and performances by indie bands.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Josh Schwartz is the creator of "Gossip Girl".</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="54" id="54" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The terror attacks it was clear had blasted a hole in the dam holding back Mumbai's reservoir of woes. While the protesters seemed to be reacting to a tragedy that had left at least 164 people dead and 308 injured they were really venting the frustrations of having to cope with life in a city with an infrastructure so stretched that simply getting to work and back is an ordeal. At peak hour the commuter trains which carry six million people each day are packed with up to 5000 commuters even though they're built for 1800. Every day an average of 11 people die on the railway system either because they fall off the trains or because they're hit by passing locomotives as they cross the tracks.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Every day in Mumbai about 164 people die.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="55" id="55" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">(CNN) — Nadya Suleman the Southern California woman who gave birth to octuplets in January has fired a nonprofit group of nurses charged with helping care for her children CNN affiliate KTLA has reported. Suleman accused the nurses from a group called Angels in Waiting of spying on her to report her to child-welfare authorities the affiliate reported Monday. The group was working for free the affiliate said. Suleman instead will rely on nurses whom she is paying Suleman's attorney said. She now has four of the octuplets at home along with her six other children. The other octuplets remain in a hospital which is discharging them two at a time to ease the adjustment.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Nadya Suleman has 14 children.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="56" id="56" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">It is the country's aging nuclear facility that currently concerns Armenian environmental groups as well as those in neighboring countries. Twenty miles west of the capital Yerevan Armenia's Metsamor Nuclear Power Plant was built in 1970s and houses two VVER-440 Model V230 nuclear reactors. Metsamor which currently produces about 40 percent of the country's electricity is located in a seismically active zone and was closed even before the 1991 collapse of the Soviet Union because of the devastating Dec. 7 1988 earthquake in Spitak.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Metsamor nuclear reactor was shut down on Dec. 7 1988.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="57" id="57" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">BUJUMBURA Apr 9 (Reuters) An anti-corruption activist was murdered in a knife attack in Burundi on Thursday police in the central African nation said on Thursday. Ernest Manirumva who suffered stab wounds to the head was the deputy chairman of a Burundi corruption watchdog known as OLUCOME. His body was found on Thursday morning inside his house in the capital Bujumbura witnesses told Reuters. 'Manirumva was assassinated after midnight' said a police spokesman. 'We don't yet know the people who committed the crime but investigations have started.'</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Ernest Manirumva was an anti-corruption campaigner.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="58" id="58" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">(CNN) — Numerous wildfires were roaring Thursday through parts of Oklahoma and Texas engulfing one entire town and searing neighborhoods including one in Oklahoma City. Hurricane-force winds continued to kick the flames higher. The fires had engulfed so many miles of turf and flying embers had sparked in so many different places that hours after the first blazes were reported Thursday morning safety officials still weren't sure how many fires they were facing. In Texas the 100-person town of Stoneburg was "burned over" by a 25000-acre fire said Texas Forest Service spokeswoman Misty Wilburn. The town northwest of Dallas near the Oklahoma state line had been evacuated she said. At least 100 homes were believed burned down in Midwest City Oklahoma a suburb of Oklahoma City.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">A hurricane has caused vast damages in Oklahoma City.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="59" id="59" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Apple shrugged off the economic downturn to report a 15% jump in profits for the first three months of the year. Sales of its iPhone more than doubled from the same quarter one year ago while iPod sales also grew. However demand for Macintosh computers dipped. Net profit rose to $1.21bn (£0.84bn) from $1.05bn in the same quarter a year ago on sales up 8.7% to $8.16bn. The results sent the company's shares 2.5% higher in after-hours trading.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">iPhone is a product of Apple's.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="60" id="60" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

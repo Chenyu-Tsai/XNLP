@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A new medal has been created for New Zealanders who helped in recovery efforts after the Boxing Day Tsunami. Called the New Zealand Special Service Medal (Asian Tsunami) it recognises the work of New Zealanders who went to the region after the tsunami; locating the missing identifying the dead and assisting those left behind. Defence Minister Phil Goff says New Zealanders who served in the devastated areas in the first two months after the tsunami are to receive the medal.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">A medal for special services has been created in New Zealand.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="581" id="581" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Petroleum Safety Authority Norway said in a press release that it is demobilizing disaster teams and beginning to prepare for its investigation of the incident. It will also closely follow StatoilHydro's clean-up. Statfjord is 200 km (124 miles) off the coast of Norway located to the east of Bergen. It is an oil and gas field in the Norwegian sector of the North Sea though approximately 15% of it is in the United Kingdom's waters. At peak production it produces over 700000 barrels of oil per day. The field is one of the largest known under-sea oil fields in the world.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Statfjord is located to the west of Bergen.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="582" id="582" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Charles Chibitty the last surviving member of the group of 17 who served in World War II as the Comanche code talkers died in a Tulsa Oklahoma nursing home July 20. He was 83. Chibitty was among the 14 Comanches who landed with the D-Day invasion of Normandy Beaches where they reported by radio to division headquarters on the progress of the landings. The Comanche were dubbed code talkers because the American Indian language has no written record and it was never broken by the Germans during the war.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">America won World War II.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="583" id="583" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Last night HBO premiered I Am An Animal: The Story of Ingrid Newkirk and PETA. Since its inception People for the Ethical Treatment of Animals (PETA) has made headlines and raised eyebrows. They are almost single-handedly responsible for the movement against animal testing and their efforts have raised the suffering animals experience in a broad spectrum of consumer goods production and food processing into a cause célèbre.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">PETA stands for People for the Ethical Treatment of Animals.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="584" id="584" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Between the hours of 3:00 pm and 8:45 pm GMT on Monday March 24 2008 an 87-year-old woman was raped in her own home in Great Yarmouth Norfolk England. Specially trained officers interviewed the victim who is described as being in a vulnerable state and a team of 20 detectives are working on the case. House-to-house inquiries are being made in the area of the attack between St Peter's Road and Victoria Road Great Yarmouth.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">An 87-year-old woman was raped in Norfolk.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="585" id="585" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Gordon Brown has become Prime Minister of the United Kingdom. Queen Elizabeth II invited him to form a government in a meeting at Buckingham Palace on Wednesday afternoon. Brown who has been Chancellor of the Exchequer for the past ten years succeeds Tony Blair who tendered his resignation to the Queen earlier on Wednesday. In an emotional Prime Minister's Questions Blair received a standing ovation from MPs and tributes from opposition leaders.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Blair was Prime Minister before Brown.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="586" id="586" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">632 Air Canada flight attendants will lose their jobs in November as the airline is eliminating flights and routes. 332 of the jobs will be lost due to the closure of flight attendant base offices in Halifax and Winnipeg. Another 300 jobs will be lost at Vancouver due to major reductions in Air Canada's Pacific-based international flights. Air Canada Embraer jet taking off.Dramatic increases in fuel prices are widely blamed for the airline's cutbacks. The flight attendant layoffs are part of an overall plan to reduce 2000 jobs at Air Canada.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">European Airlines are cutting jobs.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="587" id="587" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Sam Brownback is perplexed. The U.S. Senator from Kansas and Presidential candidate is a Republican whose politics-he is against marriage for gay people he is against abortion and he has a clean image in a party tainted by scandal-should speak favorably to the party's base. But it has not. "I'm baffled by that myself" Senator Brownback told Wikinews reporter David Shankbone. "We haven't been able to raise money."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Sam Brownback is not a Republican.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="588" id="588" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Actress Claire Danes appeared Wednesday in Toronto on the television series MuchOnDemand to promote her new film Stardust. Danes appears in the fantasy epic Stardust opposite Michelle Pfeiffer Robert DeNiro and Sienna Miller. The film is based on Neil Gaiman's novel of the same name. Danes plays a striking girl named Yvaine who is a fallen star. Pfeiffer DeNiro and Charlie Cox are all pursuing her.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Claire Danes is an actress who played in "Stardust".</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="589" id="589" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Simpsons has been on television for 17 seasons and FOX confirms that it will run at least two more seasons. The show is currently contracted through FOX until 2008 and is the longest running television show on prime-time in the United States. An estimated over nine million people watch the show every Sunday night but that number is down from earlier peak viewer numbers.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Simpsons is a show broadcast in America.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="590" id="590" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Prosecutors said they could call as many as 70 witnesses to try and prove Foley wanted Yelenic to die. The trial at the Indiana County Courthouse is expected to last about three weeks. Foley who is on unpaid suspension from the Pennsylvania State Police is charged with criminal homicide. The jury has the option of convicting him of first-degree murder which could put Foley in prison for life without parole or of a lesser degree charge like manslaughter.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Yelenic molested his adopted son.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="591" id="591" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Ion Mihai Pacepa an ex-head of Romanian intelligence and Terry McAuliffe an aide to Bill Clinton have unrelated claims that Arafat was homosexual. It has been alleged that the PLO's leader may have contracted HIV as the result of risky homosexual behavior in the years preceding the AIDS scare of the late 1980s. Arafat's sexual proclivities may have been largely ignored by Arab and indeed other state leaders.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Arafat leader of the PLO may have had HIV.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="592" id="592" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The BBC's correspondent Alan Johnston based in Gaza has been freed after almost four months in captivity. The BBC broadcast images of Alan Johnston leaving a building in Gaza and entering a white car. Hamas police surrounded a building where it was believed Johnston was being held. Earlier Hamas had captured several members of the Army of Islam and continued to put pressure by threat of force on the captors. An intervention by another militant group the Popular Resistance Committees led to a breakthrough in negotiations between Hamas and the Army of Islam.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Alan Johnston is now free.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="593" id="593" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Real IRA has claimed responsibility for a gun attack last night that killed two British soldiers and wounded two. The Sunday Tribune received a telephone call using a known code word claiming responsibility on behalf of the Real IRA's South Antrim Brigade. The spokesman defended their actions and said they "...made no apology" for an attack against occupiers and their collaborators.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Real IRA is not responsible for gun attacks.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="594" id="594" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Reports say that the host of the United States television game show Jeopardy! Alex Trebek 67 is being hospitalized after suffering from a minor heart attack. "Alex Trebek host of 'Jeopardy!' has had a minor heart attack. He is resting comfortably in a Los Angeles California hospital and he will be back in the studio for the next scheduled tapings in January" said a spokesman for the show in a statement posted on the show's website.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Jeopardy is the name of an American TV show.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="595" id="595" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A small team from Britain's Scotland Yard has arrived in the Pakistani capital to help with a government investigation into last week's assassination of opposition leader Benazir Bhutto. VOA's Nancy-Amelia Collins in Islamabad has more. Pakistani officials say the Scotland Yard team will lend forensic and technical expertise to the investigation which is being carried out by the government as controversy swirls around the death of Ms. Bhutto.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Benazir Bhutto is dead.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="596" id="596" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The current Iraqi president Jalal Talabani said that former president Saddam Hussein confessed to various crimes and killings which were committed during his regime. Some of these cases are currently under investigation. Mr. Talabani stated that a judge had told him of these alleged confessions which he revealed he knew about on Iraqi national television. Details are few but one example of a confessed crime is the mass killing of the Kurds in the late 1980s which resulted in the deaths of thousands of Kurds.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Jalal Talabani agrees to divide Iraq.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="597" id="597" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">J.K. Rowling the author of the "Harry Potter" series has revealed the release date of the seventh and final installment Harry Potter and the Deathly Hallows July 21 2007. Mary GrandPre the illustrator of the first six books will return to illustrate the new novel. The book will be released worldwide at midnight by the publisher Scholastic. Huge crowds are expected around the world and the book since its first appearance on Amazon.co.uk had risen to the number one sale for pre-orders. After the new book was announced Amazon.com reported a surge of traffic occurred on their website. Amazon.com has called the novel "one of the most eagerly awaited books of all time"</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">J.K. Rowling is the author of "Harry Potter".</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="598" id="598" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The forest was estimated to contain trees that were more than 130 feet high. It also contained a variety of smaller trees shrubs and ferns. One fossil was shaped like an asparagus stalk but was the size of a small tree. It is believed that the forest was buried in nearly a flash after the land was pushed downward below sea level after a massive earthquake burying the forest "forever." "The fossilized forest was preserved following a major earthquake 300 million years ago. The quake caused the whole region to drop below sea level whereupon the forest became buried in mud preserving it forever" added the press release.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Fossilized trees have been found in the USA.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="599" id="599" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A Helios airliner (Boeing 737 flight HCY 522) with 115 passengers and 6 crew onboard has crashed into a mountain at 09:04 UTC (12:04 p.m. EEST) near Grammatiko 40 kilometres (25 miles) north of Athens while approaching the capital's airport. All on board perished. The plane was travelling from Larnaca in the southeast of Cyprus (Greek:Kypros) and scheduled to arrive in Prague after a stop in Athens. In-flight events Immediately after take-off the pilots reported a problem with the air conditioning system of the aircraft and requested to stay at a low altitude. A few minutes later the pilots alerted the station that the problem had been fixed and requested permission to ascend. This information however has been denied by the Director of Helios Airways. As the plane approached Athens all communication abruptly ceased and the plane never issued a mayday distress signal. Two Greek F-16 military aircraft were assigned to observe the plane. The pilots of the F-16s noted that one airliner pilot appeared to be unconscious and the other was not in the cockpit.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">26 people died in an airplane crash.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="600" id="600" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

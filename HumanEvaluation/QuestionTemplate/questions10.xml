@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Boltanski filed a complaint on Saturday morning before returning to Paris. Libération and Reporters without Borders suspect this attack was a deliberate act of intimidation decided by the Tunisian regime. According to a United Press International report Tunisian authorities arrested two men Saturday on suspicion of assaulting Boltanski.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">A French journalist was assaulted in Tunisia.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="181" id="181" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">In response to Ike and as part of an ongoing effort to save threatened historic sites across the United States Brink's organization has added the Galveston district to its annual list of "America's 11 Most Endangered Historic Places." Since 1988 the National Trust for Historic Preservation has announced an annual list of sites it aims to restore protect and preserve. "Whether these sites are urban districts or rural landscapes Native American landmarks or 20th-century sports arenas entire communities or single buildings the list spotlights historic places across America that are threatened by neglect insufficient funds inappropriate development or insensitive public policy" the group said on its Web site.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The National Trust for Historic Preservation was founded in 1988 by Brink's organization.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="182" id="182" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The four — Jamil al-Sayyed Ali Hajj Raymond Azar and Mustafa Hamdan — directed the chief security and intelligence services and the presidential guard. They were widely seen as henchmen for Syria which occupied Lebanon militarily for three decades. Widely believed to have ordered Rafik Hariri's killing Syria was forced out of Lebanon under local and international pressure a few months later. Lebanon is preparing for a crucial parliamentary election in June in which Saad Hariri and his political allies now in the majority are facing an alliance led by Hezbollah. Many here believe that the tribunal's decision could cut into Mr. Hariri's votes by spreading the impression that Syria could escape being brought to account for the assassination of his father and be emboldened to rebuild its influence here.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Ali Hajj and Mustafa Hamdan come from Lebanon.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="183" id="183" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">First identified in 1930 swine flu is a common and sometimes fatal respiratory disease in pigs caused by type A influenza virus. The disease does not normally spread to humans though infections are sporadically recorded especially among people who have been directly exposed to pigs. The recent cases in Mexico and the United States however appear to have spread through human contact. From December 2005 through February 2009 only 12 cases of swine influenza were reported in the United States. In 1988 a pregnant woman died after contact with sick pigs. In 1976 swine flu at an U.S. military base at Fort Dix New Jersey killed one soldier. Four were hospitalized with pneumonia. At first experts feared the strain was related to the Spanish Flu of 1918 which killed millions but the strain never spread beyond the base.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Swine flu spreads to humans through contact with infected pigs.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="184" id="184" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Health ministers from countries suffering the highest burden of drug-resistant tuberculosis cases including India have agreed to a series of measures aimed at accelerating efforts to stop and reverse the global epidemic at a UN-backed meeting in China. Representatives of 27 countries with a high incidence of multi-drug resistant TB (MDR-TB) are meeting in Beijing for a three-day conference organised by the UN World Health Organisation (WHO) China's Ministry of Health and the Bill and Melinda Gates Foundation to secure funding and action to combat the spread of MDR-TB and extensively drug-resistant TB (XDR-TB).</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">XDR-TB is a type of tuberculosis.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="185" id="185" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Tributes have been paid to writer and broadcaster Sir Clement Freud who has died at his London home nine days short of his 85th birthday. Stephen Fry who starred alongside Sir Clement on Radio 4's comedy game show Just A Minute described him as an "immensely generous and charming man". The former Liberal MP is survived by his wife the actress Jill Freud five children and 17 grandchildren. Sir Clement's funeral will take place in London next Friday.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Sir Clement Freud was a grandson of psychoanalyst Sigmund Freud.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="186" id="186" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Marco Island's fringe and the surrounding Ten Thousand Islands are mostly made up of mangrove trees. Mangroves are a Florida native plant that thrives in salty water. They are able to separate the salt from the water and use the fresh water to survive. These mangrove forest ecosystems trap and cycle organic matter chemicals and nutrients. They are the nurseries for area fishes crustaceans and shellfish. They also provide food for species such as snook tarpon jack sheepshead red drum oyster and shrimp. Our recreational and commercial fisheries would drastically decline without healthy mangrove forests.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mangroves are a kind of tree.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="187" id="187" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">"I'm not ruling out staying active in causes and issues but at this point I'm looking for a new line of work" Blagojevich said. "I'm trying to pursue a way to earn a living and do some interesting things.. This is a chance to do something new and entertaining." Blagojevich first compared himself to Arnold Schwarzenegger whom he described as "my favorite governor" — well now that he's no longer governor of Illinois. "(I'm pursuing) the reverse career path of Arnold's" he said. Later in explaining his desire to join "I'm A Celebrity" he also invoked the 26th president of the United States Theodore Roosevelt.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Blagojevich is the ex-governor of Illinois.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="188" id="188" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">LILONGWE Malawi: In a surprise move a judge yesterday rejected Madonna's request to adopt a second child from Malawi and said it would set a dangerous precedent to bend rules requiring that prospective parents live here for some period. Madonna's lawyer Alan Chinula said later yesterday that he has "filed notice for appeal in the Supreme Court of Appeal." He says no date was immediately set. The country's child welfare minister had come out Thursday in support of the pop superstar's application to ado pt 3-year-old Chifundo "Mercy" James.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Madonna has three children.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="189" id="189" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">No longer just primetime entertainment for people tired of the cookie cutter sitcom barrage the show has grown enough of a following (casual viewers as well as its near-rabid fanbase) to warrant its own feature length film. The journey from television to theater at the show's 18th year of existence—The Simpsons is one of the longest-running TV shows in history—wasn't necessarily a sure thing. Matt Groening the show's creator initially imagined that a movie would surface once the series ended. But with the proverbial fat lady still waiting in the wings it seems as if now's as good a time as any to let Homer Marge Bart Lisa and Maggie take the stage.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">"The Simpsons" was created by Matt Groening.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="190" id="190" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Ernie Barnes whose drawings and paintings of athletes dancers and other figures in motion reflected his first career as a professional football player died on Monday in Los Angeles. He was 70. The cause was complications of a blood disorder his personal assistant Luz Rodriguez said. Mr. Barnes was an offensive lineman in the old American Football League playing four seasons in the 1960s for the New York Titans the San Diego Chargers and the Denver Broncos. He would often say later that even during his playing days his heart was more in the painting and sketching he had been doing since he was a child.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Ernie Barnes was an athlete.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="191" id="191" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Mr. Lieberman is part of the new government led by Benjamin Netanyahu and his conservative Likud Party which was sworn in late Tuesday. Mr. Lieberman leads the hawkish party Yisrael Beiteinu an important partner in the governing coalition and the third largest party in Parliament. Critics of Mr. Lieberman were outraged at the outcome of the recent coalition negotiations which put Yisrael Beiteinu in charge of the Ministry of Public Security which is responsible for the police.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Lieberman is the new Foreign Minister of Israel.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="192" id="192" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">ALBANY N.Y. — New York's rural 20th Congressional District becomes the center of the American political world this week in a special election that's piqued the interest of both major parties. Tuesday's election will pit Republican Jim Tedisco a 58-year-old state legislator for 27 years against Democrat Scott Murphy a 39-year-old businessman who has the backing of President Barack Obama and influential unions. Voters will choose the successor to Kirsten Gillibrand who is now a U.S. senator. The special election has come to symbolize issues far beyond the sprawling district along New York's Hudson River Valley.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Barack Obama is 39 years old.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="193" id="193" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">SEOUL South Korea—North Korea's state news agency says that leader Kim Jong Il observed the launch of the country's satellite. The Korean Central News Agency says in a reported dated Sunday that Kim visited the General Satellite Control and Command Center and observed the liftoff. North Korea launched a rocket Sunday that flew over Japan. The country says it was a satellite and that it successfully went into orbit. The U.S. says all parts of the rocket ended up in the ocean.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Kim Jong-il is the leader of North Korea.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="194" id="194" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The doctor who supervises Formula 1's Bahrain Grand Prix has been under suspension in the run-up to this year's race the BBC has learned. Dr Amjad Deeb Obaid has headed the F1 medical unit in Bahrain since 2007 with responsibility for a team of 150 medical professionals. He was suspended this year after the death of a patient he had discharged. Bahraini health ministry officials had found "professional deficiencies in [Dr Obaid's] medical ability".</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Amjad Deeb Obaid worked at Salmaniya Medical Complex.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="195" id="195" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Monitors from the IAEA the U.N. nuclear watchdog left North Korea on Thursday after being ordered out by Pyongyang which has raised regional tensions by saying it will abandon atomic disarmament talks and restart an aged nuclear complex it had agreed to shut in an aid-for-disarmament deal. The U.N. Security Council unanimously condemned North Korea's launch of a long-range rocket on April 5 saying the action contravened a U.N. ban.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The International Atmospheric Energy Agency is called IAEA.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="196" id="196" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The government of Niger and Tuareg rebels of the Movement of Niger People for Justice (MNJ) have agreed to end hostilities according to reports. Libyan state news agency Jana said two days of talks in Tripoli ended with both sides committing themselves to "total and comprehensive peace". There has been no confirmation from the Niger government but a rebel website said everyone supported reconciliation. The rebels are seeking a greater share of the region's uranium resources.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">MNJ is a group of rebels.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="197" id="197" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Lib Dem justice spokesman David Howarth said the footage showed a "sickening and unprovoked attack" by police. The IPCC is investigating and said it would examine the footage. The pictures shot at 1929 BST (1829 GMT) at Royal Exchange Passage initially show Mr Tomlinson who was not protesting walking away from a group of police officers. He then receives a two-handed push from an officer landing heavily before remonstrating with the police. Mr Tomlinson collapsed and died of a heart attack after walking to nearby Cornhill where he received first aid from police. A New York fund manager recorded the footage believed to be the last showing Mr Tomlinson alive.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mr. Tomlinson was a fund manager.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="198" id="198" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The tiny Swiss canton of Appenzell Innerrhoden has voted to prohibit the phenomenon of naked hiking. Anyone found wandering the Alps wearing nothing but a sturdy pair of hiking boots will now be fined. Appenzell is considered one of the most conservative regions of Switzerland it only gave women the vote in 1990. Locals have been outraged by an apparent upsurge of hikers who think the best way to appreciate the mountains is with their clothes off. The vote was taken with a show of hands at Appenzell's annual Landsgemeinde; an open air meeting of all registered voters in the town square.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Swiss canton of Appenzell has prohibited naked hiking.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="199" id="199" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Barack Obama made history on 4 November 2008 when he defeated Republican rival John McCain to become the first black president of the United States. He had already broken new ground in his White House campaign as the first black candidate to become the presidential choice of either major US party. To many people Mr Obama seemed to come from nowhere. Although he had served in the Illinois state senate for eight years it was only in 2004 that he shot to national prominence with a speech that stirred the Democratic National Convention.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Barack Obama was a Republican candidate for the US presidency.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="200" id="200" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

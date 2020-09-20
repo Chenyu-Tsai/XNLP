@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">However the Brazilian Ministry of Education (MEC) has come to an agreement with the Cuban government to allow medical students who studied in Cuba to go through a less rigorous examination. Furthermore the MEC wants to exempt the students from the Cuban Escola Latino Americana de Medicina (Latin American Medicine School) or ELAM located in Havana from the examination. Under the agreement the diplomas of ELAM students would be automatically recognized as valid in Brazil. The Brazilian President Luiz Inácio Lula da Silva signed the endorsement of this agreement last year during his visit to Cuba.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Cuban government teamed up with MEC.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="361" id="361" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The ACS developed jointly by four American agencies was installed in March of 2002. It is a system of three cameras filters and dispersers which act to detect wavelengths of light ranging from near-infrared to ultraviolet. It is a system that was designed to last five years according to Preston Burch associate director and program manager for the Hubble Space Telescope. NASA also indicated that the other four main systems on the telescope remain unaffected and functioning normally. Research work will resume this week using those systems. A scheduled mission to the space telescope in 2008 is expected to deliver instruments to further upgrade the capabilities of the telescope. It is not known what the effect of the ACS failure will have on the scheduled mission.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The ACS was designed by Preston Burch.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="362" id="362" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">"This is very exciting and important" said Professor Michael Bode from Liverpool John Moores University a principal investigator for the RoboNet project which helped to collaborate on the research. "This is the most Earth-like planet we have discovered to date in terms of its mass and the distance from its parent star. Most of the other planets that have been discovered are either much more massive much hotter or both."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The residence of Michael Bode is in Liverpool.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="363" id="363" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Trains trams cars and buses ground to a halt on Monday after a shoot-out between 18:00 CET and 19:00 CET in the historical city of Basel in Switzerland. The first shots were fired at around 16:00 CET according to the spokesperson of the Government. Special Police Forces were getting prepared to launch an assault against this building. The authors of the shoot-out are unknown as well as their target. Railway traffic was blocked off at around 18:00 CET according to the Swiss Federal Railways' (SBB-CFF-FFS) spokesperson Christian Kräuchi. At around 19:00 CET railway traffic resumed.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Basel is a European city.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="364" id="364" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The Senator and former diplomat Arthur Virgílio(PSDB) sent a letter to Minister Celso Amorim protesting against the change in the entrance examination to IRBr. He said that the minister's decision is nonsense a symbolic protest against the USA. The decision minimizes the importance of English in the world. According to him the government is being underhanded. "The question is not to love or to hate the United States but to recognize their enormous weight until bothering in the world-wide scenario" he added. [3] The journalist and high critic of the government and the Workers' Party (PT) Percival Puggina said: "On March 18 2004 during a opening speech of a popular restaurant of Coca-Cola in Belo Horizonte [4] President Lula said: 'I spent much time in my life thinking that if you wanted to be anti-American you should not drink Coca-Cola.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Celso Amorim is Arthur Virgílio's neighbour.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="365" id="365" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A Casa-212 aircraft owned by the Indonesian air force disappeared while on a flight from the capital Jakarta to Bogor in West Java Friday morning. The plane was carrying 12 Indonesian military personnel and 6 civilians including a British Singaporean and Indian national. The plane was tasked to test a new digital camera designed to conduct aerial mapping and topography. The aircraft was last sighted on radar in the Salak moutain region on the main island of Java 90 kilometers (60 miles) southeast of the Indonesian capital. The Indonesian military has deployed a search and rescue team in the area. Authorities fear that the aircraft crashed in a densely forested area making any rescue difficult. Air Force spokesman Chaeruddin Ray said the region was covered in thick fog and in a rough terrain.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">A Casa-212 aircraft belonging to Indonesian air force disappeared in the Salak region.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="366" id="366" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Lhadon Tethong Executive Director of Students for a Free Tibet made a statement after the alleged action: "At this very moment Tibetans are facing the most severe and violent repression they have seen in decades at the hands of the Chinese government and we have taken nonviolent action at this critical time to draw the world's attention to the crisis gripping Tibet."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Lhadon Tethong was born in China.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="367" id="367" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">One other teen mother Amanda Ireland who recently graduated from the school also gave a warning to the mothers "Don't try to get pregnant. People say they know what it's like because they have younger siblings but they really have no idea." Ireland also noted "They're so excited to finally have someone to love them unconditionally. I try to explain it's hard to feel loved when an infant is screaming to be fed at 3 a.m." 46 year-old Gloucester resident Lori Mitchell whose daughter dropped out of high school at 16 to raise a child said there are worse things than being a teenage mother "They could be junkies or prostitutes. You try to protect them as much as you can but it's up to them to do the right thing."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Lori Mitchell is Amanda Ireland's mother.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="368" id="368" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">When Stronach was with the Conservatives she dated fellow MP Peter MacKay. In an interview in the Toronto Star on January 8 2005 Stronach confirmed that she and MacKay were dating. Stronach elected as a Conservative in the 2004 election crossed the floor to the Liberal Party on May 17 2005. She did not comment on what impact this would have on their relationship. On May 18 2005 MacKay told the CBC that his relationship with Stronach was indeed over. Stronach crossed the floor from the Conservative party directly to Paul Martin's Liberal cabinet in May 2005. Stronach was previously married to Olympic speed-skating champion Johann Olav Koss of Norway then divorced in 2005.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Johann Olav Koss was married to MP Peter MacKay's ex-girlfriend.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="369" id="369" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">As a sign of respect several Cabinet Ministers including Deputy Prime Minister Datuk Seri Najib Tun Razak and Information Minister Datuk Seri Abdul Kadir Sheikh Fadzir cancelled official functions. The official launch of the national jersey for the SEA Games was also called off which was scheduled to be officiated by the deputy premier. Radio and television stations switched to a somber mood by broadcasting songs with verses from the holy Quran. Muslim radio announcers called on listeners to offer the Al-Fatihah verse to Eton.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Datuk Seri Abdul Kadir Sheikh Fadzir works for the Cabinet.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="370" id="370" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">"We are deeply shocked and saddened by the tragic accident that occurred tonight in Clarence. Our focus right now is on supporting the first responders on the ground and their efforts to ensure the health and safety of people in the area" said Chris Lee an Republican politician from Corning New York representing the 26th Congressional District of New York. The tragedy is the nation's deadliest disaster since the Comair Flight 191 crashed in Lexington Kentucky in August 2006. Delta Air Lines Flight 5191 was a scheduled U.S. domestic passenger flight from Lexington Kentucky to Atlanta Georgia. On the morning of August 27 2006 the Bombardier Canadair Regional Jet 100ER that was being used for the flight crashed while attempting to take off from Blue Grass Airport in Fayette County Kentucky four miles (6 kilometers) west of the central business district of the City of Lexington.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Chris Lee is a Republican.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="371" id="371" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Mr. Hakeem 58 left the North-West Frontier Province (NWFP) at the age of 25 and became a naturalized citizen of the U.S. Now a businessman who is active in Texas politics he shares some views as a person who is in touch with his family and friends who remain in the region. He travelled throughout portions of Pakistan at the end of last year.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mr. Hakeem was born in Texas.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="372" id="372" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Prof. Sali Tagliamonte a professor of linguistics at the University of Toronto said parents and teachers shouldn't be concerned that this new medium is corrupting young people's grammar. "I don't think parents have to worry because they're really showing that they are creative and that they have a mastery of the language. They are not using ruinous language" he said. "What these kids are doing is showing us that they have a really good command of the English language so much so that I was really blown away by how fluidly they operate" he added. The research was presented today at the annual meeting of the Linguistics Association of Canada and the United States.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The University of Toronto is the employer of Prof. Sali Tagliamonte.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="373" id="373" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The South African government has set a six-month deadline for some white farmers to agree on sale prices for their farms. The government will be requiring them to sell the farms as part of its land redistribution programme. Agriculture and Land Affairs Minister Lulu Xingwana said that if no agreement is reached in 6 months the government could expropriate farmlands. Stating that negotiations have been too slow in some cases taking many years Xingwana said that some farm owners were seeking "unrealistic prices". Land owners claim they are not offered market value for their property.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Lulu Xingwana holds offices in the South African government.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="374" id="374" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A kindergarten teacher in Port St. Lucie Florida United States is being reassigned following an incident last week in which her students voted to remove a possibly autistic child from the classroom. According to school officials Morningside Elementary School teacher Wendy Portillo held a vote in her kindergarten classroom concerning the removal of 5-year-old Alex Barton. The boy's mother Melissa Barton says her son is in the process of testing for Asperger's syndrome a form of high-functioning autism which can impair social skills and behavior. She says that Alex has had disciplinary problems stemming from his condition.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Wendy Portillo is one of the teachers employed in Port St. Lucie.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="375" id="375" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Following misleading reports that Rev Professor Michael Reiss had advocated that creation should be taught in science class he left his post as director of education at the Royal Society the UK's national academy of science. Last week at the British Association's science festival Rev  Professor Michael Reiss said that creation should not be ignored if it come up in class. Professor Reiss who was director of education at the Royal Society said that since a substantial number of pupils have concerns about the issue they are likely to "detach from" science if their concerns and world view are not addressed. Creation should not be taught he said but if it comes up teachers should be encouraged to explain the science of evolution.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Professor Michael Reiss is the founder of the British Association's science festival.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="376" id="376" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Among the books that vanished on searches of Amazon's offerings were some editions of John Barrowman's and Stephen Fry's autobiographies some editions of Lady Chatterley's Lover by D.H. Lawrence and Lesléa Newman's children's book Heather Has Two Mommies as well as works of erotica such as Emmanuelle Arsan's Emmanuelle. Mark Probst author of gay-themed romance novel The Filly said in his blog that problems began on April 10: On Amazon.com two days ago mysteriously the sales rankings disappeared from two newly-released high profile gay romance books: "Transgressions" by Erastes and "False Colors" by Alex Beecroft. Everybody was perplexed. Was it a glitch of some sort? The very next day HUNDREDS of gay and lesbian books simultaneously lost their sales rankings....</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">D.H. Lawrence wrote "Lady Chatterley's Lover".</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="377" id="377" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Track Star Marion Jones winner of 3 gold medals in the 2000 Sydney Olympics has tested positive for the performance enhancing drug EPO. The hormone helps create extra red blood cells which allows the user's body to absorb extra oxygen. Jones was expected to compete in yesterday's Golden League meet in Zurich Switzerland but left early in the morning for "personal reasons." It was announced earlier today (UTC) that she had tested positive for EPO. Jones faces a two year ban if her B test sample comes back positive. Jones has a history of association with steroid users and dealers. In 1999 her then husband CJ Hunter tested positive for a similar drug Nandralone. He had to withdraw from the 2000 Sydney Olympics and received a two year ban.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Marion Jones took part in the 2000 Sydney Olympics.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="378" id="378" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">"It was horrible to go in there" SPCA spokesman Matt Stanton said. "Our people had to fill their nostrils with Vick's VapoRub and wear masks. They could only go in for five minutes at a time and had to come out to get fresh air again." Oughton refused to leave the house during the inital investigation and declined to speak to reporters. "Go away. Go away. We have a call in to the police" two women yelled at reporters through the front door.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Vick's VapoRub pays Matt Stanton's salary.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="379" id="379" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A press release was sent to the WMAQ-TV Newsroom staff on July 10 2007. Jacobson came to WMAQ-TV in 1996 from Fox affiliate WJBK located in Detroit. Jacobson is a native of Mount Prospect. She began her career at KSAX and also worked in El Paso and Tucson AZ. She started at WMAQ as a freelance reporter and moved up to general assignment reporter. She and her husband have two children and live on the north side of Chicago.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Mount Prospect is located north of Chicago.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="380" id="380" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>

@@ -1,0 +1,483 @@
+<HTMLQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2011-11-11/HTMLQuestion.xsd">
+<HTMLContent><![CDATA[
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<script type='text/javascript' src='https://s3.amazonaws.com/mturk-public/externalHIT_v1.js'></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.142.0.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+<style>
+  dt{
+    font-size: medium;
+  }
+
+  dd{
+    margin-bottom: 1rem; 
+    margin-left: 0;
+  }
+  
+  .card-text{
+    margin-bottom: 2rem;
+  }
+
+  h5{
+    font-weight: bold;
+  }
+  .tablink{
+    font-weight: 600;
+  }
+
+  .btn-lg{
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  h2{
+    margin-top: 1rem;
+  }
+  p{
+    font-size: 1rem;
+  }
+</style>
+</head>
+
+<body>
+<section class="container mb-3 mt-3">
+  <fieldset class="shadow bg-white mb-3">
+<div class="w3-container">
+  <h2 class="text-info" style="font-weight: bolder">Instructions and Examples</h2>
+  <div id="Instructions" class="w3-container ins w3-animate-opacity" style="display:block">
+    <h2>Instructions</h2>
+    <p>Read the premise, hypothesis and realation, select a segment from premise that can determine the relation between premise and hypothesis.</p>
+    <ul>
+      <!-- We are adding a template variable below which we will replace with an actual link in our code later -->
+      <li>Read the premise, hypothesis and the relation.</li>
+      <li>On the basis of your own judgement, select a "sequential" segment from premise that can determine the relation between premise and hypothesis.</li>
+      <li>The length is not restricted, as long as the segment provides sufficient informations.</li>
+      <li>Copy the segment from premise and paste it into the following box.</li>
+      <li><strong>SPAM and non-sequential segments will be rejected.</strong></li>
+      </ul>
+    <p>The following section is the definition of the three realations, which comes from the RTE-5 task guideline. If you are familiar with NLI tasks such as SNLI, MNLI, RTE, you can skip the section below.</p>
+    <p>We define textual entailment as a directional relationship between a pair of text fragments, which we call the "Premise" and the "Hypothesis". We say that: </p>
+    <p><strong><i>Premise entails Hypothesis, if a human reading premise would infer that hypothesis is most likely true. </i></strong></p>
+    <p>For example, given assumed common background knowledge of the business news domain and the following premise: </p>
+    <p style="font-family: Times New Roman; font-size: large"><strong><i>Premise1 Internet media company Yahoo Inc. announced Monday it is buying Overture Services Inc. in a $1.63-billion (U.S.) cash-and-stock deal that will bolster its on-line search capabilities.</i></strong></p>
+    <p>the following hypothesis is entailed:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.1 Yahoo boutght Overture</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.2 Overture acquired by Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.3 Overture was bought</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.4 Yahoo is an internet company</i></p></li>
+    </ul>
+    <p>For example, the following hypothesis are contradicted by Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.5 Overture bought Yahoo</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.6 Yahoo sold Overture</i></p></li>
+    </ul>
+    <p>While the following ones cannot be judged on the basis of Premise above:</p>
+    <ul>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.7 Yahoo manufatures cars</i></p></li>
+      <li style="font-family: Times New Roman; font-size: large"><p><i>H1.8 Overture shareholders will receive $4.75 cash and 0.6108 Yahoo stock for each of their shares.</i></p></li>
+    </ul>
+  </div>
+  
+</div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Entailment" class="w3-container ins w3-animate-opacity">
+    <h2>Entailment Example</h2>
+    <p>Here is a pair of premise and hypothesis with entailment relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p>
+    <ul>
+      <dt style="font-size: medium;">Premise</dt>
+      <dd style='margin-bottom: 1rem; margin-left: 0;'>CNN) -- Malawians are rallying behind <strong class="w3-text-deep-orange">Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</strong>, adopted a son from Malawi in 2006. She is seeking to adopt Chifundo "Mercy" James, 4. "Ninety-nine percent of the people calling in are saying, 'let her take the baby,' " said Marilyn Segula, a presenter at Capital FM, which broadcasts in at least five cities, including the capital, Lilongwe.</t>
+      <h>Madonna has three children.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Madonna has three children.</dd>
+      <dt>Relation</dt>
+      <dd>Entailment</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Madonna as she awaits a ruling Friday on whether she can adopt a girl from the southern African nation. The pop star, who has three children</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Neutral" class="w3-container ins w3-animate-opacity">
+    <h2>Neutral Example</h2>
+    <p>Here is a pair of premise and hypothesis with neutral relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>Concerns have been raised that potential leads in the hunt for missing York woman <strong class="w3-text-deep-orange">Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</strong> after a stranger in the bar expressed satisfaction when asked if the chef was still missing. The incident happened more than three weeks ago and staff said detectives had not yet been in touch. Police said leads were being assessed in a methodical and structured way.</dd>
+      <dt>Hypothesis</dt>
+      <dd>Claudia Lawrence resides in Malton.</dd>
+      <dt>Relation</dt>
+      <dd>Neutral</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Claudia Lawrence are not being followed up quickly enough. It comes after hotel staff in Malton contacted police</dd>
+    </ul>
+  </div>
+</fieldset>
+<fieldset class="shadow bg-white mb-3">
+  <div id="Contradiction" class="w3-container ins w3-animate-opacity">
+    <h2>Contradiction Example</h2>
+    <p>Here is a pair of premise and hypothesis with Contradiction relation. The following is the Segment you need to respond, which we also emphasize in the premise.</p> 
+    <ul>
+      <dt>Premise</dt>
+      <dd>But an O2 insider said there had been problems with a companies trying to sell the pass codes. Some people were "bound to have been turned away" because of fraudulent tickets. <strong class="w3-text-deep-orange">Led Zeppelin, formed in 1968</strong>, were one of the most influential bands of the 1970s with songs such as Whole Lotta Love and Stairway To Heaven. They split in 1980 after the death of the drummer John Bonham. Kenneth Donnell, 25, who was not born in 1980, spent 83,000 on two tickets in a BBC Children in Need auction.</dd>
+      <dt>Hypothesis</dt>
+      <dd>The band Led Zeppelin was formed in 1980.</dd>
+      <dt>Relation</dt>
+      <dd>Contradiction</dd>
+      <dt>Segment (Your response)</dt>
+      <dd>Led Zeppelin, formed in 1968</dd>
+    </ul>
+  </div>
+</fieldset>
+</section>
+
+<!-- Questions Section -->
+<section class="container">
+  <div class="alert alert-danger text-center shadow" role="alert" style="font-weight: bold; font-size: large">
+  All answers will be manually checked, SPAM and blank answers will be definitely rejected.
+  </div>  
+  <form name='mturk_form' method='post' id='mturk_form' action='https://www.mturk.com/mturk/externalSubmit'><input type='hidden' value='' name='assignmentId' id='assignmentId'/>
+    <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 1</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">(CNN) — Children were among the victims of a plane crash that killed as many as 17 people Sunday in Butte Montana according to authorities in Oroville California where the aircraft stopped for fuel. The single-engine plane stopped at the Oroville airport at about 11 a.m. PT refueled and departed about half an hour later Police Chief Kirk Trostle said. "There were some adults and children on board" he told reporters Sunday evening adding the passengers got out briefly to stretch while the pilot refueled the plane.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">17 adults died in a plane crash in Montana.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="61" id="61" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 2</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Stanford the chief executive officer of Stanford Financial Group and the Stanford Investment Bank at the heart of the SEC fraud charges followed the lead of his Memphis-based chief financial officer James Davis who asserted his Fifth Amendment rights in court filings nearly two weeks ago. Stanford's signature is dated Monday. Memphis-based chief investment officer Laura Pendergest-Holt is accused of helping facilitate the scheme by misleading investors. The only criminal charges filed so far are against Pendergest-Holt — for obstruction of justice — related to the government's belief that she lied about her knowledge of assets involved with the uninsured Caribbean-based certificates of deposit that are at the center of the investigation.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Fifth Amendment right is against self-incrimination.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="62" id="62" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 3</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">LOSAIL Qatar (AFP) Australia's Casey Stoner riding a Ducati was confidently eyeing a third successive Qatar MotoGP victory after taking pole position in a dominant qualifying performance under the Losail desert floodlights. World champion Valentino Rossi was second fastest with his Yamaha teammate Jorge Lorenzo who was the pole sitter in 2008 in third place. Stoner the winner here for the last two years and the 2007 world champion clocked 1min 55.286sec with Rossi 0.473sec behind and Lorenzo 0.497sec off the pace. Italy's Andrea Dovizioso on a Honda was fourth quickest.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Valentino Rossi is the World Moto GP champion.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="63" id="63" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 4</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">(AP) The Italian court trying an American student and her former boyfriend for the murder of a British woman inspected the apartment house in Perugia on Saturday where the victim was stabbed to death in 2007. American Amanda Knox 21 and her former Italian boyfriend Raffaele Sollecito who was also studying in the university town in Umbria are being tried for the slaying of Knox's roommate Meredith Kercher. Both have denied all wrongdoing. The body of 21-year-old Kercher stabbed in the neck was found in a pool of blood in her bedroom of the rented flat in November 2007.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Amanda Knox was in Italy on an exchange program for students.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="64" id="64" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 5</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">US music producer Phil Spector has been convicted of murdering actress Lana Clarkson after a five-month retrial. The 68-year-old famous for the "Wall of Sound" recording technique faces between 15 years and life in prison. He had pleaded not guilty to the second degree murder of 40-year-old Ms Clarkson who was shot in the mouth at Spector's home in Los Angeles. Spector was remanded in custody until sentencing on 29 May. His lawyer has said he intends to appeal.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Phil Spector was a music producer.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="65" id="65" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 6</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A court in Venezuela has jailed nine former police officers for their role in the deaths of 19 people during demonstrations in 2002. The violence took place hours ahead of a failed coup against President Hugo Chavez. Both supporters and opponents of the left-wing leader were shot dead in the demonstrations in the capital Caracas. Among those convicted were three former high-ranking police chiefs for the city. They were jailed for 30 years each for complicity in the deaths of pro-government demonstrators a lawyer for the victims said.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Nine police officers have had a role in the death of 19 people.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="66" id="66" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 7</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The death was confirmed by his daughter Alexandra Holzer. Mr. Holzer — who wrote more than 140 books on ghosts the afterlife witchcraft extraterrestrial beings and other phenomena associated with the realm he called "the other side" — carried out his most famous investigation with the medium Ethel Johnson-Meyers in 1977. Together they roamed the house in Amityville in which a young man Ronald DeFeo Jr. had murdered his parents and four siblings in 1974. The house had become notorious after its next owners claimed to have been tormented by a series of spine-chilling noises and eerie visitations set forth in the best-selling 1977 book "The Amityville Horror: A True Story" written by Jay Anson.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Alexandra Holzer has an house in Amityville.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="67" id="67" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 8</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">NEW DELHI March 31 (Bernama) — Fifty years living in India is spiritually enriching says 74-year-old Tibetan spiritual leader Dalai Lama. In March 1959 he crossed the Indian border as young man after a 14-day harrowing escape from his homeland. "I was 24 years old when I came to India as a refugee. I feel it is a very meaningful life because of the religious experience I had following others like Hinduism Christianity Islam and Judaism. "I am son of India" the Dalai Lama told reporters in Delhi in conjunction with his 50th anniversary in exile in India.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Dalai Lama is 74 years old.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="68" id="68" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 9</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">The museum's co-curator Yitzchak Mais former director of the Yad Vashem museum in Jerusalem explained its significance as filling a largely unexplored niche. "These are your neighbors from the Midwest" Mr. Mais said. "You'll realize that you walked on the street with them shopped with them at the grocery sat with them at the movie theater." "You've lived with the witnesses" he went on. "It removes the distance. This didn't happen a thousand miles away. It's about right here and that's very clear."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Yad Vashem Holocaust museum is located in Israel.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="69" id="69" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 10</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">London March 17 (IANS) British actress Natasha Richardson is reportedly in a critical condition after suffering a serious head injury while skiing in Quebec Canada. The 45-year-old was involved in an accident on the slopes on Monday and was taken to Montreal's Centre Hospitalier Laurentien. She was later transferred to another medical facility according to US reports. Richardson who is married to Irish actor Liam Neeson is under constant supervision from medics after suffering a "traumatic brain injury" a hospital source tells IrishCentral.com.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Natasha Richardson and Liam Neeson are married.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="70" id="70" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 11</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">"Despite the challenges Ford made strong progress on our transformation plan by gaining share with strong new products slowing operating-related cash outflows reducing outstanding debt lowering our structural costs and reaching new agreements with the UAW (United Auto Workers)." Ford said it "remains on track to meet or beat its financial targets based on current planning assumptions including the target for its overall and North American automotive pre-tax results to be breakeven or better in 2011 excluding special items."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Ford is reducing its structural costs in order to achieve its financial targets.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="71" id="71" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 12</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">(Washington D.C.) More babies were born in the United States last year than ever before according to preliminary data but it's not another baby boom just yet. About 4315000 children were born in 2007 about 15000 more births than the peak time of the baby boom in 1957 said Stephanie Ventura a demographer at the National Center for Health Statistics which compiled the data from provisional birth certificate registrations at state health departments. "According to our provisional data we had the highest number of births ever reported in 2007" she said.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">About 15000 children of the 4315000 born in 2007 in the U.S. were Hispanic.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="72" id="72" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 13</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Leftist Mauricio Funes of El Salvador's former Marxist rebel FMLN party has won the country's presidential election. He defeated his conservative rival the Arena party's Rodrigo Avila who has admitted defeat. Arena had won every presidential election since the end of El Salvador's civil war 18 years ago. Addressing jubilant supporters Mr Funes said it was the happiest day of his life and the beginning of a new chapter of peace for the country. Branded by his opponents as a puppet of Venezuala's President Hugo Chavez Mr Funes vowed to respect all Salvadorian democratic institutions.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Rodrigo Avila has won El Salvador's presidential election.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Contradiction</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="73" id="73" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 14</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Most centenarians attribute their great age to some magic elixir or other. The longevity of the Italian scientist Rita Levi-Montalcini who this week became the first Nobel Prize-winner to reach the age of 100 might be the result of a potion that is a little out of the ordinary: Professor Levi-Montalcini it is said puts her undiminished mental vigour down to regular doses of nerve growth factor (NGF) the discovery that made her famous. She was awarded the 1986 Nobel Prize for Medicine jointly with an American Stanley Cohen for her research into NGF: the proteins and amino-acids which enable the cells of the nervous system to grow and take on specialised tasks. Despite her age Dr Levi-Montalcini a neurologist and development biologist still works every day at the European Brain Research Institute which she founded in Rome.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Rita Levi-Montalcini has never gotten married.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="74" id="74" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 15</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Rihanna's hell ride through Hollywood began when she intercepted a booty call to her boyfriend from a rival. "A three page text message" from a woman Chris Brown had "a previous sexual relationship with" popped up on his cell phone as the singer drove home with Rihanna by his side from a pre-Grammy Awards party. "A verbal argument ensued" that quickly escalated out of control with Brown delivering a brutal and bloody beatdown of Rihanna as they hurtled through L.A. in a silver Lamborghini according to a shocking affidavit.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Rihanna's boyfriend won a Grammy Award.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="75" id="75" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 16</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">A month after Gov. David A. Paterson dropped his proposal for a soda tax New York City's health commissioner has written an article advocating "hefty" taxes on sodas and sports drinks containing sugar. Such a tax the article said could be the biggest boon to public health since tobacco taxes. The commissioner Dr. Thomas R. Frieden and Kelly D. Brownell of Yale University his co-author argue in the New England Journal of Medicine that a tax of a penny per ounce could reduce consumption by more than 10 percent and raise $1.2 billion a year in New York State alone.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Yale University is located in New England.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="76" id="76" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 17</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">ATT the largest telecommunications company in the United States reported on Wednesday that its first-quarter profit dipped 9.7 percent from a year ago but cost-cutting and new customers lured by the iPhone helped beat Wall Street's expectation of a bigger drop. The company based in Dallas reported its net income for the quarter was $3.1 billion or 53 cents a share compared with $3.5 billion or 57 cents a share in the period a year ago. ATT said revenue was $30.6 billion slightly down from $30.7 billion in the quarter a year ago. Analysts had expected revenue of $31.1 billion.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">iPhone is a product of Apple's.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="77" id="77" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 18</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Crippa died a week ago at Santa Barbara Cottage Hospital seven days after he ate a heaping plate of the deadly Amanita ocreata mushrooms said his wife Joan Crippa. Known as "death angel" for its snow-white appearance the fungus has deadly toxins that worked their way through Crippa's system sickening him and eventually causing his liver to fail. Family members had often warned Crippa against indulging in his passion for hunting wild mushrooms an activity he learned from his Italian immigrant parents his wife said.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Crippa was killed by a wild mushroom.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="78" id="78" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 19</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">Things got under way around 1:30 p.m. after Nick Goddard who is 26 and lost his job as a computer programmer last month showed up with a few friends. Mr. Goddard said he had hatched the idea for the Unemployment Olympics because he yearned for the chance to "battle all the unemployed people for stuff." "It's also not a bad time to be unemployed" said Mr. Goddard who is from Rochester Hills Mich. and lives in the East Village. "There is no stigma associated with it now."</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">The Unemployment Olympics took place in the East Village.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Neutral</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="79" id="79" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+  <div class="card shadow  mb-3 border-info text-center">
+    <div class="card-header">Question 20</div>
+    <div class="card-body">
+      <h5 class="card-title">Premise</h5>
+      <p class="card-text">One man who did not want to be named said: "There was a big fight I heard it was some sort of retaliation after something else that happened earlier on." Most of Larkhall Park has been sealed off following the incident. A 100-metre stretch of Wandsworth Road which runs along the western side of the park has also been closed to traffic. The teenager's death brings the total number of young people to die in violent circumstances in London this year to seven.</p>
+      <h5 class="card-title">Hypoythesis</h5>
+      <p class="card-text">Seven young people died in violent situations this year in London.</p>
+      <h5 class="card-title">Relation</h5>
+      <p class="card-text">Entailment</p>
+      <h5 class="card-title">Segment (Your response)</h5>
+      <div class="form-group">
+        <label for="question1"></label>
+        <textarea type='text' class="form-control" name="80" id="80" rows="3"></textarea>
+      </div>
+      </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-raised btn-lg btn-block" id='submitButton'>Submit</button>
+  
+</form>
+</section>
+<script language='Javascript'>turkSetAssignmentID();</script>
+
+     
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+]]>
+</HTMLContent>
+<FrameHeight>0</FrameHeight>
+</HTMLQuestion>
